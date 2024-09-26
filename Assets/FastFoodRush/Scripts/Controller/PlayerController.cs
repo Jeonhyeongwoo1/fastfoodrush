@@ -28,7 +28,6 @@ namespace FastFoodRush.Controller
             _movement.z = SimpleInput.GetAxis("Vertical");
             _movement = (Quaternion.Euler(new Vector3(0, 45, 0)) * _movement).normalized;
             bool isMoving = _movement.x != 0 || _movement.z != 0;
-            Debug.Log($"{_movement.x} / {_movement.z}");
 
             if (isMoving)
             {
