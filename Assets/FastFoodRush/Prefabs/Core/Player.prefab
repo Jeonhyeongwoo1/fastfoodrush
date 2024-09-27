@@ -776,6 +776,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 2087651989855260861}
   _moveSpeed: 5
+  _wobblingStack: {fileID: 5394448786086244737}
+  _leftHandPoint: {fileID: 5589602402123599224}
+  _rightHandPoint: {fileID: 5589602403860402589}
 --- !u!1 &4830079316989780650
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,6 +885,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5589602403422914795}
+  - component: {fileID: 5394448786086244737}
   m_Layer: 0
   m_Name: Stack
   m_TagString: Untagged
@@ -907,6 +911,20 @@ Transform:
   - {fileID: 5589602403860402589}
   m_Father: {fileID: 5339290827414309575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5394448786086244737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5589602403422914792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77271ba0a0364cb6a54ab79bb8cb779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tray: {fileID: 92527384500477821}
+  _offset: {x: 0, y: 0.25, z: 0}
 --- !u!1 &5589602403860402586
 GameObject:
   m_ObjectHideFlags: 0

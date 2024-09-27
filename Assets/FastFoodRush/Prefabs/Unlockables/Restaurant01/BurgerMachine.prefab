@@ -175,14 +175,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5527700679009679193}
-  - component: {fileID: 2001241155297356994}
+  - component: {fileID: 2402171139593855068}
   m_Layer: 0
   m_Name: BurgerMachine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5527700679009679193
 Transform:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ Transform:
   - {fileID: 1053920721238243006}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2001241155297356994
+--- !u!114 &2402171139593855068
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,12 +212,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5187450606456860131}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6c29a41b63346289229477a63087ce, type: 3}
+  m_Script: {fileID: 11500000, guid: d2613ad12c712414cb50262752e9ecc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
   _buyPoint: {x: 0, y: 0, z: 3}
   _moneyNeedToUnlock: 100
+  _burgerMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}
+  _productType: 0
 --- !u!1 &5421470861400449577
 GameObject:
   m_ObjectHideFlags: 0
@@ -228,6 +230,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5421470861400449578}
   - component: {fileID: 5421470861400449580}
+  - component: {fileID: 8699990159293455090}
   m_Layer: 0
   m_Name: FoodPile
   m_TagString: Untagged
@@ -272,6 +275,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8699990159293455090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421470861400449577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8679ff4bf80c940a399910efc5c52c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6096906714698419238
 GameObject:
   m_ObjectHideFlags: 0

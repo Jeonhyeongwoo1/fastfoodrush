@@ -1,0 +1,52 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using DG.Tweening;
+using UnityEngine;
+
+namespace FastFoodRush.Interactable
+{
+    public class WobblingStack : MonoBehaviour
+    {
+        public int StackCount => _stackList.Count;
+
+        [SerializeField] private GameObject _tray;
+        [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
+
+        private List<GameObject> _stackList = new();
+
+        private void Update()
+        {
+            if (_stackList.Count == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < _stackList.Count; i++)
+            {
+                GameObject go = _stackList[i];
+                go.transform.position = _tray.transform.position + _offset * i;
+            }
+        }
+
+        public void Stack(GameObject obj)
+        {
+            _tray.SetActive(_stackList.Count > 0);
+
+            Vector3 endValue = _tray.transform.position + _offset * _stackList.Count;
+            obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
+            {
+                _stackList.Add(obj);
+                obj.transform.position = endValue;
+            });
+        }
+
+        public GameObject Pop()
+        {
+            GameObject go = _stackList.Last();
+            _stackList.Remove(go);
+            return go;
+        }
+    }
+}

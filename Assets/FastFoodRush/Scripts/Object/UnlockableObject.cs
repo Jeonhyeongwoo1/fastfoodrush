@@ -13,7 +13,7 @@ namespace FastFoodRush.Object
         public int MoneyNeedToUnlock => _moneyNeedToUnlock;
         public Vector3 GetBuyPoint => transform.TransformPoint(_buyPoint);
         
-        public void Unlock()
+        public virtual void Unlock()
         {
             gameObject.SetActive(true);
         }
