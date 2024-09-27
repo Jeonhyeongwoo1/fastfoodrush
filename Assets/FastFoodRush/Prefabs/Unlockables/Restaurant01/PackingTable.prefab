@@ -179,13 +179,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4092395748512404644}
+  - component: {fileID: 6890584554494916440}
   m_Layer: 0
   m_Name: PackingTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4092395748512404644
 Transform:
   m_ObjectHideFlags: 0
@@ -205,6 +206,21 @@ Transform:
   - {fileID: 4558105980621579585}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6890584554494916440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3711191409837395486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef6c29a41b63346289229477a63087ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 
+  _buyPoint: {x: 0, y: 0, z: 0}
+  _moneyNeedToUnlock: 0
 --- !u!1 &4446737020859063423
 GameObject:
   m_ObjectHideFlags: 0
