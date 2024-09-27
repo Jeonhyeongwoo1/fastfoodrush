@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using FastFoodRush.Manager;
 using TMPro;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace FastFoodRush.Object
             //     return;
             // }
 
-            _payCor = StartCoroutine(PayCor());
+            _payCor = StartCoroutine(PayCor(other.transform));
         }
 
         private void OnTriggerExit(Collider other)
@@ -68,17 +69,24 @@ namespace FastFoodRush.Object
             _prograssImage.fillAmount = (float)_paidAmount / _moneyNeedToUnlock;
         }
 
-        private IEnumerator PayCor()
+        private IEnumerator PayCor(Transform playerTransform)
         {
             RestaurantManager manager = RestaurantManager.Instance;
             while (manager.Moneny > 0 && _paidAmount < _moneyNeedToUnlock)
             {
                 float num = _moneyNeedToUnlock * _timeInterval / _duration;
                 float value = Mathf.Min(manager.Moneny, num);
-                int money = Mathf.Max(1, Mathf.RoundToInt(value));
+                int amount = Mathf.Max(1, Mathf.RoundToInt(value));
                 
-                UpdatePaidMoney(money);
-                RestaurantManager.Instance.Moneny -= money;
+                UpdatePaidMoney(amount);
+                RestaurantManager.Instance.Moneny -= amount;
+
+                GameObject moneyObj = PoolManager.Instance.Get(Key.Money);
+                moneyObj.transform.position = playerTransform.position + new Vector3(0, 1f, 0);
+                moneyObj.SetActive(true);
+                moneyObj.transform.DOJump(transform.position, 2, 1, 0.15f)
+                    .OnComplete(() => moneyObj.SetActive(false));
+                
                 yield return new WaitForSeconds(_timeInterval);
             }
 
