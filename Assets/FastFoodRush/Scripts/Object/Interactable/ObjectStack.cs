@@ -17,7 +17,7 @@ namespace FastFoodRush.Interactable
 
         private void Update()
         {
-            if (_stackList.Count >= _maxCapacity || _player == null)
+            if (_stackList.Count >= _maxCapacity || _player == null || _player.Stack.StackCount == 0)
             {
                 return;
             }

@@ -44,7 +44,7 @@ namespace FastFoodRush.Interactable
 
         public GameObject Pop()
         {
-            GameObject go = _stackList.Last();
+            GameObject go = _stackList.LastOrDefault();
             _stackList.Remove(go);
             return go;
         }
