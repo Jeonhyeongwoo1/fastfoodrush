@@ -23,7 +23,7 @@ namespace FastFoodRush.Object
         private int _paidAmount;
         private Coroutine _payCor;
 
-        public void Initialize(UnlockableObject unlockableObject, int paidAmount)
+        public void Initialize(UnlockableObject unlockableObject, int paidAmount, Vector3 spawnPosition, Vector3 rotation = default)
         {
             _unlockableObject = unlockableObject;
             _moneyNeedToUnlock = _unlockableObject.MoneyNeedToUnlock;
@@ -31,6 +31,9 @@ namespace FastFoodRush.Object
 
             _paidMoneyText.text = _moneyNeedToUnlock.ToString();
             _prograssImage.fillAmount = 0;
+            transform.position = spawnPosition;
+            Debug.Log(rotation);
+            transform.eulerAngles = rotation;
         }
         
         private void OnTriggerEnter(Collider other)

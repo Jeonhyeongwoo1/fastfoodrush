@@ -1163,7 +1163,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4887660844840572125
 Transform:
   m_ObjectHideFlags: 0
@@ -1196,8 +1196,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
-  _buyPoint: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 0
+  _buyPoint: {x: -6, y: 0, z: 0}
+  _buyPointRot: {x: 0, y: 90, z: 0}
+  _moneyNeedToUnlock: 10
 --- !u!1 &4887660844848031285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1275,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4887660844974013077}
   - component: {fileID: 4887660844974013075}
+  - component: {fileID: 7884346091843161505}
   m_Layer: 0
   m_Name: Activator
   m_TagString: Untagged
@@ -1317,3 +1319,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7, y: 2, z: 9.5}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7884346091843161505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4887660844974013076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590971ec0ced646c2934350be54fc50c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _activateObj: {fileID: 0}

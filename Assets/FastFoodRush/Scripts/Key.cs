@@ -6,4 +6,6 @@ public static class Key
 {
     public static string Money = "Money";
     public static string Food = "Food";
+    public static string Customer = "Customer";
+    public static string Trash = "Trash";
 }

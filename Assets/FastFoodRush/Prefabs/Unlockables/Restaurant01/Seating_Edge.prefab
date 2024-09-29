@@ -62,7 +62,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22635742611879373}
-  - component: {fileID: 6140807287417346993}
+  - component: {fileID: 6685383630214733218}
   m_Layer: 0
   m_Name: Seating_Edge
   m_TagString: Untagged
@@ -88,7 +88,7 @@ Transform:
   - {fileID: 8254567699529934088}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6140807287417346993
+--- !u!114 &6685383630214733218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,12 +97,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 800439766849679223}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6c29a41b63346289229477a63087ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
   _buyPoint: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 0
+  _chairList: []
 --- !u!1 &3545061768487575149
 GameObject:
   m_ObjectHideFlags: 0

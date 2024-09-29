@@ -220,14 +220,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6593450548945601461}
-  - component: {fileID: 5586179230024658162}
+  - component: {fileID: 6926582904052278017}
   m_Layer: 0
   m_Name: CounterTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6593450548945601461
 Transform:
   m_ObjectHideFlags: 0
@@ -252,7 +252,7 @@ Transform:
   - {fileID: 8159367040513700227}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5586179230024658162
+--- !u!114 &6926582904052278017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -261,12 +261,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 5821875567589431567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6c29a41b63346289229477a63087ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a0cb6eb089174d46b89e68deee3c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
   _buyPoint: {x: 0, y: 0, z: 1}
   _moneyNeedToUnlock: 150
+  _queuePointList:
+  - {fileID: 6632145469227862513}
+  - {fileID: 6632145469389428603}
+  - {fileID: 6632145467994657499}
+  - {fileID: 6632145468119005579}
+  - {fileID: 6632145468710508763}
+  - {fileID: 6632145467901088431}
+  - {fileID: 6632145468055407766}
+  - {fileID: 6632145469183575477}
+  - {fileID: 6632145467636063776}
+  - {fileID: 6632145468874196225}
+  _customerSpawnPoint: {fileID: 6632145467533585945}
+  _customerDesapwnPoint: {fileID: 6632145469512974667}
 --- !u!1 &6632145467533585946
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,6 +804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6632145469018620715}
   - component: {fileID: 6632145469018620692}
+  - component: {fileID: 3573876018679560055}
   m_Layer: 0
   m_Name: FoodStack
   m_TagString: Untagged
@@ -834,6 +848,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 1.6, z: 1.8}
   m_Center: {x: -0.3, y: 0, z: -0.3}
+--- !u!114 &3573876018679560055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632145469018620694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25175b17084ff4d5aa6a771b8560a87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _offset: {x: 0, y: 0.25, z: 0}
+  _maxCapacity: 6
+  _interval: 0.25
 --- !u!1 &6632145469183575478
 GameObject:
   m_ObjectHideFlags: 0

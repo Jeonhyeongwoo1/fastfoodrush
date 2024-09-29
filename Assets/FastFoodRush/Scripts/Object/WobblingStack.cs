@@ -32,8 +32,11 @@ namespace FastFoodRush.Interactable
 
         public void Stack(GameObject obj)
         {
-            _tray.SetActive(_stackList.Count > 0);
-
+            if (!_tray.activeSelf)
+            {
+                _tray.SetActive(true);
+            }
+            
             Vector3 endValue = _tray.transform.position + _offset * _stackList.Count;
             obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
             {
@@ -46,6 +49,11 @@ namespace FastFoodRush.Interactable
         {
             GameObject go = _stackList.LastOrDefault();
             _stackList.Remove(go);
+            if (_stackList.Count == 0)
+            {
+                _tray.SetActive(false);
+            }
+            
             return go;
         }
     }
