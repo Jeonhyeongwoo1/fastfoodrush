@@ -15,3 +15,9 @@ MonoBehaviour:
   _maxLevel: 5
   _firstUpgradePrice: 300
   _upgradePrice: 200
+  _defaultPlayerMoveSpeed: 5
+  _defaultPlayerCapacity: 5
+  _defaultPlayerProfit: 3
+  _playerMoveSpeedUpgradeValue: 0.3
+  _playerCapacityUpgradeValue: 1
+  _playerProfitUpgradeValue: 1

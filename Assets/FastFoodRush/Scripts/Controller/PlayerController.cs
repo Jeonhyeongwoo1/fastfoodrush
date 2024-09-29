@@ -1,6 +1,6 @@
 using System;
 using FastFoodRush.Interactable;
-using SimpleInputNamespace;
+using FastFoodRush.Manager;
 using UnityEngine;
 
 namespace FastFoodRush.Controller
@@ -8,13 +8,15 @@ namespace FastFoodRush.Controller
     public class PlayerController : MonoBehaviour
     {
         public WobblingStack Stack => _wobblingStack;
+        public int PlayerCapacity => _playerCapacity;
         
         [SerializeField] private Animator _animator;
-        [SerializeField] private float _moveSpeed;
         [SerializeField] private WobblingStack _wobblingStack;
         [SerializeField] private Transform _leftHandPoint;
         [SerializeField] private Transform _rightHandPoint;
         
+        private float _moveSpeed;
+        private int _playerCapacity;
         private Vector3 _movement;
         private CharacterController _characterController;
 
@@ -38,16 +40,45 @@ namespace FastFoodRush.Controller
             _animator.SetIKRotation(AvatarIKGoal.RightHand, _rightHandPoint.rotation);
         }
 
-        private void Start()
+        private void Awake()
         {
             _characterController = GetComponentInChildren<CharacterController>();
-
             _isMovingHash = Animator.StringToHash("IsMoving");
+        }
+        
+        private void OnEnable()
+        {
+            RestaurantManager.Instance.onUpgradedAbility += OnUpgradeAbility;
+        }
+
+        private void OnDisable()
+        {
+            RestaurantManager.Instance.onUpgradedAbility -= OnUpgradeAbility;
+        }
+
+        private void Start()
+        {
+            _moveSpeed = RestaurantManager.Instance.GetDefaultAbilityValue(AbilityType.PlayerSpeed);
+            _playerCapacity = (int)RestaurantManager.Instance.GetDefaultAbilityValue(AbilityType.PlayerCapacity);
+        }
+
+        private void OnUpgradeAbility(AbilityType abilityType, float ability)
+        {
+            switch (abilityType)
+            {
+                case AbilityType.PlayerSpeed:
+                    _moveSpeed = ability;
+                    break;
+                case AbilityType.PlayerCapacity:
+                    _playerCapacity = (int) ability;
+                    break;
+                case AbilityType.PlayerProfit:
+                    break;
+            }
         }
 
         private void Update()
         {
-            
             _movement.x = SimpleInput.GetAxis("Horizontal");
             _movement.z = SimpleInput.GetAxis("Vertical");
             _movement = (Quaternion.Euler(new Vector3(0, 45, 0)) * _movement).normalized;

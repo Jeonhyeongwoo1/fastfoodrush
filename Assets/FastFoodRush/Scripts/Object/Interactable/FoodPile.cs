@@ -28,8 +28,12 @@ namespace FastFoodRush.Interactable
             if (_elapsed > _timeInterval)
             {
                 _elapsed = 0;
-                _player.Stack.Stack(_droppedFoodList.Last());
-                _droppedFoodList.RemoveAt(_droppedFoodList.Count-1);
+                Debug.Log($"stack {_player.Stack.StackCount } / {_player.PlayerCapacity}");
+                if (_player.Stack.StackCount < _player.PlayerCapacity)
+                {
+                    _player.Stack.Stack(_droppedFoodList.Last());
+                    _droppedFoodList.RemoveAt(_droppedFoodList.Count-1);
+                }
             }
         }
         

@@ -54,12 +54,12 @@ namespace FastFoodRush.UI
                 element.priceText.text = price.ToString();
 
                 List<Image> guageList = element.guageList;
-                var upgradeList = guageList.GetRange(0, level - 1);
-                upgradeList.ForEach(v=> v.color = _upgradeColor);
-
-                var notUpgradedList = guageList.GetRange(level - 1, guageList.Count - 1);
-                notUpgradedList.ForEach(v=> v.color = _defaultColor);
-
+                int count = guageList.Count;
+                for (int i = 0; i < count; i++)
+                {
+                    guageList[i].color = i < level ? _upgradeColor : _defaultColor;
+                }
+                
                 bool isPossiblePurchase = price <= manager.Moneny;
                 element.upgradeButton.interactable = isPossiblePurchase;
                 
@@ -68,3 +68,11 @@ namespace FastFoodRush.UI
 
     }
 }
+
+
+
+
+
+
+
+

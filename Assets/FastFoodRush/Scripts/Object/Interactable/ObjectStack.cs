@@ -12,6 +12,7 @@ namespace FastFoodRush.Interactable
         public int StackCount => _stackList.Count;
         
         [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
+        [SerializeField] private bool _useMaxCapacity;
         [SerializeField] private int _maxCapacity = 6;
         [SerializeField] private float _interval;
 
@@ -20,9 +21,17 @@ namespace FastFoodRush.Interactable
 
         private void Update()
         {
-            if (_stackList.Count >= _maxCapacity || _player == null || _player.Stack.StackCount == 0)
+            if (_player == null || _player.Stack.StackCount == 0)
             {
                 return;
+            }
+
+            if (_useMaxCapacity)
+            {
+                if (_stackList.Count >= _maxCapacity)
+                {
+                    return;
+                }
             }
 
             _elapsed += Time.deltaTime;

@@ -59,6 +59,7 @@ namespace FastFoodRush.Manager
         public Action<int> onUseMoneny;
         public Action<int, int, Vector3> onOrderProduct;
         public Action<AbilityType> onUpgrade;
+        public Action<AbilityType, float> onUpgradedAbility;
 
         [SerializeField] private UnlockableBuyer _unlockableBuyer;
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
@@ -94,46 +95,61 @@ namespace FastFoodRush.Manager
                 return;
             }
 
-            Dictionary<int, int> dataDict = _data.abilityDataDict;
-            if (!dataDict.TryGetValue((int)abilityType, out int level))
+            Dictionary<int, AbilityData> dataDict = _data.abilityLevelDataDict;
+            if (!dataDict.TryGetValue((int)abilityType, out AbilityData abilityData))
             {
-                dataDict[(int)abilityType] = 1;
+                abilityData = CreateAbilityData(abilityType);
             }
 
+            int level = abilityData.level;
             if (_abilityData.MaxLevel == level)
             {
-                Debug.LogWarning("ability is max level");
+                Debug.LogWarning($"ability is max level : {level}");
                 return;
             }
 
-            dataDict[(int)abilityType] = ++level;
+            abilityData.statusValue = _abilityData.GetPlayerStatusValue(abilityType, ++abilityData.level);
+            dataDict[(int)abilityType] = abilityData;
             //UseMoney
             Moneny -= price;
+            onUpgradedAbility?.Invoke(abilityType, abilityData.statusValue);
         }
 
         public int GetCurrentAbilityLevel(AbilityType abilityType)
         {
-            Dictionary<int, int> dataDict = _data.abilityDataDict;
-            if (dataDict.TryGetValue((int)abilityType, out int level))
+            Dictionary<int, AbilityData> dataDict = _data.abilityLevelDataDict;
+            if (dataDict.TryGetValue((int)abilityType, out AbilityData abilityData))
             {
-                return level;
+                return abilityData.level;
             }
-            
-            level = 1;
-            dataDict[(int)abilityType] = level;
 
-            return level;
+            abilityData = CreateAbilityData(abilityType);
+            dataDict[(int)abilityType] = abilityData;
+
+            return 0;
         }
+
+        private AbilityData CreateAbilityData(AbilityType abilityType)
+        {
+            AbilityData abilityData = new AbilityData();
+            abilityData.level = 0;
+            abilityData.statusValue = _abilityData.GetDefaultAbilityValue(abilityType);
+            _data.abilityLevelDataDict[(int)abilityType] = abilityData;
+            return abilityData;
+        }
+
+        public float GetDefaultAbilityValue(AbilityType abilityType) =>
+            _abilityData.GetDefaultAbilityValue(abilityType);
 
         public int GetCurrentAbilityPrice(AbilityType abilityType)
         {
-            Dictionary<int, int> dataDict = _data.abilityDataDict;
-            if (!dataDict.TryGetValue((int)abilityType, out int level))
+            Dictionary<int, AbilityData> dataDict = _data.abilityLevelDataDict;
+            if (!dataDict.TryGetValue((int)abilityType, out AbilityData abilityData))
             {
-                dataDict[(int)abilityType] = 1;
+                abilityData = CreateAbilityData(abilityType);
             }
 
-            return level * _abilityData.UpgradePrice + _abilityData.FirstUpgradePrice;
+            return abilityData.level * _abilityData.UpgradePrice + _abilityData.FirstUpgradePrice;
         }
 
         private void AllDisableUnlockableObject()
