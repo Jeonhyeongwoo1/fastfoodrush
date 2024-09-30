@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace FastFoodRush.Object
 {
-    public class CustomerController : BaseController
+    public class CustomerController : BaseController, IOrderable
     {
         public enum State
         {
@@ -17,13 +17,17 @@ namespace FastFoodRush.Object
             Eat,
             Leave
         }
-        
+
         public bool IsReadyOrder { get; private set; }
         public int RemainOrderCount => _orderCount - _wobblingStack.StackCount;
+        public int Height => _height;
+        public int OrderCount => _orderCount;
+        public Transform Transform => transform;
 
         [SerializeField] private State _state;
         [SerializeField] private CustomerAIConfigData _data;
-        
+
+        private int _height;
         private int _orderCount;
         private Vector3 _queuePointPosition;
         private Vector3 _despawnPosition;
@@ -32,7 +36,7 @@ namespace FastFoodRush.Object
         private int _eatHash;
         private int _leaveHash;
 
-        private void Start()
+        protected override void Start()
         {
             _isMovingHash = Animator.StringToHash("IsMoving");
             _sitHash = Animator.StringToHash("Sit");
@@ -43,6 +47,7 @@ namespace FastFoodRush.Object
         private void OnDisable()
         {
             _orderCount = 0;
+            _height = 0;
         }
 
         private void Update()
@@ -84,7 +89,8 @@ namespace FastFoodRush.Object
             {
                 return;
             }
-            
+
+            _height++;
             _wobblingStack.Stack(orderObj, StackType.Food);
         }
 

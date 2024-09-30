@@ -37,13 +37,6 @@ namespace FastFoodRush.Interactable
             }
         }
 
-        public override void Unlock()
-        {
-            base.Unlock();
-            
-            RestaurantManager.Instance.Piles.Add(_trashPile);
-        }
-
         public Vector3 GetTablePosition()
         {
             return _table.position;

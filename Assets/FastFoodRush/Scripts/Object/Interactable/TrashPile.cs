@@ -15,15 +15,12 @@ namespace FastFoodRush.Interactable
 
         protected override float _timeInterval => 0.2f;
 
-        public override void Drop()
+        public override void Drop(GameObject obj = null)
         {
-            GameObject obj = PoolManager.Instance.Get(Key.Trash);
-
+            obj = PoolManager.Instance.Get(Key.Trash);
             Vector3 random = new Vector3(Random.Range(-0.1f, 0.1f), 0, Random.Range(-0.1f, 0.1f));
             Vector3 offset = (_objectStack.Count % 2 == 0) ? -Vector3.left * 0.25f + random : Vector3.left * 0.25f + random;
-            Vector3 spawnPosition = transform.position + offset;
-            
-            obj.transform.position = spawnPosition;
+            obj.transform.position = transform.position + offset;
             obj.SetActive(true);
             _objectStack.Push(obj);
         }

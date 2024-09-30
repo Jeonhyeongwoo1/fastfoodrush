@@ -1,0 +1,123 @@
+using System.Collections;
+using System.Collections.Generic;
+using FastFoodRush.Interactable;
+using FastFoodRush.Manager;
+using FastFoodRush.Object;
+using FastFoodRush.UI;
+using UnityEngine;
+
+namespace FastFoodRush.Object
+{
+    public abstract class BaseCounterTable : UnlockableObject
+    {
+        [SerializeField] protected ObjectStack _objectStack;
+        [SerializeField] protected List<Transform> _queuePointList = new();
+        [SerializeField] protected Transform _customerSpawnPoint;
+        [SerializeField] protected Transform _customerDesapwnPoint;
+        [SerializeField] protected float _spawnCustomerInterval = 3;
+        [SerializeField] private OrderInfoType _orderInfoType;
+        
+        protected Queue<IOrderable> _customerQueue = new();
+        protected float _spawnCustomerElapsed;
+        protected float _orderElapsed;
+        private Camera _camera;
+
+        protected virtual void Start()
+        {
+            _camera = Camera.main;
+        }
+
+        protected virtual void Update()
+        {
+            HandleSpawnCustomer();
+            HandleOrder();
+        }
+        
+        protected virtual void HandleSpawnCustomer()
+        {
+            if (IsMaxQueuePoint())
+            {
+                return;
+            }
+            
+            _spawnCustomerElapsed += Time.deltaTime;
+            if (_spawnCustomerElapsed > _spawnCustomerInterval)
+            {
+                _spawnCustomerElapsed = 0;
+                SpawnCustomer(_customerSpawnPoint.position, GetQueuePoint(), _customerDesapwnPoint.position);
+            }
+        }
+        
+        protected virtual void HandleOrder()
+        {
+            if (_customerQueue.Count == 0)
+            {
+                return;
+            }
+
+            var customer = _customerQueue.Peek();
+            if (!customer.IsReadyOrder)
+            {
+                return;
+            }
+
+            if (_objectStack.StackCount > 0 && customer.OrderCount > customer.Height)
+            {
+                _orderElapsed += Time.deltaTime;
+                if (_orderElapsed < 0.2f)
+                {
+                    return;
+                }
+
+                _orderElapsed = 0;
+                customer.ReceiveOrderInfo(_objectStack.GetStackObject());
+            }
+            
+            if (customer.RemainOrderCount == 0)
+            {
+                CompleteOrder();
+            }
+
+            if (_camera != null)
+            {
+                Vector3 screenPoint = _camera.WorldToScreenPoint(customer.Transform.position + Vector3.up * 3);
+                RestaurantManager.Instance.onOrderProduct?.Invoke(customer.RemainOrderCount, (int) _orderInfoType, screenPoint);
+            }
+        }
+        
+        protected void UpdateCustomerQueuePosition()
+        {
+            using var enumerator = _customerQueue.GetEnumerator();
+            int index = 0;
+            while (enumerator.MoveNext())
+            {
+                IOrderable current = enumerator.Current;
+                if (current != null)
+                {
+                    current.UpdateQueuePosition(GetQueuePoint(index).position);
+                    index++;
+                }
+            }
+        }
+        
+        private Transform GetQueuePoint(int index = -1)
+        {
+            if (IsMaxQueuePoint())
+            {
+                Debug.LogWarning($"max queue point count");
+                return null;
+            }
+
+            Transform point = _queuePointList[index == -1 ? _customerQueue.Count : index];
+            return point;
+        }
+        
+        private bool IsMaxQueuePoint()
+        {
+            return _customerQueue.Count >= _queuePointList.Count;
+        }
+
+        protected abstract void CompleteOrder();
+        protected abstract void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition);
+    }
+}

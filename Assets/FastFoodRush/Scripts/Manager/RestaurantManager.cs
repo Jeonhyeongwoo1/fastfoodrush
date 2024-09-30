@@ -73,7 +73,7 @@ namespace FastFoodRush.Manager
 
         public List<ObjectStack> ObjectStacks { get; set; } = new();
         public List<Pile> Piles { get; set; } = new();
-        public TrashBin TrashBin { get; set; } = new();
+        public TrashBin TrashBin { get; set; }
         
         [SerializeField] private UnlockableBuyer _unlockableBuyer;
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
@@ -242,7 +242,7 @@ namespace FastFoodRush.Manager
                 case StackType.Food:
                     return new Vector3(0.25f, 0.25f, 0);
                 case StackType.Package:
-                    return new Vector3(0, 0.25f, 0);
+                    return new Vector3(0.25f, 0.25f, 0);
                 case StackType.Trash:
                     return new Vector3(0.25f, 0.25f, 0);
                 default:

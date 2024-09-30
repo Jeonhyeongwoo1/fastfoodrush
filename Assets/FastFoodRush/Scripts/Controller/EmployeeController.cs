@@ -15,6 +15,7 @@ namespace FastFoodRush.Controller
         {
             CleanTrash,
             CarryFood,
+            CarryPackage,
         }
 
         private int _employeeMoveSpeed;
@@ -73,7 +74,10 @@ namespace FastFoodRush.Controller
                         yield return CleanTrashCor();
                         break;
                     case BehaviourType.CarryFood:
-                        yield return CarryFoodCor();
+                        yield return ReFill<FoodPile>(StackType.Food);
+                        break;
+                    case BehaviourType.CarryPackage:
+                        yield return ReFill<PackagePile>(StackType.Package);
                         break;
                 }
 
@@ -86,44 +90,47 @@ namespace FastFoodRush.Controller
             }
         }
 
-        private IEnumerator CarryFoodCor()
+        private IEnumerator ReFill<T>(StackType stackType) where T : Pile
         {
-            List<FoodPile> foodPileList = RestaurantManager.Instance.Piles.OfType<FoodPile>().ToList().FindAll(v=> v.StackCount > 0);
-            if (foodPileList.Count > 0)
+            List<T> pileList = RestaurantManager.Instance.Piles.OfType<T>().ToList()
+                .FindAll(v => v.StackCount > 0);
+            if (pileList.Count > 0)
             {
-                int random = Random.Range(0, foodPileList.Count);
-                FoodPile foodPile = foodPileList[random];
-
-                _agent.SetDestination(foodPile.transform.position);
+                int random = Random.Range(0, pileList.Count);
+                T pile = pileList[random];
+                _agent.SetDestination(pile.transform.position);
 
                 yield return new WaitUntil(() => HasArrived());
 
-                while (foodPile.StackCount > 0)
+                while (pile.StackCount > 0)
                 {
-                    if (_wobblingStack.StackCount >= _employeeCapacity)
+                    if (_wobblingStack.Height >= _employeeCapacity)
                     {
                         break;
                     }
 
-                    GameObject obj = foodPile.RemoveStack();
-                    _wobblingStack.Stack(obj, foodPile.StackType);
+                    GameObject obj = pile.RemoveStack();
+                    _wobblingStack.Stack(obj, pile.StackType);
                     yield return new WaitForSeconds(0.2f);
                 }
             }
 
+            yield return new WaitForSeconds(0.25f);
+            
             if (_wobblingStack.StackCount == 0)
             {
                 yield break;
             }
-
-            ObjectStack objectStack = RestaurantManager.Instance.ObjectStacks.Find(v => v.StackType == StackType.Food);
-            if (objectStack == null)
+            
+            List<ObjectStack> objectStackList = RestaurantManager.Instance.ObjectStacks.FindAll(v => v.StackType == stackType);
+            if(objectStackList.Count == 0)
             {
                 Debug.LogWarning($"can't find object stack");
                 yield break;
             }
 
-            Vector3 position = objectStack.ObjectStackPointPosition;
+            ObjectStack selectedObjectStack = objectStackList[Random.Range(0, objectStackList.Count)]; 
+            Vector3 position = selectedObjectStack.ObjectStackPointPosition;
             _agent.SetDestination(position);
 
             yield return new WaitUntil(() => HasArrived());
@@ -131,11 +138,11 @@ namespace FastFoodRush.Controller
             while (_wobblingStack.StackCount > 0)
             {
                 GameObject obj = _wobblingStack.Pop();
-                objectStack.Stack(obj);
+                selectedObjectStack.Stack(obj);
                 yield return new WaitForSeconds(0.25f);
             }
         }
-
+        
         private IEnumerator CleanTrashCor()
         {
             List<TrashPile> trashPileList = RestaurantManager.Instance.Piles.OfType<TrashPile>()
@@ -157,7 +164,7 @@ namespace FastFoodRush.Controller
             const float interval = 0.1f;
             while (trashPile.IsExistObject)
             {
-                if (_wobblingStack.StackCount >= _employeeCapacity)
+                if (_wobblingStack.Height >= _employeeCapacity)
                 {
                     break;
                 }
@@ -172,6 +179,8 @@ namespace FastFoodRush.Controller
                 yield return new WaitForSeconds(interval);
             }
 
+            yield return new WaitForSeconds(0.25f);
+            
             if (_wobblingStack.StackCount <= 0)
             {
                 yield break;

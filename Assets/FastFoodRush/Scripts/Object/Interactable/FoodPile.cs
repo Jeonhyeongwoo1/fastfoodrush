@@ -8,11 +8,11 @@ namespace FastFoodRush.Interactable
     {
         protected override float _timeInterval => 0.2f;
         
-        public override void Drop()
+        public override void Drop(GameObject obj = null)
         {
-            GameObject go = PoolManager.Instance.Get(Key.Food);
+            obj = PoolManager.Instance.Get(Key.Food);
             
-            _objectStack.Push(go);
+            _objectStack.Push(obj);
             int count = _objectStack.Count - 1;
             bool isLeft = count % 2 == 0;
             int depth = count / 2;
@@ -22,8 +22,8 @@ namespace FastFoodRush.Interactable
                 ? new Vector3(-offset.x, depth * offset.y, 0)
                 : new Vector3(offset.x, depth * offset.y, 0));
 
-            go.transform.position = position;
-            go.gameObject.SetActive(true);
+            obj.transform.position = position;
+            obj.gameObject.SetActive(true);
         }
     }
 }

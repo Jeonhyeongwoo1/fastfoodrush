@@ -11,6 +11,7 @@ namespace FastFoodRush.Interactable
     public class WobblingStack : MonoBehaviour
     {
         public int StackCount => _stackList.Count;
+        public int Height => _height;
         public StackType CurrentStackType => _currentStackType;
 
         [SerializeField] private GameObject _tray;
@@ -19,6 +20,8 @@ namespace FastFoodRush.Interactable
         [SerializeField] private StackType _currentStackType;
         [SerializeField] private List<GameObject> _stackList = new();
 
+        private int _height;
+        
         private void Update()
         {
             if (_stackList.Count == 0)
@@ -46,19 +49,19 @@ namespace FastFoodRush.Interactable
             }
 
             Vector3 endValue = _tray.transform.position + _offset * _stackList.Count;
-            _stackList.Add(obj);
+            _height++;
             _currentStackType = stackType;
-            
-            obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
-            {
-                obj.transform.position = endValue;
-            });
+
+            obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(()=>_stackList.Add(obj));
         }
+
+        public GameObject Peek() => _stackList.LastOrDefault();
 
         public GameObject Pop()
         {
             GameObject go = _stackList.LastOrDefault();
             _stackList.Remove(go);
+            _height--;
             if (_stackList.Count == 0)
             {
                 _tray.SetActive(false);

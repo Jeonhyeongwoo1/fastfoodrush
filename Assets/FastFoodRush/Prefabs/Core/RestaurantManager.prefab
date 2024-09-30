@@ -5084,13 +5084,14 @@ GameObject:
   - component: {fileID: 7729046859821910653}
   - component: {fileID: 7729046859821910626}
   - component: {fileID: 7729046859821910627}
+  - component: {fileID: 4527147588937297340}
   m_Layer: 5
   m_Name: OrderInfo_Package
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7729046859821910625
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5191,6 +5192,20 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: -5}
   m_UseGraphicAlpha: 1
+--- !u!114 &4527147588937297340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7729046859821910630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cba2f3576e548be95554809170e3b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amountText: {fileID: 7729046859764616637}
+  _orderInfoType: 1
 --- !u!1 &7729046859901151663
 GameObject:
   m_ObjectHideFlags: 0
@@ -8399,8 +8414,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _abilityData: {fileID: 11400000, guid: 4eb1a85b546a242ce9ca7438f05c1f0d, type: 2}
   _employeeSpawnPoint: {fileID: 7729046860671016937}
+  _unlockIndex: 8
 --- !u!1 &7729046860557835250
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (8)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -118,7 +118,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (6)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -149,7 +149,7 @@ GameObject:
   m_Layer: 0
   m_Name: SpawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -180,7 +180,7 @@ GameObject:
   m_Layer: 0
   m_Name: DespawnPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -348,7 +348,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -377,6 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39422417193372464}
   - component: {fileID: 39422417193372466}
+  - component: {fileID: 473117823610073668}
   m_Layer: 0
   m_Name: PackageStack
   m_TagString: Untagged
@@ -396,7 +397,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5250170680485211175}
   m_Father: {fileID: 39422417263304727}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &39422417193372466
@@ -420,6 +422,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8, y: 1.6, z: 1.8}
   m_Center: {x: -0.3, y: 0, z: 0.3}
+--- !u!114 &473117823610073668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39422417193372479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25175b17084ff4d5aa6a771b8560a87d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 2
+  _useMaxCapacity: 0
+  _maxCapacity: 6
+  _interval: 0.25
+  _objectStackPoint: {fileID: 5250170680485211175}
 --- !u!1 &39422417263304726
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,7 +598,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (5)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -610,7 +629,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (4)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -641,7 +660,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -672,7 +691,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (9)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -805,14 +824,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 39422417734063500}
-  - component: {fileID: 2396454603972595013}
+  - component: {fileID: 7303437413731953362}
   m_Layer: 0
   m_Name: DriveThruCounter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &39422417734063500
 Transform:
   m_ObjectHideFlags: 0
@@ -837,7 +856,7 @@ Transform:
   - {fileID: 39422418068901566}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2396454603972595013
+--- !u!114 &7303437413731953362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -846,12 +865,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 39422417734063498}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6c29a41b63346289229477a63087ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 440a5ffa1cb794427a30db897d18f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _id: 
-  _buyPoint: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 0
+  _buyPoint: {x: 1, y: 0, z: 0}
+  _buyPointRot: {x: 0, y: 0, z: 0}
+  _moneyNeedToUnlock: 150
+  _objectStack: {fileID: 473117823610073668}
+  _queuePointList:
+  - {fileID: 39422417905895958}
+  - {fileID: 39422417765954846}
+  - {fileID: 39422417604887880}
+  - {fileID: 39422417004842344}
+  - {fileID: 39422417414226501}
+  - {fileID: 39422417412467618}
+  - {fileID: 39422416530495611}
+  - {fileID: 39422418072906662}
+  - {fileID: 39422416441660112}
+  - {fileID: 39422417645433890}
+  _customerSpawnPoint: {fileID: 39422416530695323}
+  _customerDesapwnPoint: {fileID: 39422416629261646}
+  _spawnCustomerInterval: 3
+  _orderInfoType: 1
+  _driverPrefabList:
+  - {fileID: 5890665129334189226, guid: 2cc13c1f31733f74fa4523cbfbe42d0e, type: 3}
+  - {fileID: 5890665129334189226, guid: 807b2163e20ef6d4f8a09f30f79822af, type: 3}
+  - {fileID: 5890665129334189226, guid: b6416382ab5ece346801756be3fbf776, type: 3}
+  - {fileID: 5890665129334189226, guid: cc12407b1ac5bc240bac19c4e423db84, type: 3}
 --- !u!1 &39422417765954845
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,7 +905,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -895,7 +936,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (0)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1063,7 +1104,7 @@ GameObject:
   m_Layer: 0
   m_Name: Point (7)
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1081,6 +1122,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 39422417311634046}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9103711251310964908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5250170680485211175}
+  m_Layer: 0
+  m_Name: StackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5250170680485211175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103711251310964908}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 39422417193372464}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &39422417058924474
 PrefabInstance:

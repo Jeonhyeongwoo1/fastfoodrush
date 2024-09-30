@@ -53,7 +53,10 @@ namespace FastFoodRush.Controller
 
         private void OnDisable()
         {
-            RestaurantManager.Instance.onUpgradedAbility -= OnUpgradeAbility;
+            if (RestaurantManager.Instance != null)
+            {
+                RestaurantManager.Instance.onUpgradedAbility -= OnUpgradeAbility;
+            }
         }
 
         private void Start()

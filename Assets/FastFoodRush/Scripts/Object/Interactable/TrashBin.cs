@@ -9,8 +9,7 @@ namespace FastFoodRush.Interactable
 {
     public class TrashBin : Interactable
     {
-        private float _elapsed = 0;
-        private float _interval = 0.1f;
+        private float _elapsed;
 
         private void Start()
         {
@@ -25,7 +24,7 @@ namespace FastFoodRush.Interactable
             }
 
             _elapsed += Time.deltaTime;
-            if (_elapsed > _interval)
+            if (_elapsed > 0.1f)
             {
                 _elapsed = 0;
                 GameObject obj = _player.Stack.Pop();

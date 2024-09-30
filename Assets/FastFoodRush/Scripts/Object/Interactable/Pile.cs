@@ -28,16 +28,18 @@ namespace FastFoodRush.Interactable
             if (_elapsed > _timeInterval)
             {
                 _elapsed = 0;
-                if (_player.Stack.StackCount < _player.PlayerCapacity)
+                if (_player.Stack.Height < _player.PlayerCapacity)
                 {
                     _player.Stack.Stack(_objectStack.Pop(), _stackType);
                 }
             }
-
         }
-        
-        protected virtual void Start() {}
-        public abstract void Drop();
+
+        protected virtual void Start()
+        {
+            RestaurantManager.Instance.Piles.Add(this);
+        }
+        public abstract void Drop(GameObject obj = null);
         public GameObject RemoveStack()
         {
             if (!IsExistObject)

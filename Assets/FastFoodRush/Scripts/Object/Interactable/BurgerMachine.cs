@@ -39,12 +39,5 @@ namespace FastFoodRush.Interactable
                 elapsed = 0;
             }
         }
-
-        public override void Unlock()
-        {
-            base.Unlock();
-            
-            RestaurantManager.Instance.Piles.Add(_foodPile);
-        }
     }
 }
