@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using FastFoodRush.Controller;
+using FastFoodRush.Interactable;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using UnityEngine;
@@ -70,6 +71,10 @@ namespace FastFoodRush.Manager
         public Action<AbilityType> onUpgrade;
         public Action<AbilityType, float> onUpgradedAbility;
 
+        public List<ObjectStack> ObjectStacks { get; set; } = new();
+        public List<Pile> Piles { get; set; } = new();
+        public TrashBin TrashBin { get; set; } = new();
+        
         [SerializeField] private UnlockableBuyer _unlockableBuyer;
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
         [SerializeField] private AbilityConfigData _abilityData;
@@ -79,16 +84,37 @@ namespace FastFoodRush.Manager
         private RestaurantData _data;
         
         private const int startMoneny = 100000;
-        
-        private void Start()
+
+        private void Awake()
         {
             _data = new RestaurantData();
+        }
+
+        private void Start()
+        {
             Moneny = startMoneny;
             AllDisableUnlockableObject();
             UnlockableObject unlockableObject = _unlockableObjectList[UnlockableObjectCount];
             _unlockableBuyer.Initialize(unlockableObject, PaidAmount, unlockableObject.GetBuyPointPosition, unlockableObject.GetBuyPointRotation);
 
             onUpgrade += OnAbilityUpgrade;
+        }
+
+        [SerializeField] private int _unlockIndex;
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                Unlock_Debug();
+            }
+        }
+
+        private void Unlock_Debug()
+        {
+            for (int i = 0; i < _unlockIndex; i++)
+            {
+                BuyUnlockableObject();
+            }
         }
 
         private void OnDestroy()
@@ -119,7 +145,7 @@ namespace FastFoodRush.Manager
                 return;
             }
 
-            abilityData.statusValue = _abilityData.GetPlayerStatusValue(abilityType, ++abilityData.level);
+            abilityData.statusValue = _abilityData.GetStatusValue(abilityType, ++abilityData.level);
             dataDict[(int)abilityType] = abilityData;
             //UseMoney
             Moneny -= price;
@@ -143,7 +169,8 @@ namespace FastFoodRush.Manager
                 _employeeControllerList.Add(employeeController);
             }
 
-            employeeController.Initialize(_employeeSpawnPoint.position);
+            employeeController.Initialize(_employeeSpawnPoint.position, GetStatusValue(AbilityType.EmployeeSpeed),
+                (int) GetStatusValue(AbilityType.EmployeeCapacity));
         }
 
         public int GetCurrentAbilityLevel(AbilityType abilityType)
@@ -168,10 +195,9 @@ namespace FastFoodRush.Manager
             _data.abilityLevelDataDict[(int)abilityType] = abilityData;
             return abilityData;
         }
-
-        public float GetDefaultAbilityValue(AbilityType abilityType) =>
-            _abilityData.GetDefaultAbilityValue(abilityType);
-
+        
+        public float GetStatusValue(AbilityType abilityType) => _abilityData.GetStatusValue(abilityType, GetCurrentAbilityLevel(abilityType));
+        
         public int GetCurrentAbilityPrice(AbilityType abilityType)
         {
             Dictionary<int, AbilityData> dataDict = _data.abilityLevelDataDict;
@@ -206,6 +232,21 @@ namespace FastFoodRush.Manager
                 UnlockableObject nextUnlockableObject = _unlockableObjectList[UnlockableObjectCount];
                 _unlockableBuyer.Initialize(nextUnlockableObject, PaidAmount, nextUnlockableObject.GetBuyPointPosition,
                     nextUnlockableObject.GetBuyPointRotation);
+            }
+        }
+
+        public Vector3 GetOffsetByStackType(StackType stackType)
+        {
+            switch (stackType)
+            {
+                case StackType.Food:
+                    return new Vector3(0, 0.25f, 0);
+                case StackType.Package:
+                    return new Vector3(0, 0.25f, 0);
+                case StackType.Trash:
+                    return new Vector3(0.25f, 0.25f, 0);
+                default:
+                    return new Vector3(0f, 0.25f, 0);
             }
         }
     }

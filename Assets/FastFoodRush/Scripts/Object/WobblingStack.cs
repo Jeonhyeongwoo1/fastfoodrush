@@ -17,7 +17,7 @@ namespace FastFoodRush.Interactable
         [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
 
         [SerializeField] private StackType _currentStackType;
-        private List<GameObject> _stackList = new();
+        [SerializeField] private List<GameObject> _stackList = new();
 
         private void Update()
         {

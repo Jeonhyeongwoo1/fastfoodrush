@@ -18,9 +18,16 @@ namespace FastFoodRush.Interactable
         [SerializeField] private float _spawnCustomerInterval = 3;
         [SerializeField] private List<Seat> _seatList;
         
-        private Queue<CustomerAI> _customerQueue = new();
+        private Queue<CustomerController> _customerQueue = new();
         private float _elapsed;
-        
+
+        public override void Unlock()
+        {
+            base.Unlock();
+            
+            RestaurantManager.Instance.ObjectStacks.Add(_objectStack);
+        }
+
         private void Update()
         {
             HandleSpawnCustomer();
@@ -84,7 +91,7 @@ namespace FastFoodRush.Interactable
             int index = 0;
             while (enumerator.MoveNext())
             {
-                CustomerAI current = enumerator.Current;
+                CustomerController current = enumerator.Current;
                 if (current != null)
                 {
                     current.UpdateQueuePosition(GetQueuePoint(index).position);
@@ -111,7 +118,7 @@ namespace FastFoodRush.Interactable
         private void SpawnCustomer(Vector3 spawnPosition, Vector3 queuePointPosition, Vector3 despawnPosition)
         {
             GameObject obj = PoolManager.Instance.Get(Key.Customer);
-            if (!obj.TryGetComponent(out CustomerAI customerAI))
+            if (!obj.TryGetComponent(out CustomerController customerAI))
             {
                 Debug.LogWarning($"failed get customer");
                 return;

@@ -11,12 +11,14 @@ namespace FastFoodRush.Interactable
     public class ObjectStack : Interactable
     {
         public int StackCount => _stackList.Count;
+        public StackType StackType => _stackType;
 
         [SerializeField] private StackType _stackType;
-        [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
         [SerializeField] private bool _useMaxCapacity;
+        public Vector3 ObjectStackPointPosition => _objectStackPoint.position;
         [SerializeField] private int _maxCapacity = 6;
         [SerializeField] private float _interval;
+        [SerializeField] private Transform _objectStackPoint;
 
         [SerializeField] private List<GameObject> _stackList = new List<GameObject>();
         private float _elapsed = 0;
@@ -41,13 +43,23 @@ namespace FastFoodRush.Interactable
             {
                 _elapsed = 0;
                 GameObject obj = _player.Stack.Pop();
-                Vector3 endValue = transform.position + _offset * _stackList.Count;
-                _stackList.Add(obj);
-                obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
-                {
-                    obj.transform.position = endValue;
-                });
+                DoStackAnimation(obj);
             }
+        }
+
+        private void DoStackAnimation(GameObject obj)
+        {
+            Vector3 endValue = transform.position + RestaurantManager.Instance.GetOffsetByStackType(StackType.Food) * _stackList.Count;
+            _stackList.Add(obj);
+            obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
+            {
+                obj.transform.position = endValue;
+            });
+        }
+
+        public void Stack(GameObject obj)
+        {
+            DoStackAnimation(obj);
         }
 
         public GameObject GetStackObject()

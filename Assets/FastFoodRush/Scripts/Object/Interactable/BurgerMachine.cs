@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FastFoodRush.Manager;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using UnityEngine;
@@ -26,7 +27,7 @@ namespace FastFoodRush.Interactable
         {
             BurgerMachineConfigData data = _burgerMachineConfigData;
 
-            if (data.capacity <= _foodPile.DroppedFoodCount)
+            if (data.capacity <= _foodPile.StackCount)
             {
                 return;
             }
@@ -42,6 +43,8 @@ namespace FastFoodRush.Interactable
         public override void Unlock()
         {
             base.Unlock();
+            
+            RestaurantManager.Instance.Piles.Add(_foodPile);
         }
     }
 }

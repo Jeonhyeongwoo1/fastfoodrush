@@ -18,6 +18,10 @@ MonoBehaviour:
   _defaultPlayerMoveSpeed: 5
   _defaultPlayerCapacity: 5
   _defaultPlayerProfit: 3
+  _defaultEmployeeMoveSpeed: 2
+  _defaultEmployeeCapacity: 5
   _playerMoveSpeedUpgradeValue: 0.3
   _playerCapacityUpgradeValue: 1
   _playerProfitUpgradeValue: 1
+  _employeeMoveSpeedUpgradeValue: 3
+  _employeeCapacityUpgradeValue: 5

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using FastFoodRush.Manager;
 using FastFoodRush.Object;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace FastFoodRush.Interactable
         [SerializeField] private Transform _tableTop;
         [SerializeField] private TrashPile _trashPile;
         
-        private Stack<GameObject> _stackList;
+        private Stack<GameObject> _objectStack;
         private int _currentSeatedCustomerCount;
 
         private Action onAllCustomerSeatedAction;
@@ -33,6 +34,13 @@ namespace FastFoodRush.Interactable
             }
         }
 
+        public override void Unlock()
+        {
+            base.Unlock();
+            
+            RestaurantManager.Instance.Piles.Add(_trashPile);
+        }
+
         public Vector3 GetTablePosition()
         {
             return _table.position;
@@ -45,11 +53,12 @@ namespace FastFoodRush.Interactable
 
         private IEnumerator RemoveStackFoodCor()
         {
-            int count = _stackList.Count;
-            while (_stackList.Count > 0)
+            int count = _objectStack.Count;
+            while (_objectStack.Count > 0)
             {
                 yield return new WaitForSeconds(1.5f);
-                GameObject obj = _stackList.Pop();
+                Debug.LogWarning($"remove Stack {_objectStack.Count}");
+                GameObject obj = _objectStack.Pop();
                 obj.SetActive(false);
             }
             
@@ -61,7 +70,10 @@ namespace FastFoodRush.Interactable
 
         private void CreateTrashPile(int trashCount)
         {
-            _trashPile.Stack(trashCount);
+            for (int i = 0; i < trashCount; i++)
+            {
+                _trashPile.Drop();
+            }
         }
 
         private void Reset()
@@ -84,15 +96,15 @@ namespace FastFoodRush.Interactable
 
         public void StackFood(GameObject obj, float duration)
         {
-            _stackList ??= new Stack<GameObject>();
-            Vector3 endValue = _tableTop.position + new Vector3(0, 0.25f, 0) * _stackList.Count;
-            _stackList.Push(obj);
+            _objectStack ??= new Stack<GameObject>();
+            Vector3 endValue = _tableTop.position + new Vector3(0, 0.25f, 0) * _objectStack.Count;
+            _objectStack.Push(obj);
             obj.transform.DOJump(endValue, 2, 1, duration);
         }
 
         public bool IsPossibleSeat()
         {
-            return _chairList.Count > _currentSeatedCustomerCount && !_trashPile.IsExistTrash;
+            return _chairList.Count > _currentSeatedCustomerCount && !_trashPile.IsExistObject;
         }
     }
 }

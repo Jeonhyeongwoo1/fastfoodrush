@@ -525,8 +525,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f216940354b1403b821ed33f1053f91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 3169494392372190175}
   _animator: {fileID: 7991684774145955542}
+  _wobblingStack: {fileID: 3638874542525276547}
+  _agent: {fileID: 3169494392372190175}
+  _leftHandPoint: {fileID: 6833413534109660066}
+  _rightHandPoint: {fileID: 7193315603692477269}
 --- !u!1 &3817049634957651387
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,6 +775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6638017437822073265}
+  - component: {fileID: 3638874542525276547}
   m_Layer: 0
   m_Name: Stack
   m_TagString: Untagged
@@ -797,6 +801,22 @@ Transform:
   - {fileID: 7193315603692477269}
   m_Father: {fileID: 4037483806127803564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3638874542525276547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5907478208434947174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c77271ba0a0364cb6a54ab79bb8cb779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tray: {fileID: 2463928885662212482}
+  _offset: {x: 0, y: 0.25, z: 0}
+  _currentStackType: 0
+  _stackList: []
 --- !u!1 &6061238882610096077
 GameObject:
   m_ObjectHideFlags: 0

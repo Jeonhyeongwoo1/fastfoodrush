@@ -230,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _buyPoint: {x: 0, y: 0, z: 3}
+  _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 100
   _burgerMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}
   _productType: 0
@@ -300,7 +301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8679ff4bf80c940a399910efc5c52c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _offset: {x: 0.25, y: 0.25, z: 0}
+  _stackType: 1
 --- !u!1 &6096906714698419238
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,12 +24,16 @@ namespace FastFoodRush.Scripts.Data
         [SerializeField] private float _defaultPlayerMoveSpeed;
         [SerializeField] private int _defaultPlayerCapacity;
         [SerializeField] private int _defaultPlayerProfit;
+        [SerializeField] private float _defaultEmployeeMoveSpeed;
+        [SerializeField] private int _defaultEmployeeCapacity;
 
         [SerializeField] private float _playerMoveSpeedUpgradeValue;
         [SerializeField] private float _playerCapacityUpgradeValue;
         [SerializeField] private int _playerProfitUpgradeValue;
-
-        public float GetPlayerStatusValue(AbilityType abilityType, int level)
+        [SerializeField] private float _employeeMoveSpeedUpgradeValue;
+        [SerializeField] private int _employeeCapacityUpgradeValue;
+        
+        public float GetStatusValue(AbilityType abilityType, int level)
         {
             switch (abilityType)
             {
@@ -40,9 +44,9 @@ namespace FastFoodRush.Scripts.Data
                 case AbilityType.PlayerProfit:
                     return level * _playerProfitUpgradeValue + _defaultPlayerProfit;
                 case AbilityType.EmployeeSpeed:
-                    return 0;
+                    return level * _employeeMoveSpeedUpgradeValue + _defaultEmployeeMoveSpeed;
                 case AbilityType.EmployeeCapacity:
-                    return 0;
+                    return level * _employeeCapacityUpgradeValue + _defaultEmployeeCapacity;
                 case AbilityType.EmployeeAmount:
                     return 0;
                 default:
@@ -60,6 +64,12 @@ namespace FastFoodRush.Scripts.Data
                     return _defaultPlayerCapacity;
                 case AbilityType.PlayerProfit:
                     return _defaultPlayerProfit;
+                case AbilityType.EmployeeCapacity:
+                    return _defaultEmployeeCapacity;
+                case AbilityType.EmployeeSpeed:
+                    return _defaultEmployeeMoveSpeed;
+                case AbilityType.EmployeeAmount:
+                    return 0;
                 default:
                     Debug.LogWarning($"failed get default ability : {abilityType}");
                     return 0;

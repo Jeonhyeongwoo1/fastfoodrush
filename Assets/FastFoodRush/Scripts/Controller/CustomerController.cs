@@ -1,15 +1,12 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
+using FastFoodRush.Controller;
 using FastFoodRush.Interactable;
 using FastFoodRush.Manager;
-using FastFoodRush.UI;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace FastFoodRush.Object
 {
-    public class CustomerAI : MonoBehaviour
+    public class CustomerController : BaseController
     {
         public enum State
         {
@@ -21,28 +18,15 @@ namespace FastFoodRush.Object
         }
         
         public bool IsReadyOrder { get; private set; }
+        public int RemainOrderCount => _orderCount - _wobblingStack.StackCount;
 
-        public int RemainOrderCount
-        {
-            get
-            {
-                // Debug.Log($"order {_orderCount} / wobble {_wobblingStack.StackCount}");
-                return _orderCount - _wobblingStack.StackCount;
-            }
-        }
-        [SerializeField] private Animator _animator;
-        [SerializeField] private NavMeshAgent _agent;
         [SerializeField] private State _state;
-        [SerializeField] private WobblingStack _wobblingStack;
         [SerializeField] private CustomerAIConfigData _data;
-        [SerializeField] private Transform _leftHandPoint;
-        [SerializeField] private Transform _rightHandPoint;
         
         private int _orderCount;
         private Vector3 _queuePointPosition;
         private Vector3 _despawnPosition;
         
-        private int _isMovingHash;
         private int _sitHash;
         private int _eatHash;
         private int _leaveHash;
@@ -82,23 +66,7 @@ namespace FastFoodRush.Object
             
             _animator.SetBool(_isMovingHash, isMoving);
         }
-
-        private bool HasArrived()
-        {
-            if (!_agent.pathPending)
-            {
-                if (_agent.remainingDistance <= _agent.stoppingDistance)
-                {
-                    if (!_agent.hasPath || _agent.velocity.sqrMagnitude == 0f)
-                    {
-                        return true;
-                    }
-                }
-            }
-
-            return false;
-        }
-
+        
         private void UpdateState(State state)
         {
             _state = state;
@@ -196,24 +164,6 @@ namespace FastFoodRush.Object
             gameObject.SetActive(true);
             _agent.SetDestination(_queuePointPosition);
             _despawnPosition = despawnPosition;
-        }
-        
-        private void OnAnimatorIK(int layerIndex)
-        {
-            if (_wobblingStack.StackCount == 0)
-            {
-                return;
-            }
-            
-            _animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-            _animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-            _animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
-            _animator.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
-            
-            _animator.SetIKPosition(AvatarIKGoal.LeftHand, _leftHandPoint.position);
-            _animator.SetIKPosition(AvatarIKGoal.RightHand, _rightHandPoint.position);
-            _animator.SetIKRotation(AvatarIKGoal.LeftHand, _leftHandPoint.rotation);
-            _animator.SetIKRotation(AvatarIKGoal.RightHand, _rightHandPoint.rotation);
         }
     }
 }

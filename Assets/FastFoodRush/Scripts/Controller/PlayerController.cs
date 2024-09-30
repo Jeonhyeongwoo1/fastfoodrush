@@ -58,8 +58,8 @@ namespace FastFoodRush.Controller
 
         private void Start()
         {
-            _moveSpeed = RestaurantManager.Instance.GetDefaultAbilityValue(AbilityType.PlayerSpeed);
-            _playerCapacity = (int)RestaurantManager.Instance.GetDefaultAbilityValue(AbilityType.PlayerCapacity);
+            _moveSpeed = RestaurantManager.Instance.GetStatusValue(AbilityType.PlayerSpeed);
+            _playerCapacity = (int)RestaurantManager.Instance.GetStatusValue(AbilityType.PlayerCapacity);
         }
 
         private void OnUpgradeAbility(AbilityType abilityType, float ability)
@@ -94,7 +94,6 @@ namespace FastFoodRush.Controller
 
             _animator.SetBool(_isMovingHash, isMoving);
         }
-        
         
         public void OnStep(AnimationEvent animationEvent)
         {
