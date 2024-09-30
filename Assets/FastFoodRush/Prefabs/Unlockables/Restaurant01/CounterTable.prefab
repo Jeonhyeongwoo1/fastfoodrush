@@ -266,7 +266,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _buyPoint: {x: 0, y: 0, z: 1}
-  _moneyNeedToUnlock: 150
+  _buyPointRot: {x: 0, y: 0, z: 0}
+  _moneyNeedToUnlock: 10
+  _objectStack: {fileID: 3573876018679560055}
   _queuePointList:
   - {fileID: 6632145469227862513}
   - {fileID: 6632145469389428603}
@@ -280,6 +282,19 @@ MonoBehaviour:
   - {fileID: 6632145468874196225}
   _customerSpawnPoint: {fileID: 6632145467533585945}
   _customerDesapwnPoint: {fileID: 6632145469512974667}
+  _spawnCustomerInterval: 3
+  _seatList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &6632145467533585946
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,9 +875,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25175b17084ff4d5aa6a771b8560a87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stackType: 1
   _offset: {x: 0, y: 0.25, z: 0}
+  _useMaxCapacity: 0
   _maxCapacity: 6
   _interval: 0.25
+  _stackList: []
 --- !u!1 &6632145469183575478
 GameObject:
   m_ObjectHideFlags: 0

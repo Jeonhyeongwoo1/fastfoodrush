@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using FastFoodRush.Controller;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using UnityEngine;
@@ -15,6 +16,14 @@ namespace FastFoodRush.Manager
         EmployeeSpeed,
         EmployeeCapacity,
         EmployeeAmount
+    }
+
+    public enum StackType
+    {
+        None,
+        Food,
+        Package,
+        Trash
     }
     
     public class RestaurantManager : MonoBehaviour
@@ -64,7 +73,9 @@ namespace FastFoodRush.Manager
         [SerializeField] private UnlockableBuyer _unlockableBuyer;
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
         [SerializeField] private AbilityConfigData _abilityData;
+        [SerializeField] private Transform _employeeSpawnPoint;
         
+        private List<EmployeeController> _employeeControllerList = new();
         private RestaurantData _data;
         
         private const int startMoneny = 100000;
@@ -112,7 +123,27 @@ namespace FastFoodRush.Manager
             dataDict[(int)abilityType] = abilityData;
             //UseMoney
             Moneny -= price;
+
+            switch (abilityType)
+            {
+                case AbilityType.EmployeeAmount:
+                    SpawnEmployee();
+                    break;
+            }
+            
             onUpgradedAbility?.Invoke(abilityType, abilityData.statusValue);
+        }
+
+        private void SpawnEmployee()
+        {
+            GameObject employeeObj = PoolManager.Instance.Get(Key.Employee);
+
+            if (employeeObj.TryGetComponent(out EmployeeController employeeController))
+            {
+                _employeeControllerList.Add(employeeController);
+            }
+
+            employeeController.Initialize(_employeeSpawnPoint.position);
         }
 
         public int GetCurrentAbilityLevel(AbilityType abilityType)

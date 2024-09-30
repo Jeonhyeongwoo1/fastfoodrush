@@ -103,13 +103,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id: 
   _buyPoint: {x: -2, y: 0, z: 0}
+  _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 150
   _chairList:
   - {fileID: 529651869933295928}
   - {fileID: 5497761363194014646}
   _table: {fileID: 8988951882458638440}
   _tableTop: {fileID: 9087079457901133732}
-  _trashPile: {fileID: 0}
+  _trashPile: {fileID: 4038862960675972748}
 --- !u!1 &5497761363194014645
 GameObject:
   m_ObjectHideFlags: 0

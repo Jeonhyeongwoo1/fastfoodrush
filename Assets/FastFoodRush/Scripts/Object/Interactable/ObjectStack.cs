@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using FastFoodRush.Manager;
 using UnityEngine;
 
 namespace FastFoodRush.Interactable
@@ -10,7 +11,8 @@ namespace FastFoodRush.Interactable
     public class ObjectStack : Interactable
     {
         public int StackCount => _stackList.Count;
-        
+
+        [SerializeField] private StackType _stackType;
         [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
         [SerializeField] private bool _useMaxCapacity;
         [SerializeField] private int _maxCapacity = 6;
@@ -21,7 +23,7 @@ namespace FastFoodRush.Interactable
 
         private void Update()
         {
-            if (_player == null || _player.Stack.StackCount == 0)
+            if (_player == null || _player.Stack.StackCount == 0 || _player.Stack.CurrentStackType != _stackType)
             {
                 return;
             }

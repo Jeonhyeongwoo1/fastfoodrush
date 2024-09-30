@@ -63,7 +63,7 @@ namespace FastFoodRush.Interactable
 
         private Seat TryGetSeat()
         {
-            Seat selected = _seatList.Find(v => v.IsUnlock && !v.IsPossibleSeat() && v.RemainSeatableChairCount > 0);
+            Seat selected = _seatList.Find(v => v.IsUnlock && v.IsPossibleSeat() && v.RemainSeatableChairCount > 0);
             if (selected != null)
             {
                 return selected;
@@ -71,7 +71,7 @@ namespace FastFoodRush.Interactable
             
             if (selected == null)
             {
-                selected = _seatList.Find(v => v.IsUnlock && !v.IsPossibleSeat() && v.RemainSeatableChairCount == 0);
+                selected = _seatList.Find(v => v.IsUnlock && v.IsPossibleSeat() && v.RemainSeatableChairCount == 0);
                 return selected ? selected : null;
             }
 

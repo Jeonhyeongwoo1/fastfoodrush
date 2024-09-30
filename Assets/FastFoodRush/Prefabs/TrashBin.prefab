@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7629519628427282725}
   - component: {fileID: 7629519628427282722}
+  - component: {fileID: 363371225444268845}
   m_Layer: 0
   m_Name: TrashBin
   m_TagString: Untagged
@@ -160,6 +161,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.5, y: 2, z: 4.5}
   m_Center: {x: -0.5, y: 1, z: 0}
+--- !u!114 &363371225444268845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7629519628427282720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d862d4b4e937432bb5519240ef5f803, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7629519628862779594
 GameObject:
   m_ObjectHideFlags: 0

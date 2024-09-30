@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using FastFoodRush.Manager;
 using UnityEngine;
 
 namespace FastFoodRush.Interactable
@@ -10,16 +11,19 @@ namespace FastFoodRush.Interactable
     public class WobblingStack : MonoBehaviour
     {
         public int StackCount => _stackList.Count;
+        public StackType CurrentStackType => _currentStackType;
 
         [SerializeField] private GameObject _tray;
         [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
 
+        [SerializeField] private StackType _currentStackType;
         private List<GameObject> _stackList = new();
 
         private void Update()
         {
             if (_stackList.Count == 0)
             {
+                _currentStackType = StackType.None;
                 return;
             }
 
@@ -30,17 +34,23 @@ namespace FastFoodRush.Interactable
             }
         }
 
-        public void Stack(GameObject obj)
+        public void Stack(GameObject obj, StackType stackType)
         {
+            if (_currentStackType != StackType.None && _currentStackType != stackType)
+            {
+                return;
+            }
+            
             if (!_tray.activeSelf)
             {
                 _tray.SetActive(true);
             }
-            
+
             Vector3 endValue = _tray.transform.position + _offset * _stackList.Count;
             obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
             {
                 _stackList.Add(obj);
+                _currentStackType = stackType;
                 obj.transform.position = endValue;
             });
         }

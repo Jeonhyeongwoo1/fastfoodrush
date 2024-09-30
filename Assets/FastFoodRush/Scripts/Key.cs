@@ -8,4 +8,5 @@ public static class Key
     public static string Food = "Food";
     public static string Customer = "Customer";
     public static string Trash = "Trash";
+    public static string Employee = "Employee";
 }

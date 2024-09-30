@@ -9,16 +9,13 @@ namespace FastFoodRush.Interactable
 {
     public class Seat : UnlockableObject
     {
-        public int RemainSeatableChairCount => _remainSeatableChairCount;
-        public bool IsAllCustomerSeated => _currentSeatedCustomerCount == _chairList.Count;
-        public int StackCount => _stackList.Count;
+        public int RemainSeatableChairCount => _chairList.Count - _currentSeatedCustomerCount;
         
         [SerializeField] private List<Transform> _chairList;
         [SerializeField] private Transform _table;
         [SerializeField] private Transform _tableTop;
         [SerializeField] private TrashPile _trashPile;
         
-        private int _remainSeatableChairCount;
         private Stack<GameObject> _stackList;
         private int _currentSeatedCustomerCount;
 
@@ -27,11 +24,9 @@ namespace FastFoodRush.Interactable
         
         public void CompleteStackFood(Action onAllCustomerSeatedAction, Action onLeaveCustomerAction)
         {
-            _currentSeatedCustomerCount++;
-
             this.onAllCustomerSeatedAction += onAllCustomerSeatedAction;
             this.onLeaveCustomerAction += onLeaveCustomerAction;
-            if (IsAllCustomerSeated)
+            if (RemainSeatableChairCount == 0)
             {
                 this.onAllCustomerSeatedAction?.Invoke();
                 RemoveStackFood();
@@ -50,6 +45,7 @@ namespace FastFoodRush.Interactable
 
         private IEnumerator RemoveStackFoodCor()
         {
+            int count = _stackList.Count;
             while (_stackList.Count > 0)
             {
                 yield return new WaitForSeconds(1.5f);
@@ -58,27 +54,32 @@ namespace FastFoodRush.Interactable
             }
             
             onLeaveCustomerAction?.Invoke();
-
+            
+            CreateTrashPile(count);
             Reset();
+        }
+
+        private void CreateTrashPile(int trashCount)
+        {
+            _trashPile.Stack(trashCount);
         }
 
         private void Reset()
         {
             _currentSeatedCustomerCount = 0;
-            _remainSeatableChairCount = 0;
             onAllCustomerSeatedAction = null;
             onLeaveCustomerAction = null;
         }
         
         public Vector3 GetChairPosition()
         {
-            if (IsPossibleSeat())
+            if (!IsPossibleSeat())
             {
                 Debug.LogWarning("is full seat");
                 return Vector3.zero;
             }
             
-            return _chairList[_remainSeatableChairCount++].position;
+            return _chairList[_currentSeatedCustomerCount++].position;
         }
 
         public void StackFood(GameObject obj, float duration)
@@ -91,7 +92,7 @@ namespace FastFoodRush.Interactable
 
         public bool IsPossibleSeat()
         {
-            return _chairList.Count <= _remainSeatableChairCount;
+            return _chairList.Count > _currentSeatedCustomerCount && !_trashPile.IsExistTrash;
         }
     }
 }

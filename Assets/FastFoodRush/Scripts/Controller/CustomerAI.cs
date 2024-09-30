@@ -111,7 +111,7 @@ namespace FastFoodRush.Object
                 return;
             }
             
-            _wobblingStack.Stack(orderObj);
+            _wobblingStack.Stack(orderObj, StackType.Food);
         }
 
         public void UpdateQueuePosition(Vector3 position)
