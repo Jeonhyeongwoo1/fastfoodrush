@@ -19,7 +19,8 @@ namespace FastFoodRush.Interactable
         [SerializeField] private List<Seat> _seatList;
         
         private Queue<CustomerController> _customerQueue = new();
-        private float _elapsed;
+        private float _spawnCustomerElapsed;
+        private float _orderElapsed;
 
         public override void Unlock()
         {
@@ -46,9 +47,16 @@ namespace FastFoodRush.Interactable
             {
                 return;
             }
-            
+
+            _orderElapsed += Time.deltaTime;
             if (_objectStack.StackCount > 0 && customer.RemainOrderCount > 0)
             {
+                if (_orderElapsed < 0.2f)
+                {
+                    return;
+                }
+
+                _orderElapsed = 0;
                 customer.ReceiveOrderInfo(_objectStack.GetStackObject());
             }
             
@@ -107,10 +115,10 @@ namespace FastFoodRush.Interactable
                 return;
             }
             
-            _elapsed += Time.deltaTime;
-            if (_elapsed > _spawnCustomerInterval)
+            _spawnCustomerElapsed += Time.deltaTime;
+            if (_spawnCustomerElapsed > _spawnCustomerInterval)
             {
-                _elapsed = 0;
+                _spawnCustomerElapsed = 0;
                 SpawnCustomer(_customerSpawnPoint.position, GetQueuePoint().position, _customerDesapwnPoint.position);
             }
         }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using FastFoodRush.Controller;
 using FastFoodRush.Interactable;
@@ -37,6 +38,11 @@ namespace FastFoodRush.Object
             _sitHash = Animator.StringToHash("Sit");
             _eatHash = Animator.StringToHash("Eat");
             _leaveHash = Animator.StringToHash("Leave");
+        }
+
+        private void OnDisable()
+        {
+            _orderCount = 0;
         }
 
         private void Update()

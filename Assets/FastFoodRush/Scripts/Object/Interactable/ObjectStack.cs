@@ -49,7 +49,9 @@ namespace FastFoodRush.Interactable
 
         private void DoStackAnimation(GameObject obj)
         {
-            Vector3 endValue = transform.position + RestaurantManager.Instance.GetOffsetByStackType(StackType.Food) * _stackList.Count;
+            Vector3 endValue = transform.position +
+                               new Vector3(0, RestaurantManager.Instance.GetOffsetByStackType(StackType.Food).y, 0) *
+                               _stackList.Count;
             _stackList.Add(obj);
             obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
             {

@@ -19,17 +19,43 @@ namespace FastFoodRush.Controller
 
         private int _employeeMoveSpeed;
         private int _employeeCapacity;
+        private Coroutine _processLoginCor;
 
         protected override void Start()
         {
             base.Start();
             
-            StartCoroutine(ProcessLogic());
+            _processLoginCor = StartCoroutine(ProcessLogic());
         }
 
         private void Update()
         {
             _animator.SetBool(_isMovingHash, !HasArrived());
+        }
+
+        private void OnEnable()
+        {
+            RestaurantManager.Instance.onUpgradedAbility += OnUpgradeAbility;
+        }
+
+        private void OnDisable()
+        {
+            RestaurantManager.Instance.onUpgradedAbility -= OnUpgradeAbility;
+        }
+
+        public void Sleep()
+        {
+            StopLogic();
+            gameObject.SetActive(false);
+        }
+
+        public void StopLogic()
+        {
+            if (_processLoginCor != null)
+            {
+                StopCoroutine(_processLoginCor);
+                _processLoginCor = null;
+            }
         }
 
         private IEnumerator ProcessLogic()
@@ -63,30 +89,26 @@ namespace FastFoodRush.Controller
         private IEnumerator CarryFoodCor()
         {
             List<FoodPile> foodPileList = RestaurantManager.Instance.Piles.OfType<FoodPile>().ToList().FindAll(v=> v.StackCount > 0);
-
-            if (foodPileList.Count == 0)
+            if (foodPileList.Count > 0)
             {
-                yield break;
-            }
+                int random = Random.Range(0, foodPileList.Count);
+                FoodPile foodPile = foodPileList[random];
 
-            int random = Random.Range(0, foodPileList.Count);
-            FoodPile foodPile = foodPileList[random];
+                _agent.SetDestination(foodPile.transform.position);
 
-            _agent.SetDestination(foodPile.transform.position);
+                yield return new WaitUntil(() => HasArrived());
 
-            yield return new WaitUntil(() => HasArrived());
-
-            const float interval = 0.1f;
-            while (foodPile.StackCount > 0)
-            {
-                if (_wobblingStack.StackCount >= _employeeCapacity)
+                while (foodPile.StackCount > 0)
                 {
-                    yield break;
-                }
+                    if (_wobblingStack.StackCount >= _employeeCapacity)
+                    {
+                        break;
+                    }
 
-                GameObject obj = foodPile.RemoveStack();
-                _wobblingStack.Stack(obj, foodPile.StackType);
-                yield return new WaitForSeconds(0.2f);
+                    GameObject obj = foodPile.RemoveStack();
+                    _wobblingStack.Stack(obj, foodPile.StackType);
+                    yield return new WaitForSeconds(0.2f);
+                }
             }
 
             if (_wobblingStack.StackCount == 0)
@@ -175,7 +197,20 @@ namespace FastFoodRush.Controller
             transform.position = spawnPosition;
             gameObject.SetActive(true);
         }
-        
+
+        private void OnUpgradeAbility(AbilityType abilityType, float ability)
+        {
+            switch (abilityType)
+            {
+                case AbilityType.EmployeeSpeed:
+                    _agent.speed = ability;
+                    break;
+                case AbilityType.EmployeeCapacity:
+                    _employeeCapacity = (int)ability;
+                    break;
+             }
+        }
+
         public void OnStep(AnimationEvent animationEvent)
         {
             // if (animationEvent.animatorClipInfo.weight < 0.5f) return;

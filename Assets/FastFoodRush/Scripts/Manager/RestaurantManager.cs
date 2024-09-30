@@ -240,7 +240,7 @@ namespace FastFoodRush.Manager
             switch (stackType)
             {
                 case StackType.Food:
-                    return new Vector3(0, 0.25f, 0);
+                    return new Vector3(0.25f, 0.25f, 0);
                 case StackType.Package:
                     return new Vector3(0, 0.25f, 0);
                 case StackType.Trash:

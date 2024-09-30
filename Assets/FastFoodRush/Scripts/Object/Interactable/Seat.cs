@@ -10,7 +10,7 @@ namespace FastFoodRush.Interactable
 {
     public class Seat : UnlockableObject
     {
-        public int RemainSeatableChairCount => _chairList.Count - _currentSeatedCustomerCount;
+        public int RemainSeatableChairCount => _chairList.Count - _remainSeatableChairCount;
         
         [SerializeField] private List<Transform> _chairList;
         [SerializeField] private Transform _table;
@@ -19,6 +19,7 @@ namespace FastFoodRush.Interactable
         
         private Stack<GameObject> _objectStack;
         private int _currentSeatedCustomerCount;
+        private int _remainSeatableChairCount;
 
         private Action onAllCustomerSeatedAction;
         private Action onLeaveCustomerAction;
@@ -27,7 +28,9 @@ namespace FastFoodRush.Interactable
         {
             this.onAllCustomerSeatedAction += onAllCustomerSeatedAction;
             this.onLeaveCustomerAction += onLeaveCustomerAction;
-            if (RemainSeatableChairCount == 0)
+            _currentSeatedCustomerCount++;
+            
+            if (_currentSeatedCustomerCount == _chairList.Count)
             {
                 this.onAllCustomerSeatedAction?.Invoke();
                 RemoveStackFood();
@@ -57,7 +60,7 @@ namespace FastFoodRush.Interactable
             while (_objectStack.Count > 0)
             {
                 yield return new WaitForSeconds(1.5f);
-                Debug.LogWarning($"remove Stack {_objectStack.Count}");
+                // Debug.LogWarning($"remove Stack {_objectStack.Count}");
                 GameObject obj = _objectStack.Pop();
                 obj.SetActive(false);
             }
@@ -79,6 +82,7 @@ namespace FastFoodRush.Interactable
         private void Reset()
         {
             _currentSeatedCustomerCount = 0;
+            _remainSeatableChairCount = 0;
             onAllCustomerSeatedAction = null;
             onLeaveCustomerAction = null;
         }
@@ -91,7 +95,7 @@ namespace FastFoodRush.Interactable
                 return Vector3.zero;
             }
             
-            return _chairList[_currentSeatedCustomerCount++].position;
+            return _chairList[_remainSeatableChairCount++].position;
         }
 
         public void StackFood(GameObject obj, float duration)
@@ -104,7 +108,7 @@ namespace FastFoodRush.Interactable
 
         public bool IsPossibleSeat()
         {
-            return _chairList.Count > _currentSeatedCustomerCount && !_trashPile.IsExistObject;
+            return _chairList.Count > _remainSeatableChairCount && !_trashPile.IsExistObject;
         }
     }
 }

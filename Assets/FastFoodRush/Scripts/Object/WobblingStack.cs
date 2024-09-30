@@ -23,7 +23,6 @@ namespace FastFoodRush.Interactable
         {
             if (_stackList.Count == 0)
             {
-                _currentStackType = StackType.None;
                 return;
             }
 
@@ -47,10 +46,11 @@ namespace FastFoodRush.Interactable
             }
 
             Vector3 endValue = _tray.transform.position + _offset * _stackList.Count;
+            _stackList.Add(obj);
+            _currentStackType = stackType;
+            
             obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
             {
-                _stackList.Add(obj);
-                _currentStackType = stackType;
                 obj.transform.position = endValue;
             });
         }
@@ -62,6 +62,7 @@ namespace FastFoodRush.Interactable
             if (_stackList.Count == 0)
             {
                 _tray.SetActive(false);
+                _currentStackType = StackType.None;
             }
             
             return go;

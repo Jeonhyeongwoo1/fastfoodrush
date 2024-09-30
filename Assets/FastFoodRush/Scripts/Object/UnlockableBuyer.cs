@@ -32,7 +32,6 @@ namespace FastFoodRush.Object
             _paidMoneyText.text = _moneyNeedToUnlock.ToString();
             _prograssImage.fillAmount = 0;
             transform.position = spawnPosition;
-            Debug.Log(rotation);
             transform.eulerAngles = rotation;
         }
         
