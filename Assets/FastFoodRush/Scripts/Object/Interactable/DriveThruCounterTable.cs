@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FastFoodRush.Manager;
+using FastFoodRush.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,10 +9,25 @@ namespace FastFoodRush.Object
 {
     public class DriveThruCounterTable : BaseCounterTable
     {
-        [SerializeField] private List<GameObject> _driverPrefabList;
-
         private readonly int driverTypeCount = 4;
-        
+
+        protected override void HandleOrderInfoUI()
+        {            
+            var customer = _customerQueue.Peek();
+            if (_camera != null)
+            {
+                if (customer.RemainOrderCount > 0)
+                {
+                    Vector3 screenPoint = _camera.WorldToScreenPoint(customer.Transform.position + Vector3.up * 3);
+                    _orderInfoUI.Show(customer.RemainOrderCount.ToString(), (int)OrderInfoType.Package, screenPoint);
+                }
+                else
+                {
+                    _orderInfoUI.Hide();
+                }
+            }
+        }
+
         protected override void CompleteOrder()
         {
             var orderable = _customerQueue.Dequeue();

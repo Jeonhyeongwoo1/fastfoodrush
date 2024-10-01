@@ -73,7 +73,6 @@ namespace FastFoodRush.Manager
         
         public Action<float> onUpdateProgressAction;
         public Action<int> onUpdateMoneyAction;
-        public Action<int, int, Vector3> onOrderProductAction;
         public Action<AbilityType> onAbilityUpgradeAction;
         public Action<AbilityType, float> onUpgradedAbilityAction;
 

@@ -9,7 +9,7 @@ namespace FastFoodRush.Object
 {
     public class CustomerController : BaseController, IOrderable
     {
-        public enum State
+        private enum State
         {
             Idle,
             MoveToCounterTable,
@@ -29,8 +29,8 @@ namespace FastFoodRush.Object
 
         private int _height;
         private int _orderCount;
-        private Vector3 _queuePointPosition;
         private Vector3 _despawnPosition;
+        private Coroutine _moveToCor;
         
         private int _sitHash;
         private int _eatHash;
@@ -53,28 +53,6 @@ namespace FastFoodRush.Object
         private void Update()
         {
             bool isMoving = !HasArrived();
-            switch (_state)
-            {
-                case State.Idle:
-                    break;
-                case State.MoveToCounterTable:
-                    IsReadyOrder = !isMoving;
-                    if (!isMoving)
-                    {
-                        UpdateState(State.Idle);
-                    }
-                    
-                    break;
-                case State.MoveToSit:
-                    if (!isMoving)
-                    {
-                    
-                    }
-                    break;
-                case State.Eat:
-                    break;
-            }
-            
             _animator.SetBool(_isMovingHash, isMoving);
         }
         
@@ -95,12 +73,19 @@ namespace FastFoodRush.Object
 
             return true;
         }
-
+        
         public void UpdateQueuePosition(Vector3 position)
         {
             UpdateState(State.MoveToCounterTable);
-            _queuePointPosition = position;
-            _agent.SetDestination(_queuePointPosition);
+            MoveTo(position);
+        }
+
+        private IEnumerator MoveToCor(Vector3 destinationPosition, Action done)
+        {
+            _agent.SetDestination(destinationPosition);
+            yield return new WaitUntil(() => HasArrived());
+            
+            done?.Invoke();
         }
         
         public void MoveToTable(Vector3 seatPosition, Seat seat)
@@ -168,16 +153,30 @@ namespace FastFoodRush.Object
             IsReadyOrder = false;  
         }
 
+        private void MoveTo(Vector3 destinationPosition)
+        {
+            if (_moveToCor != null)
+            {
+                StopCoroutine(_moveToCor);
+            }
+
+            IsReadyOrder = false;
+            _moveToCor = StartCoroutine(MoveToCor(destinationPosition, () =>
+            {
+                UpdateState(State.Idle);
+                IsReadyOrder = true;
+            }));
+        }
+
         public void Spawn(Vector3 spawnPosition, Vector3 queuePosition, int maxFoodCapacity, Vector3 despawnPosition)
         {
             _agent.speed = _data.MoveSpeed;
-            _queuePointPosition = queuePosition;
             _orderCount = maxFoodCapacity;
             transform.position = spawnPosition;
             UpdateState(State.MoveToCounterTable);
             gameObject.SetActive(true);
-            _agent.SetDestination(_queuePointPosition);
             _despawnPosition = despawnPosition;
+            MoveTo(queuePosition);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace FastFoodRush.Object
         [SerializeField] protected Transform _customerSpawnPoint;
         [SerializeField] protected Transform _customerDesapwnPoint;
         [SerializeField] protected float _spawnCustomerInterval = 3;
+        [SerializeField] protected OrderInfoUI _orderInfoUI;
         [SerializeField] private OrderInfoType _orderInfoType;
         [SerializeField] private MoneyPile _moneyPile;
         [SerializeField] private WorkingSpot _workingSpot;
@@ -22,7 +23,7 @@ namespace FastFoodRush.Object
         protected Queue<IOrderable> _customerQueue = new();
         protected float _spawnCustomerElapsed;
         protected float _orderElapsed;
-        private Camera _camera;
+        protected Camera _camera;
 
         protected virtual void Start()
         {
@@ -63,6 +64,7 @@ namespace FastFoodRush.Object
                 return;
             }
 
+            HandleOrderInfoUI();
             if (_objectStack.StackCount > 0 && customer.OrderCount > customer.Height && _workingSpot.IsAvailableHandleOrder)
             {
                 _orderElapsed += Time.deltaTime;
@@ -82,12 +84,6 @@ namespace FastFoodRush.Object
             if (customer.RemainOrderCount == 0)
             {
                 CompleteOrder();
-            }
-
-            if (_camera != null)
-            {
-                Vector3 screenPoint = _camera.WorldToScreenPoint(customer.Transform.position + Vector3.up * 3);
-                RestaurantManager.Instance.onOrderProductAction?.Invoke(customer.RemainOrderCount, (int) _orderInfoType, screenPoint);
             }
         }
 
@@ -134,6 +130,7 @@ namespace FastFoodRush.Object
             return _customerQueue.Count >= _queuePointList.Count;
         }
 
+        protected abstract void HandleOrderInfoUI();
         protected abstract void CompleteOrder();
         protected abstract void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition);
     }

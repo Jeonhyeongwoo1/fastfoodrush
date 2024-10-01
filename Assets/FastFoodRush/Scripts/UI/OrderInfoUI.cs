@@ -17,33 +17,29 @@ namespace FastFoodRush.UI
     {
         [SerializeField] private TextMeshProUGUI _amountText;
         [SerializeField] private OrderInfoType _orderInfoType;
-
+        [SerializeField] private GameObject iconObj;
+        
         private void Start()
         {
-            RestaurantManager.Instance.onOrderProductAction += Show;
             gameObject.SetActive(false);
         }
-
-        private void OnDestroy()
-        {
-            RestaurantManager.Instance.onOrderProductAction -= Show;
-        }
-
-        public void Show(int amount, int orderInfoType, Vector3 position)
+        
+        public void Show(string amount, int orderInfoType, Vector3 position)
         {
             if (orderInfoType != (int)_orderInfoType)
             {
                 return;
             }
 
-            _amountText.text = amount.ToString();
+            iconObj.SetActive(amount != Const.NoSeat);
+            _amountText.text = amount;
             transform.position = position;
-            gameObject.SetActive(amount != 0);
+            gameObject.SetActive(true);
         }
 
         public void Hide()
         {
-            
+            gameObject.SetActive(false);
         }
     }
 }
