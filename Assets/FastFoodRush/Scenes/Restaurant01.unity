@@ -3623,6 +3623,31 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 767424986325741490, guid: d575dec691512584c9b3f82152b9c6a5, type: 3}
   m_PrefabInstance: {fileID: 1801980177}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1808208327 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 751175741553327530, guid: 903ab3508822032489956e9d812010bb, type: 3}
+  m_PrefabInstance: {fileID: 9087079458789578726}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808208330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808208327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 0
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
+  _moneyObjectList: []
 --- !u!1 &1852728768 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7729046860111089223, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
@@ -4968,50 +4993,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[6].size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[7].size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[8].size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[9].size
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[10].size
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[6].prefab
-      value: 
-      objectReference: {fileID: 5890665129334189226, guid: 2cc13c1f31733f74fa4523cbfbe42d0e, type: 3}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[7].prefab
-      value: 
-      objectReference: {fileID: 5890665129334189226, guid: 807b2163e20ef6d4f8a09f30f79822af, type: 3}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[8].prefab
-      value: 
-      objectReference: {fileID: 5890665129334189226, guid: b6416382ab5ece346801756be3fbf776, type: 3}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[9].prefab
-      value: 
-      objectReference: {fileID: 5890665129334189226, guid: cc12407b1ac5bc240bac19c4e423db84, type: 3}
-    - target: {fileID: 4393884979578793597, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
-      propertyPath: _poolDataList.Array.data[10].prefab
-      value: 
-      objectReference: {fileID: 4762738753070356771, guid: f2b62a40e2dd37a418a03ad0eb0338c8, type: 3}
     - target: {fileID: 4631145560853393800, guid: fcc74e5d6b3427b4ba400ac0b9756dd7, type: 3}
       propertyPath: m_Name
       value: PoolManager
@@ -5706,6 +5687,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
+      propertyPath: _priceOfFood
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[0]
       value: 
       objectReference: {fileID: 543450653382442175}
@@ -5872,7 +5857,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 751175741553327530, guid: 903ab3508822032489956e9d812010bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1808208330}
   m_SourcePrefab: {fileID: 100100000, guid: 903ab3508822032489956e9d812010bb, type: 3}
 --- !u!4 &9100545085430129195 stripped
 Transform:

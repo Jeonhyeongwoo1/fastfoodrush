@@ -14,12 +14,12 @@ namespace FastFoodRush.UI
 
         private void OnEnable()
         {
-            RestaurantManager.Instance.onUseMoneny += OnUseMoney;
+            RestaurantManager.Instance.onMoney += OnUseMoney;
         }
 
         private void OnDisable()
         {
-            RestaurantManager.Instance.onUseMoneny -= OnUseMoney;
+            RestaurantManager.Instance.onMoney -= OnUseMoney;
         }
 
         private void OnUseMoney(int money)

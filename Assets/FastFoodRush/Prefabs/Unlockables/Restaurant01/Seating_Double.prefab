@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8254567699529934088}
   - component: {fileID: 6736349948324323350}
+  - component: {fileID: 5994120421134949692}
   m_Layer: 0
   m_Name: TipMoneyPile
   m_TagString: Untagged
@@ -53,6 +54,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1.6}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5994120421134949692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751175741553327530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 4
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
+  _moneyObjectList: []
 --- !u!1 &800439766849679223
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,6 +132,7 @@ MonoBehaviour:
   _table: {fileID: 8988951882458638440}
   _tableTop: {fileID: 9087079457901133732}
   _trashPile: {fileID: 4038862960675972748}
+  _tipMoneyPile: {fileID: 5994120421134949692}
 --- !u!1 &1882244584665759203
 GameObject:
   m_ObjectHideFlags: 0

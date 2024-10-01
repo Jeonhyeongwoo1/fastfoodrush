@@ -15,6 +15,11 @@ namespace FastFoodRush.Interactable
 
         protected override float _timeInterval => 0.2f;
 
+        protected override void Start()
+        {
+            RestaurantManager.Instance.Piles.Add(this);
+        }
+        
         public override void Drop(GameObject obj = null)
         {
             obj = PoolManager.Instance.Get(Key.Trash);

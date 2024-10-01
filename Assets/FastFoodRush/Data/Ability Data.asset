@@ -17,7 +17,7 @@ MonoBehaviour:
   _upgradePrice: 200
   _defaultPlayerMoveSpeed: 5
   _defaultPlayerCapacity: 5
-  _defaultPlayerProfit: 3
+  _defaultPlayerProfit: 0
   _defaultEmployeeMoveSpeed: 2
   _defaultEmployeeCapacity: 5
   _playerMoveSpeedUpgradeValue: 0.3

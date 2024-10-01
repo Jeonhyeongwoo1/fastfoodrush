@@ -15,9 +15,13 @@ namespace FastFoodRush.Object
         public Vector3 GetBuyPointPosition => transform.TransformPoint(_buyPoint);
         public Vector3 GetBuyPointRotation => _buyPointRot;
         public bool IsUnlock => gameObject.activeSelf;
+
+        protected int _unlockLevel = 0;
         
         public virtual void Unlock()
         {
+            _unlockLevel++;
+            
             gameObject.SetActive(true);
         }
     }

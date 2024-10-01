@@ -4,7 +4,9 @@ using FastFoodRush.Controller;
 using FastFoodRush.Interactable;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
+using FastFoodRush.UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FastFoodRush.Manager
 {
@@ -24,7 +26,8 @@ namespace FastFoodRush.Manager
         None,
         Food,
         Package,
-        Trash
+        Trash,
+        Money
     }
     
     public class RestaurantManager : MonoBehaviour
@@ -56,7 +59,7 @@ namespace FastFoodRush.Manager
             set
             {
                 _data.money = value;
-                onUseMoneny?.Invoke(_data.money);
+                onMoney?.Invoke(_data.money);
             }
         }
 
@@ -66,7 +69,7 @@ namespace FastFoodRush.Manager
             set => _data.paidAmount = value;
         }
 
-        public Action<int> onUseMoneny;
+        public Action<int> onMoney;
         public Action<int, int, Vector3> onOrderProduct;
         public Action<AbilityType> onUpgrade;
         public Action<AbilityType, float> onUpgradedAbility;
@@ -79,11 +82,11 @@ namespace FastFoodRush.Manager
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
         [SerializeField] private AbilityConfigData _abilityData;
         [SerializeField] private Transform _employeeSpawnPoint;
+
+        [SerializeField] private int _priceOfFood;
         
         private List<EmployeeController> _employeeControllerList = new();
         private RestaurantData _data;
-        
-        private const int startMoneny = 100000;
 
         private void Awake()
         {
@@ -92,7 +95,8 @@ namespace FastFoodRush.Manager
 
         private void Start()
         {
-            Moneny = startMoneny;
+            Moneny = Const.StartMoney;
+            
             AllDisableUnlockableObject();
             UnlockableObject unlockableObject = _unlockableObjectList[UnlockableObjectCount];
             _unlockableBuyer.Initialize(unlockableObject, PaidAmount, unlockableObject.GetBuyPointPosition, unlockableObject.GetBuyPointRotation);
@@ -248,6 +252,20 @@ namespace FastFoodRush.Manager
                 default:
                     return new Vector3(0f, 0.25f, 0);
             }
+        }
+
+        public int GetTipAmount()
+        {
+            int random = Random.Range(1, 3);
+            float ratio = random * 0.1f;
+            int tipAmount = (int)(_priceOfFood * ratio) + (int)GetStatusValue(AbilityType.PlayerProfit);
+            return tipAmount;
+        }
+
+        public int GetPriceOfFood(OrderInfoType orderInfoType)
+        {
+            int price = _priceOfFood * (orderInfoType == OrderInfoType.Package ? 4 : 1) + (int)GetStatusValue(AbilityType.PlayerProfit);
+            return price;
         }
     }
 }

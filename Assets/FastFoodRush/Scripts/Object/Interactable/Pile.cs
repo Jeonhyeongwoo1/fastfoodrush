@@ -35,10 +35,7 @@ namespace FastFoodRush.Interactable
             }
         }
 
-        protected virtual void Start()
-        {
-            RestaurantManager.Instance.Piles.Add(this);
-        }
+        protected virtual void Start(){}
         public abstract void Drop(GameObject obj = null);
         public GameObject RemoveStack()
         {

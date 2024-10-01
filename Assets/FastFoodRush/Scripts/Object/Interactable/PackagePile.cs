@@ -9,7 +9,12 @@ namespace FastFoodRush.Interactable
     public class PackagePile : Pile
     {
         protected override float _timeInterval => 0.3f;
-
+        
+        protected override void Start()
+        {
+            RestaurantManager.Instance.Piles.Add(this);
+        }
+        
         public override void Drop(GameObject obj = null)
         {
             Vector3 endValue = transform.position +

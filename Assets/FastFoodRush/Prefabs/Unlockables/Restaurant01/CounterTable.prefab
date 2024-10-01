@@ -314,6 +314,8 @@ MonoBehaviour:
   _customerSpawnPoint: {fileID: 6632145467533585945}
   _customerDesapwnPoint: {fileID: 6632145469512974667}
   _spawnCustomerInterval: 3
+  _orderInfoType: 0
+  _moneyPile: {fileID: 2481398544978101810}
   _seatList:
   - {fileID: 0}
   - {fileID: 0}
@@ -766,6 +768,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6632145468834169626}
   - component: {fileID: 6632145468834169624}
+  - component: {fileID: 2481398544978101810}
   m_Layer: 0
   m_Name: MoneyPile
   m_TagString: Untagged
@@ -809,6 +812,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1.6}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &2481398544978101810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6632145468834169627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 4
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
+  _moneyObjectList: []
 --- !u!1 &6632145468874196226
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,7 +935,6 @@ MonoBehaviour:
   _maxCapacity: 6
   _interval: 0.25
   _objectStackPoint: {fileID: 192236509299484024}
-  _stackList: []
 --- !u!1 &6632145469183575478
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ namespace FastFoodRush.Object
         [SerializeField] protected Transform _customerDesapwnPoint;
         [SerializeField] protected float _spawnCustomerInterval = 3;
         [SerializeField] private OrderInfoType _orderInfoType;
+        [SerializeField] private MoneyPile _moneyPile;
         
         protected Queue<IOrderable> _customerQueue = new();
         protected float _spawnCustomerElapsed;
@@ -70,7 +71,11 @@ namespace FastFoodRush.Object
                 }
 
                 _orderElapsed = 0;
-                customer.ReceiveOrderInfo(_objectStack.GetStackObject());
+                bool isSuccessReceivedOrder = customer.TryReceivedOrderInfo(_objectStack.GetStackObject());
+                if (isSuccessReceivedOrder)
+                {
+                    ReceivedTip();
+                }
             }
             
             if (customer.RemainOrderCount == 0)
@@ -83,6 +88,17 @@ namespace FastFoodRush.Object
                 Vector3 screenPoint = _camera.WorldToScreenPoint(customer.Transform.position + Vector3.up * 3);
                 RestaurantManager.Instance.onOrderProduct?.Invoke(customer.RemainOrderCount, (int) _orderInfoType, screenPoint);
             }
+        }
+
+        protected void ReceivedTip()
+        {
+            /*
+             *  햄버거 한개 당 가격
+             *  팁 = 음식 한개의 가격 + profit level * profit value
+             */
+
+            int price = RestaurantManager.Instance.GetPriceOfFood(_orderInfoType);
+            _moneyPile.AddMoney(price);
         }
         
         protected void UpdateCustomerQueuePosition()

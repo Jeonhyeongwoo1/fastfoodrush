@@ -293,6 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 39422416923852853}
   - component: {fileID: 39422416923852855}
+  - component: {fileID: 6916525090248647731}
   m_Layer: 0
   m_Name: MoneyPile
   m_TagString: Untagged
@@ -336,6 +337,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1.6}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6916525090248647731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39422416923852852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 4
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
+  _moneyObjectList: []
 --- !u!1 &39422417004842359
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +909,7 @@ MonoBehaviour:
   _customerDesapwnPoint: {fileID: 39422416629261646}
   _spawnCustomerInterval: 3
   _orderInfoType: 1
+  _moneyPile: {fileID: 6916525090248647731}
   _driverPrefabList:
   - {fileID: 5890665129334189226, guid: 2cc13c1f31733f74fa4523cbfbe42d0e, type: 3}
   - {fileID: 5890665129334189226, guid: 807b2163e20ef6d4f8a09f30f79822af, type: 3}

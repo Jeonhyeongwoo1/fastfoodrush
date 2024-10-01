@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using FastFoodRush.Object;
+using FastFoodRush.UI;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace FastFoodRush.Interactable
 {
@@ -16,14 +18,21 @@ namespace FastFoodRush.Interactable
         [SerializeField] private Transform _table;
         [SerializeField] private Transform _tableTop;
         [SerializeField] private TrashPile _trashPile;
+        [SerializeField] private MoneyPile _tipMoneyPile;
         
         private Stack<GameObject> _objectStack;
         private int _currentSeatedCustomerCount;
         private int _remainSeatableChairCount;
-
+        private int _tipChance;
+        
         private Action onAllCustomerSeatedAction;
         private Action onLeaveCustomerAction;
-        
+
+        private void Start()
+        {
+            _tipChance = Const.TipChance + (_unlockLevel - 1) * 10;
+        }
+
         public void CompleteStackFood(Action onAllCustomerSeatedAction, Action onLeaveCustomerAction)
         {
             this.onAllCustomerSeatedAction += onAllCustomerSeatedAction;
@@ -33,7 +42,18 @@ namespace FastFoodRush.Interactable
             if (_currentSeatedCustomerCount == _chairList.Count)
             {
                 this.onAllCustomerSeatedAction?.Invoke();
-                RemoveStackFood();
+                StartCoroutine(BeginEatingCor());
+            }
+        }
+
+        public void ReceivedTip()
+        {
+            int random = Random.Range(0, 100);
+            if (random < _tipChance)
+            {
+                int tipMoney = RestaurantManager.Instance.GetTipAmount();
+                Debug.Log("Tip" + tipMoney);
+                _tipMoneyPile.AddMoney(tipMoney);    
             }
         }
 
@@ -42,25 +62,20 @@ namespace FastFoodRush.Interactable
             return _table.position;
         }
 
-        private void RemoveStackFood()
+        private IEnumerator BeginEatingCor()
         {
-            StartCoroutine(RemoveStackFoodCor());
-        }
-
-        private IEnumerator RemoveStackFoodCor()
-        {
-            int count = _objectStack.Count;
+            int trashCount = 0;
             while (_objectStack.Count > 0)
             {
-                yield return new WaitForSeconds(1.5f);
-                // Debug.LogWarning($"remove Stack {_objectStack.Count}");
+                yield return new WaitForSeconds(Random.Range(0.8f, 1.5f));
                 GameObject obj = _objectStack.Pop();
                 obj.SetActive(false);
+                trashCount++;
             }
             
+            ReceivedTip();
             onLeaveCustomerAction?.Invoke();
-            
-            CreateTrashPile(count);
+            CreateTrashPile(trashCount);
             Reset();
         }
 

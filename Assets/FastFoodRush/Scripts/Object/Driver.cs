@@ -15,7 +15,7 @@ namespace FastFoodRush.Object
         public int Height { get; }
         public int OrderCount { get; }
         public Transform Transform { get; }
-        public void ReceiveOrderInfo(GameObject obj);
+        public bool TryReceivedOrderInfo(GameObject obj);
         public void UpdateQueuePosition(Vector3 position);
     }
     
@@ -101,8 +101,13 @@ namespace FastFoodRush.Object
             }));
         }
         
-        public void ReceiveOrderInfo(GameObject obj)
+        public bool TryReceivedOrderInfo(GameObject obj)
         {
+            if (RemainOrderCount == 0)
+            {
+                return false;
+            }
+            
             _height++;
             Sequence seq = DOTween.Sequence();
             seq.Append(obj.transform.DOJump(transform.position, 4, 1, 0.3f));
@@ -111,6 +116,8 @@ namespace FastFoodRush.Object
                 obj.SetActive(false);
                 _currentReceivedOrderCount++;
             });
+
+            return true;
         }
 
         public void UpdateQueuePosition(Vector3 position)

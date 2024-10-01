@@ -83,15 +83,17 @@ namespace FastFoodRush.Object
             _state = state;
         }
 
-        public void ReceiveOrderInfo(GameObject orderObj)
+        public bool TryReceivedOrderInfo(GameObject orderObj)
         {
             if (RemainOrderCount == 0)
             {
-                return;
+                return false;
             }
 
             _height++;
             _wobblingStack.Stack(orderObj, StackType.Food);
+
+            return true;
         }
 
         public void UpdateQueuePosition(Vector3 position)
