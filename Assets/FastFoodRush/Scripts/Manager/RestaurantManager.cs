@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using DG.Tweening;
 using FastFoodRush.Controller;
 using FastFoodRush.Interactable;
 using FastFoodRush.Object;
@@ -84,7 +85,8 @@ namespace FastFoodRush.Manager
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
         [SerializeField] private AbilityConfigData _abilityData;
         [SerializeField] private Transform _employeeSpawnPoint;
-
+        [SerializeField] private GameObject _unlockEffectObj; 
+        
         [SerializeField] private int _priceOfFood;
         
         private List<EmployeeController> _employeeControllerList = new();
@@ -228,12 +230,13 @@ namespace FastFoodRush.Manager
                 Debug.LogWarning($"already opened all unlockable object");
                 return;
             }
-
+            
             UnlockableObject unlockableObject = _unlockableObjectList[UnlockableObjectCount];
             unlockableObject.Unlock();
             UnlockableObjectCount++;
             PaidAmount = 0;
 
+            ShowUnlockEffect(unlockableObject.transform.position);
             if (_unlockableObjectList.Count > UnlockableObjectCount)
             {
                 UnlockableObject nextUnlockableObject = _unlockableObjectList[UnlockableObjectCount];
@@ -242,6 +245,13 @@ namespace FastFoodRush.Manager
             }
             
             CheckProgress();
+        }
+
+        private void ShowUnlockEffect(Vector3 spawnPosition)
+        {
+            _unlockEffectObj.transform.position = spawnPosition;
+            _unlockEffectObj.SetActive(true);
+            DOVirtual.DelayedCall(1, () => _unlockEffectObj.SetActive(false));
         }
 
         private void CheckProgress()
