@@ -20,8 +20,7 @@ namespace FastFoodRush.Interactable
         protected override float _timeInterval => 0.15f;
         private readonly int _maxMoneyObjectStackCount = 200;
         private int _totalMoney;
-        private float _elapsed = 0;
-        [SerializeField] private List<GameObject> _moneyObjectList = new ();
+        private List<GameObject> _moneyObjectList = new ();
 
         protected override void Update()
         {

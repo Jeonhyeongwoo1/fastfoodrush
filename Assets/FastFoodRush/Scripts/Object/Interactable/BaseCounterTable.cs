@@ -86,7 +86,7 @@ namespace FastFoodRush.Object
             if (_camera != null)
             {
                 Vector3 screenPoint = _camera.WorldToScreenPoint(customer.Transform.position + Vector3.up * 3);
-                RestaurantManager.Instance.onOrderProduct?.Invoke(customer.RemainOrderCount, (int) _orderInfoType, screenPoint);
+                RestaurantManager.Instance.onOrderProductAction?.Invoke(customer.RemainOrderCount, (int) _orderInfoType, screenPoint);
             }
         }
 

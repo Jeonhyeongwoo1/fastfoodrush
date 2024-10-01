@@ -6,6 +6,7 @@ using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using FastFoodRush.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace FastFoodRush.Manager
@@ -59,7 +60,7 @@ namespace FastFoodRush.Manager
             set
             {
                 _data.money = value;
-                onMoney?.Invoke(_data.money);
+                onUpdateMoneyAction?.Invoke(_data.money);
             }
         }
 
@@ -68,11 +69,12 @@ namespace FastFoodRush.Manager
             get => _data.paidAmount;
             set => _data.paidAmount = value;
         }
-
-        public Action<int> onMoney;
-        public Action<int, int, Vector3> onOrderProduct;
-        public Action<AbilityType> onUpgrade;
-        public Action<AbilityType, float> onUpgradedAbility;
+        
+        public Action<float> onUpdateProgressAction;
+        public Action<int> onUpdateMoneyAction;
+        public Action<int, int, Vector3> onOrderProductAction;
+        public Action<AbilityType> onAbilityUpgradeAction;
+        public Action<AbilityType, float> onUpgradedAbilityAction;
 
         public List<ObjectStack> ObjectStacks { get; set; } = new();
         public List<Pile> Piles { get; set; } = new();
@@ -100,8 +102,9 @@ namespace FastFoodRush.Manager
             AllDisableUnlockableObject();
             UnlockableObject unlockableObject = _unlockableObjectList[UnlockableObjectCount];
             _unlockableBuyer.Initialize(unlockableObject, PaidAmount, unlockableObject.GetBuyPointPosition, unlockableObject.GetBuyPointRotation);
-
-            onUpgrade += OnAbilityUpgrade;
+            CheckProgress();
+            
+            onAbilityUpgradeAction += OnAbilityUpgrade;
         }
 
         [SerializeField] private int _unlockIndex;
@@ -123,7 +126,7 @@ namespace FastFoodRush.Manager
 
         private void OnDestroy()
         {
-            onUpgrade -= OnAbilityUpgrade;
+            onAbilityUpgradeAction -= OnAbilityUpgrade;
         }
 
         private void OnAbilityUpgrade(AbilityType abilityType)
@@ -161,7 +164,7 @@ namespace FastFoodRush.Manager
                     break;
             }
             
-            onUpgradedAbility?.Invoke(abilityType, abilityData.statusValue);
+            onUpgradedAbilityAction?.Invoke(abilityType, abilityData.statusValue);
         }
 
         private void SpawnEmployee()
@@ -237,6 +240,35 @@ namespace FastFoodRush.Manager
                 _unlockableBuyer.Initialize(nextUnlockableObject, PaidAmount, nextUnlockableObject.GetBuyPointPosition,
                     nextUnlockableObject.GetBuyPointRotation);
             }
+            
+            CheckProgress();
+        }
+
+        private void CheckProgress()
+        {
+            bool isEnd = UnlockableObjectCount == _unlockableObjectList.Count;
+            float ratio = (float) UnlockableObjectCount / _unlockableObjectList.Count;
+            if (isEnd)
+            {
+                SaveData();
+                //Next stage
+
+                LoadRestaurant();
+            }
+            
+            onUpdateProgressAction?.Invoke(ratio);
+        }
+
+        private void LoadRestaurant()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            int index = scene.buildIndex;
+            SceneManager.LoadScene(++index);
+        }
+
+        private void SaveData()
+        {
+            
         }
 
         public Vector3 GetOffsetByStackType(StackType stackType)

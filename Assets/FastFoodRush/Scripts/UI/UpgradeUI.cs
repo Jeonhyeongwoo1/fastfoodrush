@@ -39,7 +39,7 @@ namespace FastFoodRush.UI
 
         private void OnClickUpgrade(AbilityType abilityType)
         {
-            RestaurantManager.Instance.onUpgrade?.Invoke(abilityType);
+            RestaurantManager.Instance.onAbilityUpgradeAction?.Invoke(abilityType);
             Refresh();
         }
 

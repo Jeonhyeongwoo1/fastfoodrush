@@ -20,13 +20,13 @@ namespace FastFoodRush.UI
 
         private void Start()
         {
-            RestaurantManager.Instance.onOrderProduct += Show;
+            RestaurantManager.Instance.onOrderProductAction += Show;
             gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
-            RestaurantManager.Instance.onOrderProduct -= Show;
+            RestaurantManager.Instance.onOrderProductAction -= Show;
         }
 
         public void Show(int amount, int orderInfoType, Vector3 position)

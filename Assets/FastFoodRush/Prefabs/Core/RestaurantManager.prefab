@@ -1356,7 +1356,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 55
 --- !u!1 &7729046859026061385
 GameObject:
   m_ObjectHideFlags: 0
@@ -5686,7 +5686,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 347f77ec13357124098d711de8a30934, type: 3}
   m_FillDirection: 0
-  m_FillAmount: 0.7
+  m_FillAmount: 0.715
   m_FillCenter: 1
   m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7729046860020304383
@@ -7348,6 +7348,7 @@ GameObject:
   - component: {fileID: 7729046860306395638}
   - component: {fileID: 7729046860306395632}
   - component: {fileID: 7729046860306395633}
+  - component: {fileID: 360127094933272855}
   m_Layer: 5
   m_Name: ProgressDisplay
   m_TagString: Untagged
@@ -7415,6 +7416,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &360127094933272855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7729046860306395639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2508ef5db204b9991383112be93c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _progressbarImage: {fileID: 7729046859994573664}
+  _progressbarText: {fileID: 7729046858997732910}
 --- !u!1 &7729046860335653774
 GameObject:
   m_ObjectHideFlags: 0
@@ -8420,6 +8435,7 @@ MonoBehaviour:
   - {fileID: 0}
   _abilityData: {fileID: 11400000, guid: 4eb1a85b546a242ce9ca7438f05c1f0d, type: 2}
   _employeeSpawnPoint: {fileID: 7729046860671016937}
+  _priceOfFood: 20
   _unlockIndex: 8
 --- !u!1 &7729046860557835250
 GameObject:

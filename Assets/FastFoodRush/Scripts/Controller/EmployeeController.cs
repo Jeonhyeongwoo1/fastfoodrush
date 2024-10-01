@@ -36,12 +36,12 @@ namespace FastFoodRush.Controller
 
         private void OnEnable()
         {
-            RestaurantManager.Instance.onUpgradedAbility += OnUpgradeAbility;
+            RestaurantManager.Instance.onUpgradedAbilityAction += OnUpgradeAbility;
         }
 
         private void OnDisable()
         {
-            RestaurantManager.Instance.onUpgradedAbility -= OnUpgradeAbility;
+            RestaurantManager.Instance.onUpgradedAbilityAction -= OnUpgradeAbility;
         }
 
         public void Sleep()
