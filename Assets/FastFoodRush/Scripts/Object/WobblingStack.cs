@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
@@ -16,7 +14,6 @@ namespace FastFoodRush.Interactable
 
         [SerializeField] private GameObject _tray;
         [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
-
         [SerializeField] private StackType _currentStackType;
         [SerializeField] private List<GameObject> _stackList = new();
 
@@ -29,10 +26,18 @@ namespace FastFoodRush.Interactable
                 return;
             }
 
+            _stackList[0].transform.position = _tray.transform.position;
+            _stackList[0].transform.rotation = _tray.transform.rotation;
+            
             for (int i = 0; i < _stackList.Count; i++)
             {
+                float rate = Mathf.Lerp(0.8f, 0.1f, i / (float) _stackList.Count);
                 GameObject go = _stackList[i];
-                go.transform.position = _tray.transform.position + _offset * i;
+                Vector3 prevPosition = go.transform.position;
+                Vector3 position = Vector3.Lerp(prevPosition, _tray.transform.position + _offset * i, rate);
+                Quaternion rotation = _tray.transform.rotation;
+                go.transform.position = position;
+                go.transform.rotation = rotation;
             }
         }
 

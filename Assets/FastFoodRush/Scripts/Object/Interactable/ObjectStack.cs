@@ -59,6 +59,7 @@ namespace FastFoodRush.Interactable
                                _objectStack.Count;
             _objectStack.Push(obj);
             obj.transform.DOJump(endValue, 2, 1, _interval);
+            obj.transform.eulerAngles = Vector3.zero;
         }
 
         public void Stack(GameObject obj)

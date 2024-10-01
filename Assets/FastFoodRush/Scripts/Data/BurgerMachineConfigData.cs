@@ -6,10 +6,10 @@ namespace FastFoodRush.Scripts.Data
     [CreateAssetMenu(fileName = "Burger Machine Data", menuName = "Scriptable Object/Fastfood Data")]
     public class BurgerMachineConfigData : ScriptableObject
     {
-        public int capacity => _capacity;
-        public int createTime => _createTime;
+        public int Capacity => _capacity;
+        public float CreateTime => _createTime;
         
         [SerializeField] private int _capacity;
-        [SerializeField] private int _createTime;
+        [SerializeField] private float _createTime;
     }
 }

@@ -34,7 +34,7 @@ namespace FastFoodRush.Interactable
                 _player = null;
             }
             
-            OnPlayerEnter(other.transform);
+            OnPlayerExit(other.transform);
         }
 
         protected virtual void OnPlayerEnter(Transform tr) {}

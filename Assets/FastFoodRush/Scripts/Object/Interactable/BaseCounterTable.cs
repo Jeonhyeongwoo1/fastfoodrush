@@ -17,6 +17,7 @@ namespace FastFoodRush.Object
         [SerializeField] protected float _spawnCustomerInterval = 3;
         [SerializeField] private OrderInfoType _orderInfoType;
         [SerializeField] private MoneyPile _moneyPile;
+        [SerializeField] private WorkingSpot _workingSpot;
         
         protected Queue<IOrderable> _customerQueue = new();
         protected float _spawnCustomerElapsed;
@@ -62,7 +63,7 @@ namespace FastFoodRush.Object
                 return;
             }
 
-            if (_objectStack.StackCount > 0 && customer.OrderCount > customer.Height)
+            if (_objectStack.StackCount > 0 && customer.OrderCount > customer.Height && _workingSpot.IsAvailableHandleOrder)
             {
                 _orderElapsed += Time.deltaTime;
                 if (_orderElapsed < 0.2f)

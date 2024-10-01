@@ -8,12 +8,9 @@ using UnityEngine;
 
 namespace FastFoodRush.Interactable
 {
-    public enum ProductType { Food, }
-    
     public class BurgerMachine : UnlockableObject
     {
         [SerializeField] private BurgerMachineConfigData _burgerMachineConfigData;
-        [SerializeField] private ProductType _productType;
         
         private FoodPile _foodPile;
         private float elapsed = 0;
@@ -27,13 +24,13 @@ namespace FastFoodRush.Interactable
         {
             BurgerMachineConfigData data = _burgerMachineConfigData;
 
-            if (data.capacity <= _foodPile.StackCount)
+            if (data.Capacity <= _foodPile.StackCount)
             {
                 return;
             }
 
             elapsed += Time.deltaTime;
-            if (elapsed > data.createTime)
+            if (elapsed > data.CreateTime)
             {
                 _foodPile.Drop();
                 elapsed = 0;

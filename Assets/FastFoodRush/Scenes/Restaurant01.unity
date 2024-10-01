@@ -4212,14 +4212,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 39422416923852853, guid: 168559bc8abc46f4bb3867ca7a7f7eb4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 39422416923852853, guid: 168559bc8abc46f4bb3867ca7a7f7eb4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.50000006
-      objectReference: {fileID: 0}
     - target: {fileID: 39422417734063498, guid: 168559bc8abc46f4bb3867ca7a7f7eb4, type: 3}
       propertyPath: m_Name
       value: DriveThruCounter
@@ -5649,7 +5641,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[0]
@@ -5662,11 +5654,11 @@ PrefabInstance:
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[2]
       value: 
-      objectReference: {fileID: 4558105980108485510}
+      objectReference: {fileID: 1243246296}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[3]
       value: 
-      objectReference: {fileID: 4558105980108485510}
+      objectReference: {fileID: 9100545085430129196}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[4]
       value: 
