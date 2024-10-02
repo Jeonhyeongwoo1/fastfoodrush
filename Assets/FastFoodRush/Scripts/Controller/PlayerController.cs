@@ -39,7 +39,7 @@ namespace FastFoodRush.Controller
             _animator.SetIKRotation(AvatarIKGoal.LeftHand, _leftHandPoint.rotation);
             _animator.SetIKRotation(AvatarIKGoal.RightHand, _rightHandPoint.rotation);
         }
-
+        
         private void Awake()
         {
             _characterController = GetComponentInChildren<CharacterController>();
@@ -64,7 +64,26 @@ namespace FastFoodRush.Controller
             _moveSpeed = RestaurantManager.Instance.GetStatusValue(AbilityType.PlayerSpeed);
             _playerCapacity = (int)RestaurantManager.Instance.GetStatusValue(AbilityType.PlayerCapacity);
         }
+        
+        private void Update()
+        {
+            _movement.x = SimpleInput.GetAxis("Horizontal");
+            _movement.z = SimpleInput.GetAxis("Vertical");
+            _movement = (Quaternion.Euler(new Vector3(0, 45, 0)) * _movement).normalized;
+            bool isMoving = _movement.x != 0 || _movement.z != 0;
 
+            if (isMoving)
+            {
+                float deltaTime = Time.deltaTime;
+                _characterController.Move(_movement * (deltaTime * _moveSpeed));
+            
+                Quaternion lookRotation = Quaternion.LookRotation(_movement, Vector3.up);
+                transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, deltaTime * 10);
+            }
+
+            _animator.SetBool(_isMovingHash, isMoving);
+        }
+        
         private void OnUpgradeAbility(AbilityType abilityType, float ability)
         {
             switch (abilityType)
@@ -78,24 +97,6 @@ namespace FastFoodRush.Controller
                 case AbilityType.PlayerProfit:
                     break;
             }
-        }
-
-        private void Update()
-        {
-            _movement.x = SimpleInput.GetAxis("Horizontal");
-            _movement.z = SimpleInput.GetAxis("Vertical");
-            _movement = (Quaternion.Euler(new Vector3(0, 45, 0)) * _movement).normalized;
-            bool isMoving = _movement.x != 0 || _movement.z != 0;
-
-            if (isMoving)
-            {
-                _characterController.Move(_movement * (Time.deltaTime * _moveSpeed));
-            
-                Quaternion lookRotation = Quaternion.LookRotation(_movement, Vector3.up);
-                transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 10);
-            }
-
-            _animator.SetBool(_isMovingHash, isMoving);
         }
         
         public void OnStep(AnimationEvent animationEvent)

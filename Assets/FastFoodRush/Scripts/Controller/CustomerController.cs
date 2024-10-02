@@ -36,12 +36,17 @@ namespace FastFoodRush.Object
         private int _eatHash;
         private int _leaveHash;
 
+        private readonly string _entranceLayer = "Entrance";
+        private RaycastHit[] _raycastHitArray = new RaycastHit[5];
+        
         protected override void Start()
         {
             _isMovingHash = Animator.StringToHash("IsMoving");
             _sitHash = Animator.StringToHash("Sit");
             _eatHash = Animator.StringToHash("Eat");
             _leaveHash = Animator.StringToHash("Leave");
+
+            StartCoroutine(CheckDoorCor());
         }
 
         private void OnDisable()
@@ -54,6 +59,34 @@ namespace FastFoodRush.Object
         {
             bool isMoving = !HasArrived();
             _animator.SetBool(_isMovingHash, isMoving);
+        }
+
+        private IEnumerator CheckDoorCor()
+        {
+            while (true)
+            {
+                RaycastHit hit;
+
+                while (!Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, 2.5f, LayerMask.GetMask(_entranceLayer), QueryTriggerInteraction.Collide))
+                {
+                    yield return null;
+                }
+
+                var doors = hit.transform.GetComponentsInChildren<Door>();
+                foreach (var door in doors)
+                {
+                    door.OpenDoor(transform.position);
+                }
+
+                yield return new WaitForSeconds(1f);
+
+                foreach (var door in doors)
+                {
+                    door.CloseDoor();
+                }
+                
+                yield return new WaitForSeconds(0.2f);
+            }
         }
         
         private void UpdateState(State state)
