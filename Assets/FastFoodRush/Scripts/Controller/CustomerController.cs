@@ -51,6 +51,7 @@ namespace FastFoodRush.Object
 
         private void OnDisable()
         {
+            _animator.speed = 1;
             _orderCount = 0;
             _height = 0;
         }
@@ -167,14 +168,18 @@ namespace FastFoodRush.Object
             StartCoroutine(LeaveCor());
         }
 
-        private void OnEatting()
+        private void OnEatting(int level)
         {
+            //현재 앉은 의자의 레벨에 따라서 애니메이션 스피드를 조금 더 빠르게 설정
+            _animator.speed = 1 + (0.4f * (level - 1));
             UpdateState(State.Eat);
+            
             _animator.SetTrigger(_eatHash);
         }
 
         private IEnumerator LeaveCor()
         {
+            _animator.speed = 1;
             _animator.SetTrigger(_leaveHash);
 
             yield return new WaitForSeconds(0.5f);

@@ -4350,6 +4350,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6593450548945601461, guid: 4a4a4cd1671dcb24a8b38b4bb6a34987, type: 3}
   m_PrefabInstance: {fileID: 6632145469056335627}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &543450653382442175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6926582904052278017, guid: 4a4a4cd1671dcb24a8b38b4bb6a34987, type: 3}
+  m_PrefabInstance: {fileID: 6632145469056335627}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0cb6eb089174d46b89e68deee3c32a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &543450653598890097 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5527700679009679193, guid: bf548d5600551d94995b7a7a4a259c50, type: 3}
@@ -5108,6 +5119,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BurgerMachine_1
       objectReference: {fileID: 0}
+    - target: {fileID: 5187450606456860131, guid: bf548d5600551d94995b7a7a4a259c50, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5527700679009679193, guid: bf548d5600551d94995b7a7a4a259c50, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6
@@ -5668,12 +5683,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.size
-      value: 18
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[0]
       value: 
-      objectReference: {fileID: 543450653598890098}
+      objectReference: {fileID: 543450653382442175}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[1]
       value: 
@@ -5681,15 +5696,15 @@ PrefabInstance:
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[2]
       value: 
-      objectReference: {fileID: 543450653598890098}
+      objectReference: {fileID: 9100545085430129196}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[3]
       value: 
-      objectReference: {fileID: 1968667977}
+      objectReference: {fileID: 9100545085430129196}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[4]
       value: 
-      objectReference: {fileID: 1968667977}
+      objectReference: {fileID: 9100545085430129196}
     - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
       propertyPath: _unlockableObjectList.Array.data[5]
       value: 
@@ -5742,6 +5757,10 @@ PrefabInstance:
       propertyPath: _unlockableObjectList.Array.data[17]
       value: 
       objectReference: {fileID: 993800842}
+    - target: {fileID: 8120737102087913367, guid: 9e9a1c38dca83bd4e975d224b97924de, type: 3}
+      propertyPath: _unlockableObjectList.Array.data[18]
+      value: 
+      objectReference: {fileID: 543450653598890098}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

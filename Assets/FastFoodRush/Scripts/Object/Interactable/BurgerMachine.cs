@@ -13,6 +13,9 @@ namespace FastFoodRush.Interactable
         private FlippingObject[] _flippingObjectArray;
         private MovingObject _movingObject;
 
+        private int _capacity;
+        private float _createTime;
+
         protected override void Start()
         {
             base.Start();
@@ -21,10 +24,17 @@ namespace FastFoodRush.Interactable
             _movingObject = GetComponentInChildren<MovingObject>(true);
         }
 
+        public override void Unlock(bool animate = true)
+        {
+            base.Unlock(animate);
+            
+            SetData();
+        }
+
         protected override void UpgradeableMesh()
         {
             base.UpgradeableMesh();
-            
+
             if (_unlockLevel >= Const.MaxLevel)
             {
                 foreach (FlippingObject flippingObject in _flippingObjectArray)
@@ -38,19 +48,25 @@ namespace FastFoodRush.Interactable
 
         private void Update()
         {
-            BurgerMachineConfigData data = _burgerMachineConfigData;
-
-            if (data.Capacity <= _foodPile.StackCount)
+            if (_capacity <= _foodPile.StackCount)
             {
                 return;
             }
 
             elapsed += Time.deltaTime;
-            if (elapsed > data.CreateTime)
+            if (elapsed > _createTime)
             {
                 _foodPile.Drop();
                 elapsed = 0;
             }
+        }
+        
+        private void SetData()
+        {
+            _createTime = _burgerMachineConfigData.CreateTime * (1 - 0.2f * (_unlockLevel - 1));
+            _capacity = _burgerMachineConfigData.Capacity + (_unlockLevel - 1) * 2;
+            
+            Debug.LogWarning($"create {_createTime} / capaCity {_capacity}");
         }
     }
 }

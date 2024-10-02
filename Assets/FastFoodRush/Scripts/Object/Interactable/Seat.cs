@@ -23,18 +23,30 @@ namespace FastFoodRush.Interactable
         private int _currentSeatedCustomerCount;
         private int _remainSeatableChairCount;
         private int _tipChance;
+        private float _eatingMinTime;
+        private float _eatingMaxTime;
         
-        private Action onAllCustomerSeatedAction;
+        
+        private Action<int> onAllCustomerSeatedAction;
         private Action onLeaveCustomerAction;
-
-        protected override void Start()
+        
+        public override void Unlock(bool animate = true)
         {
-            base.Start();
+            base.Unlock(animate);
             
-            _tipChance = Const.TipChance + (_unlockLevel - 1) * 10;
+            SetData();
         }
 
-        public void CompleteStackFood(Action onAllCustomerSeatedAction, Action onLeaveCustomerAction)
+        private void SetData()
+        {
+            _tipChance = Const.TipChance + (_unlockLevel - 1) * 10;
+
+            _eatingMinTime = 1f * (1 - (_unlockLevel - 1) * 0.2f);
+            _eatingMaxTime = 3f * (1 - (_unlockLevel - 1) * 0.3f);
+            Debug.LogWarning($"min {_eatingMinTime} / max {_eatingMaxTime}");
+        }
+
+        public void CompleteStackFood(Action<int> onAllCustomerSeatedAction, Action onLeaveCustomerAction)
         {
             this.onAllCustomerSeatedAction += onAllCustomerSeatedAction;
             this.onLeaveCustomerAction += onLeaveCustomerAction;
@@ -42,7 +54,7 @@ namespace FastFoodRush.Interactable
             
             if (_currentSeatedCustomerCount == _chairList.Count)
             {
-                this.onAllCustomerSeatedAction?.Invoke();
+                this.onAllCustomerSeatedAction?.Invoke(_unlockLevel);
                 StartCoroutine(BeginEatingCor());
             }
         }
@@ -53,7 +65,6 @@ namespace FastFoodRush.Interactable
             if (random < _tipChance)
             {
                 int tipMoney = RestaurantManager.Instance.GetTipAmount();
-                Debug.Log("Tip" + tipMoney);
                 _tipMoneyPile.AddMoney(tipMoney);    
             }
         }
@@ -68,7 +79,7 @@ namespace FastFoodRush.Interactable
             int trashCount = 0;
             while (_objectStack.Count > 0)
             {
-                yield return new WaitForSeconds(Random.Range(0.8f, 1.5f));
+                yield return new WaitForSeconds(Random.Range(_eatingMinTime, _eatingMaxTime));
                 GameObject obj = _objectStack.Pop();
                 obj.SetActive(false);
                 trashCount++;

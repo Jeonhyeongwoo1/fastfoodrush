@@ -74,10 +74,10 @@ namespace FastFoodRush.Controller
                         yield return CleanTrashCor();
                         break;
                     case BehaviourType.CarryFood:
-                        yield return ReFill<FoodPile>(StackType.Food);
+                        yield return ReFillCor<FoodPile>(StackType.Food);
                         break;
                     case BehaviourType.CarryPackage:
-                        yield return ReFill<PackagePile>(StackType.Package);
+                        yield return ReFillCor<PackagePile>(StackType.Package);
                         break;
                 }
 
@@ -90,7 +90,7 @@ namespace FastFoodRush.Controller
             }
         }
 
-        private IEnumerator ReFill<T>(StackType stackType) where T : Pile
+        private IEnumerator ReFillCor<T>(StackType stackType) where T : Pile
         {
             List<T> pileList = RestaurantManager.Instance.Piles.OfType<T>().ToList()
                 .FindAll(v => v.StackCount > 0);

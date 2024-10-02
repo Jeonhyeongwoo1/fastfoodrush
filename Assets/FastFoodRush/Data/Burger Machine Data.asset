@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Burger Machine Data
   m_EditorClassIdentifier: 
   _capacity: 6
-  _createTime: 0.3
+  _createTime: 1
