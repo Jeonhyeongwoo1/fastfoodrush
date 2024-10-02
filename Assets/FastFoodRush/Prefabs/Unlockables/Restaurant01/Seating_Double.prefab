@@ -73,7 +73,6 @@ MonoBehaviour:
   _xCount: 2
   _zCount: 4
   _oneDepthMaxCount: 8
-  _moneyObjectList: []
 --- !u!1 &800439766849679223
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +125,7 @@ MonoBehaviour:
   _buyPoint: {x: -2, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 150
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _chairList:
   - {fileID: 529651869933295928}
   - {fileID: 5497761363194014646}
@@ -175,6 +175,7 @@ GameObject:
   - component: {fileID: 5497761363194014646}
   - component: {fileID: 5497761363194014648}
   - component: {fileID: 5497761363194014647}
+  - component: {fileID: 655517025340313552}
   m_Layer: 0
   m_Name: Chair (2)
   m_TagString: Untagged
@@ -247,6 +248,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &655517025340313552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5497761363194014645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
+  - {fileID: -6264831526926562434, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &8216696828003428160
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +274,7 @@ GameObject:
   - component: {fileID: 529651869933295928}
   - component: {fileID: 6849265772682928962}
   - component: {fileID: 4699245602267180789}
+  - component: {fileID: 3967808302267477881}
   m_Layer: 0
   m_Name: Chair (1)
   m_TagString: Untagged
@@ -330,6 +347,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3967808302267477881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8216696828003428160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
+  - {fileID: -6264831526926562434, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &8708105802567026958
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +374,7 @@ GameObject:
   - component: {fileID: 8378881195435051418}
   - component: {fileID: 4583297856462559598}
   - component: {fileID: 9087079457725590696}
+  - component: {fileID: 8908631669352933731}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -437,6 +470,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &8908631669352933731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708105802567026958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6692290496178104961, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6692290496178104961, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &9087079457901133735
 GameObject:
   m_ObjectHideFlags: 0

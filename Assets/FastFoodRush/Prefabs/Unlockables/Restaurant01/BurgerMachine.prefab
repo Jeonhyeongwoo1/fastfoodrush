@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1053920721238243006}
   - component: {fileID: 4111677447695186203}
   - component: {fileID: 2227992721091186129}
+  - component: {fileID: 3470093215244465794}
   m_Layer: 0
   m_Name: MovingBurger
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 426601592949861380}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.9, z: -0.3}
+  m_LocalPosition: {x: -0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3470093215244465794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 426601592949861380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8399284412e643baac5c8b59a3bcddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _endPos: {x: 0, y: 0.9, z: 0.89}
 --- !u!1 &3361152202091580193
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,9 +245,10 @@ MonoBehaviour:
   _id: 
   _buyPoint: {x: 0, y: 0, z: 3}
   _buyPointRot: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 100
+  _moneyNeedToUnlock: 10
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
   _burgerMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}
-  _productType: 0
 --- !u!1 &5421470861400449577
 GameObject:
   m_ObjectHideFlags: 0
@@ -411,6 +426,7 @@ GameObject:
   - component: {fileID: 3931594042685777963}
   - component: {fileID: 4400615257687054246}
   - component: {fileID: 3837639465936587970}
+  - component: {fileID: 7437330997600911641}
   m_Layer: 0
   m_Name: Machine
   m_TagString: Untagged
@@ -520,6 +536,22 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.5, z: 0.5}
   m_TimeToStationary: 0.5
+--- !u!114 &7437330997600911641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407935811211735771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -1220596194976705504, guid: e1813e6bf6a17e84889971e7d009c271, type: 3}
+  - {fileID: 2193752321316807310, guid: f02cb75ad2997e147ab04e0b569449c5, type: 3}
+  _level: 0
 --- !u!1 &8317266977804248035
 GameObject:
   m_ObjectHideFlags: 0

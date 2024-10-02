@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -19,13 +21,29 @@ namespace FastFoodRush.Object
         [SerializeField] private Vector3 _buyPointRot;
         [SerializeField] private int _moneyNeedToUnlock;
         [SerializeField] private Vector3 _punchScale = new Vector3(0.1f, 0.2f, 0.1f);
+        
+        [SerializeField] protected List<UpgradeableMesh> _updateableMeshList;
+
+        protected virtual void Start()
+        {
+            var updateableMeshArray = GetComponentsInChildren<UpgradeableMesh>(true);
+            _updateableMeshList = new List<UpgradeableMesh>(updateableMeshArray.Length);
+            _updateableMeshList = updateableMeshArray.ToList();
+        }
 
         public virtual void Unlock(bool animate = true)
         {
             _unlockLevel++;
             
-            gameObject.SetActive(true);
-
+            if (_unlockLevel > 1)
+            {
+                UpgradeableMesh();
+            }
+            else
+            {
+                gameObject.SetActive(true);
+            }
+            
             if (!animate)
             {
                 return;
@@ -33,6 +51,16 @@ namespace FastFoodRush.Object
 
             transform.DOPunchScale(_punchScale, 0.3f)
                         .OnComplete(() => transform.localScale = Vector3.one);
+        }
+
+        protected virtual void UpgradeableMesh()
+        {
+            int count = _updateableMeshList.Count;
+            for (int i = 0; i < count; i++)
+            {
+                UpgradeableMesh upgradeableMesh = _updateableMeshList[i];
+                upgradeableMesh.UpdateMesh();
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using FastFoodRush.Interactable;
 using FastFoodRush.Manager;
-using FastFoodRush.Object;
 using FastFoodRush.UI;
 using UnityEngine;
 
@@ -19,14 +17,16 @@ namespace FastFoodRush.Object
         [SerializeField] private OrderInfoType _orderInfoType;
         [SerializeField] private MoneyPile _moneyPile;
         [SerializeField] private WorkingSpot _workingSpot;
+        [SerializeField] private GameObject _workerObj;
         
         protected Queue<IOrderable> _customerQueue = new();
         protected float _spawnCustomerElapsed;
         protected float _orderElapsed;
         protected Camera _camera;
 
-        protected virtual void Start()
+        protected override void Start()
         {
+            base.Start();
             _camera = Camera.main;
         }
 
@@ -36,6 +36,16 @@ namespace FastFoodRush.Object
             HandleOrder();
         }
         
+        protected override void UpgradeableMesh()
+        {
+            base.UpgradeableMesh();
+            
+            if (_workerObj)
+            {
+                _workerObj.SetActive(_unlockLevel >= 2);
+            }
+        }
+
         protected virtual void HandleSpawnCustomer()
         {
             if (IsMaxQueuePoint())

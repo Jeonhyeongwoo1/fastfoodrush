@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using FastFoodRush.Object;
-using FastFoodRush.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -28,8 +27,10 @@ namespace FastFoodRush.Interactable
         private Action onAllCustomerSeatedAction;
         private Action onLeaveCustomerAction;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             _tipChance = Const.TipChance + (_unlockLevel - 1) * 10;
         }
 

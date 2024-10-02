@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 39422417263304714}
   - component: {fileID: 39422417263304713}
   - component: {fileID: 39422417263304712}
+  - component: {fileID: 8588002222054990914}
   m_Layer: 0
   m_Name: Table_Small
   m_TagString: Untagged
@@ -565,6 +566,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 0.8, z: 1.2}
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &8588002222054990914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39422417263304726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: 4680675608976693439, guid: 7fb745ff70b33144683adfc9bd92d3fc, type: 3}
+  - {fileID: 4680675608976693439, guid: ccff62a3de204024fa5d3dfe94247929, type: 3}
+  _level: 0
 --- !u!1 &39422417311634045
 GameObject:
   m_ObjectHideFlags: 0
@@ -742,6 +759,7 @@ GameObject:
   - component: {fileID: 39422417654969788}
   - component: {fileID: 39422417654969787}
   - component: {fileID: 39422417654969786}
+  - component: {fileID: 2208184320461922773}
   m_Layer: 0
   m_Name: Table_Large
   m_TagString: Untagged
@@ -835,6 +853,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &2208184320461922773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39422417654969784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -1394328347821736558, guid: 7fb745ff70b33144683adfc9bd92d3fc, type: 3}
+  - {fileID: -1394328347821736558, guid: ccff62a3de204024fa5d3dfe94247929, type: 3}
+  _level: 0
 --- !u!1 &39422417734063498
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +926,8 @@ MonoBehaviour:
   _buyPoint: {x: 1, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 150
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
   _objectStack: {fileID: 473117823610073668}
   _queuePointList:
   - {fileID: 39422417905895958}
@@ -907,14 +943,11 @@ MonoBehaviour:
   _customerSpawnPoint: {fileID: 39422416530695323}
   _customerDesapwnPoint: {fileID: 39422416629261646}
   _spawnCustomerInterval: 3
+  _orderInfoUI: {fileID: 0}
   _orderInfoType: 1
   _moneyPile: {fileID: 6916525090248647731}
   _workingSpot: {fileID: 2371270070092888280}
-  _driverPrefabList:
-  - {fileID: 5890665129334189226, guid: 2cc13c1f31733f74fa4523cbfbe42d0e, type: 3}
-  - {fileID: 5890665129334189226, guid: 807b2163e20ef6d4f8a09f30f79822af, type: 3}
-  - {fileID: 5890665129334189226, guid: b6416382ab5ece346801756be3fbf776, type: 3}
-  - {fileID: 5890665129334189226, guid: cc12407b1ac5bc240bac19c4e423db84, type: 3}
+  _workerObj: {fileID: 2807474211473392983}
 --- !u!1 &39422417765954845
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,6 +1021,7 @@ GameObject:
   - component: {fileID: 39422417974106737}
   - component: {fileID: 39422417974106739}
   - component: {fileID: 39422417974106738}
+  - component: {fileID: 9206034528506683209}
   m_Layer: 0
   m_Name: CashRegister
   m_TagString: Untagged
@@ -1060,6 +1094,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9206034528506683209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 39422417974106736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -4488516306824289610, guid: 7fb745ff70b33144683adfc9bd92d3fc, type: 3}
+  - {fileID: -4488516306824289610, guid: ccff62a3de204024fa5d3dfe94247929, type: 3}
+  _level: 0
 --- !u!1 &39422418068901565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1202,6 +1252,10 @@ PrefabInstance:
     - target: {fileID: 2772573124071064301, guid: 9f24a39932c80fd4095104ea65d97d28, type: 3}
       propertyPath: m_Name
       value: Worker
+      objectReference: {fileID: 0}
+    - target: {fileID: 2772573124071064301, guid: 9f24a39932c80fd4095104ea65d97d28, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3256656948937709655, guid: 9f24a39932c80fd4095104ea65d97d28, type: 3}
       propertyPath: m_RootOrder

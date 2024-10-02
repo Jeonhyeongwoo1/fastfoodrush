@@ -104,11 +104,14 @@ MonoBehaviour:
   _buyPoint: {x: 0, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 100
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
   _chairList:
   - {fileID: 529651869933295928}
   _table: {fileID: 8988951882458638440}
   _tableTop: {fileID: 9087079457901133732}
   _trashPile: {fileID: 4013900839171930677}
+  _tipMoneyPile: {fileID: 0}
 --- !u!1 &1644711819708389705
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +154,7 @@ GameObject:
   - component: {fileID: 529651869933295928}
   - component: {fileID: 6849265772682928962}
   - component: {fileID: 4699245602267180789}
+  - component: {fileID: 5142559548224158406}
   m_Layer: 0
   m_Name: Stool
   m_TagString: Untagged
@@ -223,6 +227,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5142559548224158406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8216696828003428160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -4102455882285522874, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
+  - {fileID: -4102455882285522874, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
+  _level: 0
 --- !u!1 &8708105802567026958
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,6 +255,7 @@ GameObject:
   - component: {fileID: 8378881195435051418}
   - component: {fileID: 4583297856462559598}
   - component: {fileID: 9087079457725590696}
+  - component: {fileID: 8718003037395226528}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -330,6 +351,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &8718003037395226528
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708105802567026958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -1597465474890332046, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -1597465474890332046, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
+  _level: 0
 --- !u!1 &9087079457901133735
 GameObject:
   m_ObjectHideFlags: 0

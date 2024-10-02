@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using FastFoodRush.Manager;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using UnityEngine;
@@ -14,10 +10,30 @@ namespace FastFoodRush.Interactable
         
         private FoodPile _foodPile;
         private float elapsed = 0;
+        private FlippingObject[] _flippingObjectArray;
+        private MovingObject _movingObject;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             _foodPile = GetComponentInChildren<FoodPile>(true);
+            _flippingObjectArray = GetComponentsInChildren<FlippingObject>(true);
+            _movingObject = GetComponentInChildren<MovingObject>(true);
+        }
+
+        protected override void UpgradeableMesh()
+        {
+            base.UpgradeableMesh();
+            
+            if (_unlockLevel >= Const.MaxLevel)
+            {
+                foreach (FlippingObject flippingObject in _flippingObjectArray)
+                {
+                    flippingObject.gameObject.SetActive(false);
+                }
+                
+                _movingObject.Moving(_burgerMachineConfigData.CreateTime);
+            }
         }
 
         private void Update()

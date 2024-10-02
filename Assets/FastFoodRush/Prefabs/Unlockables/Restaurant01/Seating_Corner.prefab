@@ -106,6 +106,7 @@ MonoBehaviour:
   _buyPoint: {x: 0, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 0
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _chairList:
   - {fileID: 7307633772363011670}
   - {fileID: 644829498905891636}
@@ -113,6 +114,7 @@ MonoBehaviour:
   _table: {fileID: 8988951882458638440}
   _tableTop: {fileID: 9087079457901133732}
   _trashPile: {fileID: 1618334292861613538}
+  _tipMoneyPile: {fileID: 0}
 --- !u!1 &1277121038721960625
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,6 +157,7 @@ GameObject:
   - component: {fileID: 644829498905891636}
   - component: {fileID: 5690543482435503395}
   - component: {fileID: 1096844565140007587}
+  - component: {fileID: 2586161108215302586}
   m_Layer: 0
   m_Name: Sofa (2)
   m_TagString: Untagged
@@ -227,6 +230,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2586161108215302586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3545061768487575149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -8185155883099882650, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
+  - {fileID: -8185155883099882650, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &5778729670693702250
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,6 +256,7 @@ GameObject:
   - component: {fileID: 7307633772363011670}
   - component: {fileID: 1101993868150045708}
   - component: {fileID: 3823426028704465830}
+  - component: {fileID: 2930861359191039046}
   m_Layer: 0
   m_Name: Sofa (1)
   m_TagString: Untagged
@@ -310,6 +329,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2930861359191039046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5778729670693702250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -8185155883099882650, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
+  - {fileID: -8185155883099882650, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &5921110914511829479
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +355,7 @@ GameObject:
   - component: {fileID: 5032532801947571650}
   - component: {fileID: 7532408021061740028}
   - component: {fileID: 7181847567309126088}
+  - component: {fileID: 4824977226666446453}
   m_Layer: 0
   m_Name: Sofa_Corner
   m_TagString: Untagged
@@ -393,6 +428,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4824977226666446453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5921110914511829479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -7630533634996423883, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
+  - {fileID: -7630533634996423883, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &8708105802567026958
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,6 +455,7 @@ GameObject:
   - component: {fileID: 8378881195435051418}
   - component: {fileID: 4583297856462559598}
   - component: {fileID: 9087079457725590696}
+  - component: {fileID: 3900249553399181714}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -500,6 +551,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &3900249553399181714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708105802567026958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6692290496178104961, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6692290496178104961, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
 --- !u!1 &9087079457901133735
 GameObject:
   m_ObjectHideFlags: 0

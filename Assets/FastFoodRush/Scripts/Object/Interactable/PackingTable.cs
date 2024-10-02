@@ -14,12 +14,23 @@ namespace FastFoodRush.Interactable
         [SerializeField] private List<GameObject> _foodObjectList;
         [SerializeField] private PackagePile _packagePile;
         [SerializeField] private Transform _packageTransform;
+        [SerializeField] private GameObject _workerObj;
         
         private Sequence _sequence;
 
         private void Update()
         {
             MakePackage();
+        }
+
+        protected override void UpgradeableMesh()
+        {
+            base.UpgradeableMesh();
+
+            if (_workerObj)
+            {
+                _workerObj.SetActive(_unlockLevel >= 2);
+            }
         }
 
         private void MakePackage()

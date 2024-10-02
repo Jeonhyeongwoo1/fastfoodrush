@@ -29,6 +29,8 @@ namespace FastFoodRush.Object
                 _sequence.Kill();
                 _sequence = null;
             }
+
+            transform.position = _originPos;
         }
 
         private void DoFlip()
