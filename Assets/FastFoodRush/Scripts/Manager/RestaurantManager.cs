@@ -98,14 +98,64 @@ namespace FastFoodRush.Manager
 
         private void Start()
         {
-            Moneny = Const.StartMoney;
+            string id = SceneManager.GetActiveScene().name;
+            SaveSystem.SaveLastPlayRestaurantId($"{id}");
+            _data.isUnlock = true;
+            LoadRestaurantData(id);
             
-            AllDisableUnlockableObject();
-            UnlockableObject unlockableObject = _unlockableObjectList[UnlockableObjectCount];
-            _unlockableBuyer.Initialize(unlockableObject, PaidAmount, unlockableObject.GetBuyPointPosition, unlockableObject.GetBuyPointRotation);
             CheckProgress();
             
             onAbilityUpgradeAction += OnAbilityUpgrade;
+        }
+
+        private void OnApplicationQuit()
+        {
+            string id = SceneManager.GetActiveScene().name;
+            SaveSystem.SaveRestaurantData(id, _data);
+        }
+
+        private void OnApplicationPause(bool pauseStatus)
+        {
+            if (pauseStatus)
+            {
+                string id = SceneManager.GetActiveScene().name;
+                SaveSystem.SaveRestaurantData(id, _data);
+            }
+        }
+
+        private void LoadRestaurantData(string id)
+        {
+            AllDisableUnlockableObject();
+            
+            RestaurantData restaurantData = SaveSystem.LoadRestaurantData(id);
+            if (restaurantData != null)
+            {
+                _data = restaurantData;
+                onUpdateMoneyAction?.Invoke(_data.money);
+
+                int unlockCount = _data.unlockableObjectCount;
+                for (int i = 0; i < unlockCount; i++)
+                {
+                    UnlockObject(i);
+                }
+
+                InitializeUnlockableBuyer(unlockCount);
+
+                try
+                {
+                    int employeeCount = _data.abilityLevelDataDict[(int)AbilityType.EmployeeAmount].level;
+                    for (int i = 0; i < employeeCount; i++)
+                    {
+                        SpawnEmployee();
+                    }
+                }
+                catch (Exception e){}
+                
+                return;
+            }
+            
+            Moneny = Const.StartMoney;
+            UnlockObject(0);
         }
 
         [SerializeField] private int _unlockIndex;
@@ -114,6 +164,11 @@ namespace FastFoodRush.Manager
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 Unlock_Debug();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                OnApplicationPause(true);
             }
         }
 
@@ -224,26 +279,42 @@ namespace FastFoodRush.Manager
         
         public void BuyUnlockableObject()
         {
-            if (_unlockableObjectList.Count <= UnlockableObjectCount)
+            UnlockableObject unlockableObject = UnlockObject(UnlockableObjectCount);
+            if (unlockableObject == null)
             {
-                Debug.LogWarning($"already opened all unlockable object");
                 return;
             }
             
-            UnlockableObject unlockableObject = _unlockableObjectList[UnlockableObjectCount];
-            unlockableObject.Unlock();
             UnlockableObjectCount++;
             PaidAmount = 0;
 
             ShowUnlockEffect(unlockableObject.transform.position);
             if (_unlockableObjectList.Count > UnlockableObjectCount)
             {
-                UnlockableObject nextUnlockableObject = _unlockableObjectList[UnlockableObjectCount];
-                _unlockableBuyer.Initialize(nextUnlockableObject, PaidAmount, nextUnlockableObject.GetBuyPointPosition,
-                    nextUnlockableObject.GetBuyPointRotation);
+                InitializeUnlockableBuyer(UnlockableObjectCount);
             }
             
             CheckProgress();
+        }
+
+        private void InitializeUnlockableBuyer(int index)
+        {
+            UnlockableObject target = _unlockableObjectList[index];
+            _unlockableBuyer.Initialize(target, PaidAmount, target.GetBuyPointPosition, target.GetBuyPointRotation);
+        }
+
+        private UnlockableObject UnlockObject(int index)
+        {
+            if (_unlockableObjectList.Count <= UnlockableObjectCount)
+            {
+                Debug.LogWarning($"already opened all unlockable object");
+                return null;
+            }
+            
+            UnlockableObject unlockableObject = _unlockableObjectList[index];
+            unlockableObject.Unlock();
+
+            return unlockableObject;
         }
 
         private void ShowUnlockEffect(Vector3 spawnPosition)
@@ -259,25 +330,19 @@ namespace FastFoodRush.Manager
             float ratio = (float) UnlockableObjectCount / _unlockableObjectList.Count;
             if (isEnd)
             {
-                SaveData();
+                
                 //Next stage
-
-                LoadRestaurant();
+                LoadOtherStage();
             }
             
             onUpdateProgressAction?.Invoke(ratio);
         }
 
-        private void LoadRestaurant()
+        private void LoadOtherStage()
         {
             Scene scene = SceneManager.GetActiveScene();
             int index = scene.buildIndex;
             SceneManager.LoadScene(++index);
-        }
-
-        private void SaveData()
-        {
-            
         }
 
         public Vector3 GetOffsetByStackType(StackType stackType)

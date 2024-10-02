@@ -48,7 +48,8 @@ namespace FastFoodRush.Interactable
             {
                 
                 GameObject obj = _moneyObjectList[i];
-                obj.transform.DOJump(_player.transform.position + Vector3.up, 3, 1, 0.15f)
+                Vector3 endValue = _player.transform.position;
+                obj.transform.DOJump(endValue + Vector3.up, 3, 1, 0.15f)
                             .OnComplete(() => obj.SetActive(false));
                 _moneyObjectList.Remove(obj);
                 RestaurantManager.Instance.Moneny += Const.PriceDivisionFactor;

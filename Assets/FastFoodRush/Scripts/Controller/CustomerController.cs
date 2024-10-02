@@ -37,7 +37,6 @@ namespace FastFoodRush.Object
         private int _leaveHash;
 
         private readonly string _entranceLayer = "Entrance";
-        private RaycastHit[] _raycastHitArray = new RaycastHit[5];
         
         protected override void Start()
         {

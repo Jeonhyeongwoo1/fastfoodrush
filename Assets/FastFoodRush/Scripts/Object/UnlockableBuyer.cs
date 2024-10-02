@@ -5,6 +5,7 @@ using DG.Tweening;
 using FastFoodRush.Manager;
 using TMPro;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace FastFoodRush.Object
@@ -30,9 +31,9 @@ namespace FastFoodRush.Object
             _paidAmount = paidAmount;
 
             _paidMoneyText.text = _moneyNeedToUnlock.ToString();
-            _prograssImage.fillAmount = 0;
             transform.position = spawnPosition;
             transform.eulerAngles = rotation;
+            UpdateUI();
         }
         
         private void OnTriggerEnter(Collider other)
@@ -67,6 +68,11 @@ namespace FastFoodRush.Object
         private void UpdatePaidMoney(int amount)
         {
             _paidAmount += amount;
+            UpdateUI();
+        }
+
+        private void UpdateUI()
+        {
             _paidMoneyText.text = (_moneyNeedToUnlock - _paidAmount).ToString();
             _prograssImage.fillAmount = (float)_paidAmount / _moneyNeedToUnlock;
         }
@@ -81,7 +87,8 @@ namespace FastFoodRush.Object
                 int amount = Mathf.Max(1, Mathf.RoundToInt(value));
                 
                 UpdatePaidMoney(amount);
-                RestaurantManager.Instance.Moneny -= amount;
+                manager.Moneny -= amount;
+                manager.PaidAmount += amount;
 
                 GameObject moneyObj = PoolManager.Instance.Get(Key.Money);
                 moneyObj.transform.position = playerTransform.position + new Vector3(0, 1f, 0);
