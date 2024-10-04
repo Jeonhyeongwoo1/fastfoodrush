@@ -2,6 +2,8 @@ using System;
 using FastFoodRush.Interactable;
 using FastFoodRush.Manager;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace FastFoodRush.Controller
 {
@@ -14,6 +16,8 @@ namespace FastFoodRush.Controller
         [SerializeField] private WobblingStack _wobblingStack;
         [SerializeField] private Transform _leftHandPoint;
         [SerializeField] private Transform _rightHandPoint;
+        [FormerlySerializedAs("_audioClipArray")] [SerializeField] private AudioClip[] _footStepAudioClipArray;
+        [SerializeField] private AudioSource _audioSource;
         
         private float _moveSpeed;
         private int _playerCapacity;
@@ -106,10 +110,11 @@ namespace FastFoodRush.Controller
         
         public void OnStep(AnimationEvent animationEvent)
         {
-            // if (animationEvent.animatorClipInfo.weight < 0.5f) return;
-            //
-            // audioSource.clip = footsteps[Random.Range(0, footsteps.Length)];
-            // audioSource.Play();
+            if (animationEvent.animatorClipInfo.weight < 0.5f) return;
+            
+            _audioSource.clip = _footStepAudioClipArray[Random.Range(0, _footStepAudioClipArray.Length)];
+            _audioSource.volume = 0.5f;
+            _audioSource.Play();
         }
     }
 }

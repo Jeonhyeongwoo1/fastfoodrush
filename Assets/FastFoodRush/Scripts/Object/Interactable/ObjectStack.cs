@@ -23,9 +23,14 @@ namespace FastFoodRush.Interactable
         private Stack<GameObject> _objectStack = new();
         private float _elapsed = 0;
 
-        private void Start()
+        private void OnEnable()
         {
             RestaurantManager.Instance.ObjectStacks.Add(this);
+        }
+
+        private void OnDisable()
+        {
+            RestaurantManager.Instance.ObjectStacks.Remove(this);
         }
 
         private void Update()
@@ -48,7 +53,22 @@ namespace FastFoodRush.Interactable
             {
                 _elapsed = 0;
                 GameObject obj = _player.Stack.Pop();
+                PlaySound();
                 DoStackAnimation(obj);
+            }
+        }
+
+        private void PlaySound()
+        {
+            switch (_stackType)
+            {
+                case StackType.Food:
+                case StackType.Package:
+                    AudioManager.Instance.PlaySFX(AudioKey.Pop);
+                    break;
+                case StackType.Trash:
+                    AudioManager.Instance.PlaySFX(AudioKey.Trash);
+                    break;
             }
         }
 

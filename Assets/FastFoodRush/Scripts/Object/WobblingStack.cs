@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FastFoodRush.Interactable
 {
@@ -13,31 +15,37 @@ namespace FastFoodRush.Interactable
         public StackType CurrentStackType => _currentStackType;
 
         [SerializeField] private GameObject _tray;
-        [SerializeField] private Vector3 _offset = new Vector3(0, 0.25f, 0);
         [SerializeField] private StackType _currentStackType;
-        [SerializeField] private List<GameObject> _stackList = new();
-
-        private int _height;
         
-        private void Update()
-        {
-            if (_stackList.Count == 0)
-            {
-                return;
-            }
+        private List<Transform> _stackList = new List<Transform>();
+        private int _height;
+        [SerializeField] private Vector2 rateRange = new Vector2(0.8f, 0.4f);
+        private Vector2 movement;
+        private Vector3 _stackOffset;
 
-            _stackList[0].transform.position = _tray.transform.position;
-            _stackList[0].transform.rotation = _tray.transform.rotation;
-            
-            for (int i = 0; i < _stackList.Count; i++)
+        private void Start()
+        {
+            _stackOffset = RestaurantManager.Instance.GetOffsetByStackType(StackType.Food);
+        }
+
+        void Update()
+        {
+            if (_stackList.Count == 0) return;
+
+            movement.x = SimpleInput.GetAxis("Horizontal");
+            movement.y = SimpleInput.GetAxis("Vertical");
+
+            _stackList[0].transform.position = transform.position;
+            _stackList[0].transform.rotation = transform.rotation;
+
+            for (int i = 1; i < _stackList.Count; i++)
             {
-                float rate = Mathf.Lerp(1f, 0.1f, i / (float) _stackList.Count);
-                GameObject go = _stackList[i];
-                Vector3 prevPosition = go.transform.position;
-                Vector3 position = Vector3.Lerp(prevPosition, _tray.transform.position + _offset * i, rate);
-                Quaternion rotation = _tray.transform.rotation;
-                go.transform.position = position;
-                go.transform.rotation = rotation;
+                float rate = Mathf.Lerp(rateRange.x, rateRange.y, i / (float)_stackList.Count);
+                _stackList[i].position = Vector3.Lerp(_stackList[i].position,
+                    _stackList[i - 1].position + (_stackList[i - 1].up * _stackOffset.y), rate);
+
+                _stackList[i].rotation = Quaternion.Lerp(_stackList[i].rotation, _stackList[i - 1].rotation, rate);
+                if (movement != Vector2.zero) _stackList[i].rotation *= Quaternion.Euler(-i * 0.1f * rate, 0, 0);
             }
         }
 
@@ -53,27 +61,27 @@ namespace FastFoodRush.Interactable
                 _tray.SetActive(true);
             }
 
-            Vector3 endValue = _tray.transform.position + _offset * _stackList.Count;
+            Vector3 endValue = transform.position + new Vector3(0, _stackOffset.y, 0) * _stackList.Count;
             _height++;
             _currentStackType = stackType;
 
-            obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(()=>_stackList.Add(obj));
+            obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() => _stackList.Add(obj.transform));
         }
 
-        public GameObject Peek() => _stackList.LastOrDefault();
+        public Transform Peek() => _stackList.LastOrDefault();
 
         public GameObject Pop()
         {
-            GameObject go = _stackList.LastOrDefault();
-            _stackList.Remove(go);
+            Transform tr = Peek();
+            _stackList.Remove(tr);
             _height--;
             if (_stackList.Count == 0)
             {
                 _tray.SetActive(false);
                 _currentStackType = StackType.None;
             }
-            
-            return go;
+
+            return tr.gameObject;
         }
     }
 }

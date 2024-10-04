@@ -21,10 +21,10 @@ namespace FastFoodRush.Manager
             Application.targetFrameRate = 60;
             
             _startButton.onClick.RemoveAllListeners();
-            _startButton.onClick.AddListener(()=> AudioManager.Instance.PlaySfX(AudioKey.Magical));
+            _startButton.onClick.AddListener(()=> AudioManager.Instance.PlaySFX(AudioKey.Magical));
             _startButton.onClick.AddListener(OnClickStartButton);
 
-            AudioManager.Instance.PlayBGM(AudioKey.BGM);
+            AudioManager.Instance.PlayBGM(AudioKey.BGM, 0.5f);
             
             Sequence sequence = DOTween.Sequence();
             sequence.SetDelay(.5f);
@@ -36,6 +36,7 @@ namespace FastFoodRush.Manager
         {
             DOTween.KillAll();
             _startButton.interactable = false;
+            AudioManager.Instance.StopBGM(AudioKey.BGM);
             _screenFader.FadeOut(() =>
             {
                 string id = SaveSystem.LoadLastPlayRestaurantId();

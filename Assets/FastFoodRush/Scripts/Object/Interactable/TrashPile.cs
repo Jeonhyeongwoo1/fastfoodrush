@@ -28,7 +28,6 @@ namespace FastFoodRush.Interactable
             obj.transform.position = transform.position + offset;
             obj.SetActive(true);
             _objectStack.Push(obj);
-            AudioManager.Instance.PlaySfX(AudioKey.Trash);
         }
     }
 }

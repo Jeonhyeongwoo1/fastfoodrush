@@ -22,7 +22,6 @@ namespace FastFoodRush.Interactable
                                _objectStack.Count;
             _objectStack.Push(obj);
             obj.transform.DOJump(endValue, 3.5f, 1, _timeInterval);
-            AudioManager.Instance.PlaySfX(AudioKey.Pop);
         }
     }
 }

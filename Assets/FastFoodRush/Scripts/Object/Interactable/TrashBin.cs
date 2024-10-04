@@ -38,7 +38,7 @@ namespace FastFoodRush.Interactable
             trashObj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() =>
             {
                 trashObj.gameObject.SetActive(false);
-                AudioManager.Instance.PlaySfX(AudioKey.Bin);
+                AudioManager.Instance.PlaySFX(AudioKey.Bin);
             });   
         }
     }

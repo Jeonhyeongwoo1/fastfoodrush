@@ -104,7 +104,7 @@ namespace FastFoodRush.Manager
             _data.isUnlock = true;
             LoadRestaurantData(id);
             CheckProgress();
-            AudioManager.Instance.PlayBGM(AudioKey.BGM);
+            AudioManager.Instance.PlayBGM(AudioKey.BGM, 0.5f);
             
             onAbilityUpgradeAction += OnAbilityUpgrade;
         }
@@ -222,7 +222,7 @@ namespace FastFoodRush.Manager
                     break;
             }
             
-            AudioManager.Instance.PlaySfX(AudioKey.Kaching);
+            AudioManager.Instance.PlaySFX(AudioKey.Kaching);
             onUpgradedAbilityAction?.Invoke(abilityType, abilityData.statusValue);
         }
 
@@ -290,7 +290,7 @@ namespace FastFoodRush.Manager
             
             UnlockableObjectCount++;
             PaidAmount = 0;
-            AudioManager.Instance.PlaySfX(AudioKey.Magical);
+            AudioManager.Instance.PlaySFX(AudioKey.Magical);
 
             ShowUnlockEffect(unlockableObject.transform.position);
             if (_unlockableObjectList.Count > UnlockableObjectCount)
@@ -307,6 +307,7 @@ namespace FastFoodRush.Manager
 
         private void EndStage()
         {
+            _unlockableBuyer.gameObject.SetActive(false);
             TutorialManager.Instance.CheckMainTutorialCompletion(MainTutorialType.None);
         }
 

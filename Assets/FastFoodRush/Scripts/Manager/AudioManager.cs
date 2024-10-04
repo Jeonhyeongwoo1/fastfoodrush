@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -75,15 +74,18 @@ namespace FastFoodRush.Manager
             }
         }
 
-        public void PlaySfX(string key, float volume = 1)
+        public void PlaySFX(string key, float volume = 1)
         {
-            var audioSource = TryPlayAudio(_sfxDataList, key, volume);
-            if (audioSource == null)
+            var audioSourceData = TryGetAudioSourceData(_sfxDataList, key);
+            if (audioSourceData == null)
             {
                 Debug.LogWarning($"failed play sfx audio {key}");
+                return;
             }
+
+            audioSourceData.audioSource.PlayOneShot(audioSourceData.audioClip, volume);
         }
-        
+
         public void StopSfx(string key)
         {
             bool isSuccess = TryStopAudio(_sfxDataList, key);
@@ -104,23 +106,25 @@ namespace FastFoodRush.Manager
 
         public void PlayBGM(string key, float volume = 1, bool isLoop = true)
         {
-            var audioSource = TryPlayAudio(_bgmDataList, key, volume);
+            var audioSource = TryGetAudioSourceData(_bgmDataList, key);
             if (audioSource == null)
             {
                 Debug.LogWarning($"failed play bgm audio {key}");
                 return;
             }
 
-            audioSource.loop = isLoop;
+            audioSource.audioSource.clip = audioSource.audioClip;
+            audioSource.audioSource.volume = volume;
+            audioSource.audioSource.loop = isLoop;
+            audioSource.audioSource.Play();
         }
         
-        private AudioSource TryPlayAudio(List<AudioSourceData> audioSourceDataList, string key, float volume = 1)
+        private AudioSourceData TryGetAudioSourceData(List<AudioSourceData> audioSourceDataList, string key)
         {
             foreach (AudioSourceData data in audioSourceDataList)
             {
                 if (data.key == key)
                 {
-                    AudioClip audioClip = data.audioClip;
                     var audioSource = _audioSourceList.Find(v => !v.isPlaying);
                     if (audioSource == null)
                     {
@@ -129,24 +133,35 @@ namespace FastFoodRush.Manager
                         audioSource = component;
                     }
 
-                    audioSource.clip = audioClip;
-                    audioSource.volume = volume;
-                    audioSource.Play();
                     data.audioSource = audioSource;
-                    return data.audioSource;
+                    return data;
                 }
             }
 
             return null;
         }
 
-        private bool TryStopAudio(List<AudioSourceData> audioSourceDataList, string key)
+        private IEnumerator DOFadeStopAudioCor(AudioSource audioSource, bool isFadeOut, float fadeDuration)
+        {
+            yield return audioSource.DOFade(isFadeOut ? 0 : 1, fadeDuration).WaitForCompletion();
+            
+            audioSource.Stop();
+        }
+
+        private bool TryStopAudio(List<AudioSourceData> audioSourceDataList, string key, bool fade = false)
         {
             foreach (AudioSourceData data in audioSourceDataList)
             {
                 if (data.key == key && data.audioSource != null)
                 {
-                    data.audioSource.Stop();
+                    if (fade)
+                    {
+                        StartCoroutine(DOFadeStopAudioCor(data.audioSource, true, 0.5f));
+                    }
+                    else
+                    {
+                        data.audioSource.Stop();
+                    }
                     data.audioSource = null;
                     return true;
                 }

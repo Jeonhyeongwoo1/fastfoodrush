@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44227982, g: 0.4912123, b: 0.5710321, a: 1}
+  m_IndirectSpecularColor: {r: 0.3708708, g: 0.37838137, b: 0.35725543, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -618,13 +618,25 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7691119882452927197, guid: f37d8c11cc58f4aa1b5dedc28ae8790a, type: 3}
+      propertyPath: _sfxDataList.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691119882452927197, guid: f37d8c11cc58f4aa1b5dedc28ae8790a, type: 3}
       propertyPath: _bgmDataList.Array.data[0].key
       value: BGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 7691119882452927197, guid: f37d8c11cc58f4aa1b5dedc28ae8790a, type: 3}
+      propertyPath: _sfxDataList.Array.data[0].key
+      value: Magical
       objectReference: {fileID: 0}
     - target: {fileID: 7691119882452927197, guid: f37d8c11cc58f4aa1b5dedc28ae8790a, type: 3}
       propertyPath: _bgmDataList.Array.data[0].audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 628ab0380ebafc34d8ccd4c2c414008e, type: 3}
+    - target: {fileID: 7691119882452927197, guid: f37d8c11cc58f4aa1b5dedc28ae8790a, type: 3}
+      propertyPath: _sfxDataList.Array.data[0].audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7333daddcc0583c4da7b1731088650a9, type: 3}
     - target: {fileID: 8016143878322291609, guid: f37d8c11cc58f4aa1b5dedc28ae8790a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.4400482

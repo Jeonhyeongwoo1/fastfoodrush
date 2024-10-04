@@ -96,6 +96,7 @@ namespace FastFoodRush.Object
                 moneyObj.transform.DOJump(transform.position, 2, 1, 0.15f)
                     .OnComplete(() => moneyObj.SetActive(false));
                 
+                AudioManager.Instance.PlaySFX(AudioKey.Money);
                 yield return new WaitForSeconds(_timeInterval);
             }
 

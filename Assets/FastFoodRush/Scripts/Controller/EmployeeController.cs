@@ -122,7 +122,11 @@ namespace FastFoodRush.Controller
                 yield break;
             }
             
-            List<ObjectStack> objectStackList = RestaurantManager.Instance.ObjectStacks.FindAll(v => v.StackType == stackType);
+            List<ObjectStack> objectStackList = RestaurantManager.Instance.ObjectStacks.FindAll(v => v.StackType == stackType && v.gameObject.activeSelf);
+            foreach (var objectStack in objectStackList)
+            {
+                Debug.LogWarning(objectStack.name);
+            }
             if(objectStackList.Count == 0)
             {
                 Debug.LogWarning($"can't find object stack");

@@ -52,7 +52,7 @@ namespace FastFoodRush.Interactable
                             .OnComplete(() => obj.SetActive(false));
                 _moneyObjectList.Remove(obj);
                 RestaurantManager.Instance.Money += Const.PriceDivisionFactor;
-                AudioManager.Instance.PlaySfX(AudioKey.Money);
+                AudioManager.Instance.PlaySFX(AudioKey.Money);
                 yield return null;
             }
 
@@ -131,7 +131,7 @@ namespace FastFoodRush.Interactable
                 _moneyObjectList.Add(obj);
             }
             
-            AudioManager.Instance.PlaySfX(AudioKey.Money);
+            AudioManager.Instance.PlaySFX(AudioKey.Money);
         }
     }
 }
