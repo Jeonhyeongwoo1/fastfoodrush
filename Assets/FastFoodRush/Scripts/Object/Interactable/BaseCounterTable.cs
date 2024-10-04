@@ -46,6 +46,11 @@ namespace FastFoodRush.Object
             }
         }
 
+        public override void Unlock(bool animate = true)
+        {
+            base.Unlock(animate);
+        }
+
         protected virtual void HandleSpawnCustomer()
         {
             if (IsMaxQueuePoint())
@@ -78,7 +83,7 @@ namespace FastFoodRush.Object
             if (_objectStack.StackCount > 0 && customer.OrderCount > customer.Height && _workingSpot.IsAvailableHandleOrder)
             {
                 _orderElapsed += Time.deltaTime;
-                if (_orderElapsed < 0.2f)
+                if (_orderElapsed < 0.2f) //살짝 딜레이
                 {
                     return;
                 }

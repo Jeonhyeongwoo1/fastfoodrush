@@ -83,5 +83,17 @@ namespace FastFoodRush.Interactable
             customerAI.Spawn(spawnPosition, queuePoint.position, maxFoodCapacity, despawnPosition);
             _customerQueue.Enqueue(customerAI);
         }
+
+        public override void MainTutorialProgress()
+        {
+          
+            TutorialManager tutorialManager = TutorialManager.Instance;
+            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.RestaurantCountTable);
+            if (!isExecutedTutorial)
+            {
+                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                tutorialManager.LoadTutorial(MainTutorialType.RestaurantCountTable);
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
+using FastFoodRush.Manager;
 using UnityEngine;
 
 namespace FastFoodRush.Object
@@ -16,7 +17,6 @@ namespace FastFoodRush.Object
 
         protected int _unlockLevel = 0;
      
-        [SerializeField] private string _id;
         [SerializeField] private Vector3 _buyPoint;
         [SerializeField] private Vector3 _buyPointRot;
         [SerializeField] private int _moneyNeedToUnlock;
@@ -43,7 +43,7 @@ namespace FastFoodRush.Object
             {
                 gameObject.SetActive(true);
             }
-            
+
             if (!animate)
             {
                 return;
@@ -62,5 +62,6 @@ namespace FastFoodRush.Object
                 upgradeableMesh.UpdateMesh();
             }
         }
+        public virtual void MainTutorialProgress() {}
     }
 }

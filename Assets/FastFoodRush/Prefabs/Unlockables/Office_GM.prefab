@@ -1156,7 +1156,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4887660844840572125}
-  - component: {fileID: 4089847147414421541}
+  - component: {fileID: 1911285541703721865}
   m_Layer: 0
   m_Name: Office_GM
   m_TagString: Untagged
@@ -1183,7 +1183,7 @@ Transform:
   - {fileID: 4887660844974013077}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4089847147414421541
+--- !u!114 &1911285541703721865
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1192,13 +1192,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4887660844840572124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef6c29a41b63346289229477a63087ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ed82149abe304ff5a6a7c979fb35293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 
   _buyPoint: {x: -6, y: 0, z: 0}
-  _buyPointRot: {x: 0, y: 90, z: 0}
+  _buyPointRot: {x: 0, y: 0, z: 0}
   _moneyNeedToUnlock: 10
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
+  _mainTutorialType: 500
 --- !u!1 &4887660844848031285
 GameObject:
   m_ObjectHideFlags: 0

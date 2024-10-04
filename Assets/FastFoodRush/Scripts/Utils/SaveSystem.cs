@@ -6,6 +6,7 @@ namespace FastFoodRush
     public static class SaveSystem
     {
         private const string LastPlayRestaurantId = "LastPlayRestaurantId";
+        private const string MainTutorialStep = "mainTutorialStep";
         
         //레스토랑 id는 scene name으로 지정
         public static void SaveLastPlayRestaurantId(string id)
@@ -47,6 +48,16 @@ namespace FastFoodRush
         public static void DeleteAllData()
         {
             PlayerPrefs.DeleteAll();
+        }
+
+        public static int GetMainTutorialStep()
+        {
+            return PlayerPrefs.GetInt(MainTutorialStep);
+        }
+
+        public static void SaveMainTutorialStep(int mainTutorialStep)
+        {
+            PlayerPrefs.SetInt(MainTutorialStep, mainTutorialStep);
         }
     }
 }

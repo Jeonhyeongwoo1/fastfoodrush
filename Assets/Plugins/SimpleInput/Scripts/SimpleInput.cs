@@ -140,6 +140,8 @@ public class SimpleInput : MonoBehaviour
 	/// </summary>
 	public static bool GetAxisTimeScaleDependent = true;
 
+	public static bool IsStop { get; set; }
+	
 	private static bool m_trackUnityInput = true;
 	public static bool TrackUnityInput
 	{
@@ -235,6 +237,11 @@ public class SimpleInput : MonoBehaviour
 	public static float GetAxis( string axis )
 	{
 		Axis axisInput;
+		if (IsStop)
+		{
+			return 0f;
+		}
+		
 		if( axes.TryGetValue( axis, out axisInput ) )
 			return axisInput.value;
 
@@ -542,6 +549,11 @@ public class SimpleInput : MonoBehaviour
 
 	private void Update()
 	{
+		if (IsStop)
+		{
+			return;
+		}
+		
 		if( OnUpdate != null )
 			OnUpdate();
 

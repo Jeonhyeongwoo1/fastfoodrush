@@ -80,14 +80,14 @@ namespace FastFoodRush.Object
         private IEnumerator PayCor(Transform playerTransform)
         {
             RestaurantManager manager = RestaurantManager.Instance;
-            while (manager.Moneny > 0 && _paidAmount < _moneyNeedToUnlock)
+            while (manager.Money > 0 && _paidAmount < _moneyNeedToUnlock)
             {
                 float num = _moneyNeedToUnlock * _timeInterval / _duration;
-                float value = Mathf.Min(manager.Moneny, num);
+                float value = Mathf.Min(manager.Money, num);
                 int amount = Mathf.Max(1, Mathf.RoundToInt(value));
                 
                 UpdatePaidMoney(amount);
-                manager.Moneny -= amount;
+                manager.Money -= amount;
                 manager.PaidAmount += amount;
 
                 GameObject moneyObj = PoolManager.Instance.Get(Key.Money);

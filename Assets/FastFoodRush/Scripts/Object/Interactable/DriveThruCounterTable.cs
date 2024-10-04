@@ -70,5 +70,17 @@ namespace FastFoodRush.Object
             driver.Spawn(spawnPosition, 1, despawnPosition, movePositionList);
             _customerQueue.Enqueue(driver);
         }
+
+        public override void MainTutorialProgress()
+        {
+           
+            TutorialManager tutorialManager = TutorialManager.Instance;
+            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.DriveThruCounterTable);
+            if (!isExecutedTutorial)
+            {
+                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                tutorialManager.LoadTutorial(MainTutorialType.DriveThruCounterTable);
+            }
+        }
     }
 }

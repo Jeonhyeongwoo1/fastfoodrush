@@ -1,3 +1,4 @@
+using FastFoodRush.Manager;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using UnityEngine;
@@ -65,8 +66,17 @@ namespace FastFoodRush.Interactable
         {
             _createTime = _burgerMachineConfigData.CreateTime * (1 - 0.2f * (_unlockLevel - 1));
             _capacity = _burgerMachineConfigData.Capacity + (_unlockLevel - 1) * 2;
-            
-            Debug.LogWarning($"create {_createTime} / capaCity {_capacity}");
+        }
+
+        public override void MainTutorialProgress()
+        {
+            TutorialManager tutorialManager = TutorialManager.Instance;
+            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.FoodMachine);
+            if (!isExecutedTutorial)
+            {
+                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                tutorialManager.LoadTutorial(MainTutorialType.FoodMachine);
+            }
         }
     }
 }

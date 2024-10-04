@@ -31,7 +31,7 @@ namespace FastFoodRush.Interactable
             
             for (int i = 0; i < _stackList.Count; i++)
             {
-                float rate = Mathf.Lerp(0.8f, 0.1f, i / (float) _stackList.Count);
+                float rate = Mathf.Lerp(1f, 0.1f, i / (float) _stackList.Count);
                 GameObject go = _stackList[i];
                 Vector3 prevPosition = go.transform.position;
                 Vector3 position = Vector3.Lerp(prevPosition, _tray.transform.position + _offset * i, rate);

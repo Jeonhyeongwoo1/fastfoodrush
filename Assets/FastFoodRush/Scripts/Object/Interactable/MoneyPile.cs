@@ -42,7 +42,7 @@ namespace FastFoodRush.Interactable
             
             int count = _moneyObjectList.Count;
 
-            int totalMoney = RestaurantManager.Instance.Moneny + _totalMoney;
+            int totalMoney = RestaurantManager.Instance.Money + _totalMoney;
             _totalMoney = 0;
             for (int i = count - 1; i >= 0; i--)
             {
@@ -52,11 +52,11 @@ namespace FastFoodRush.Interactable
                 obj.transform.DOJump(endValue + Vector3.up, 3, 1, 0.15f)
                             .OnComplete(() => obj.SetActive(false));
                 _moneyObjectList.Remove(obj);
-                RestaurantManager.Instance.Moneny += Const.PriceDivisionFactor;
+                RestaurantManager.Instance.Money += Const.PriceDivisionFactor;
                 yield return null;
             }
 
-            RestaurantManager.Instance.Moneny = totalMoney;
+            RestaurantManager.Instance.Money = totalMoney;
         }
         
         // [SerializeField] private AnimationCurve _animationCurve = new AnimationCurve(new Keyframe(0, 0, 0, 0),

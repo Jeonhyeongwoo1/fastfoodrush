@@ -33,6 +33,18 @@ namespace FastFoodRush.Interactable
             }
         }
 
+        public override void MainTutorialProgress()
+        {
+            
+            TutorialManager tutorialManager = TutorialManager.Instance;
+            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.PackingTable);
+            if (!isExecutedTutorial)
+            {
+                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                tutorialManager.LoadTutorial(MainTutorialType.PackingTable);
+            }
+        }
+
         private void MakePackage()
         {
             if (_objectStack.StackCount == 0 || _sequence != null) 

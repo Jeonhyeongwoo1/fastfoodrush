@@ -60,7 +60,7 @@ namespace FastFoodRush.UI
                     guageList[i].color = i < level ? _upgradeColor : _defaultColor;
                 }
                 
-                bool isPossiblePurchase = price <= manager.Moneny;
+                bool isPossiblePurchase = price <= manager.Money;
                 element.upgradeButton.interactable = isPossiblePurchase;
                 
             }

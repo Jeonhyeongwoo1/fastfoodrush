@@ -19,6 +19,7 @@ namespace FastFoodRush.Controller
         private int _playerCapacity;
         private Vector3 _movement;
         private CharacterController _characterController;
+        private bool isStopMoving = false;
 
         private int _isMovingHash;
         
@@ -79,6 +80,10 @@ namespace FastFoodRush.Controller
             
                 Quaternion lookRotation = Quaternion.LookRotation(_movement, Vector3.up);
                 transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, deltaTime * 10);
+            }
+            else
+            {
+                _characterController.Move(Vector3.zero);
             }
 
             _animator.SetBool(_isMovingHash, isMoving);

@@ -18,6 +18,7 @@ namespace FastFoodRush.Interactable
         [SerializeField] private Transform _tableTop;
         [SerializeField] private TrashPile _trashPile;
         [SerializeField] private MoneyPile _tipMoneyPile;
+        [SerializeField] private MainTutorialType _mainTutorialType;
         
         private Stack<GameObject> _objectStack;
         private int _currentSeatedCustomerCount;
@@ -25,7 +26,6 @@ namespace FastFoodRush.Interactable
         private int _tipChance;
         private float _eatingMinTime;
         private float _eatingMaxTime;
-        
         
         private Action<int> onAllCustomerSeatedAction;
         private Action onLeaveCustomerAction;
@@ -129,6 +129,17 @@ namespace FastFoodRush.Interactable
         public bool IsPossibleSeat()
         {
             return _chairList.Count > _remainSeatableChairCount && !_trashPile.IsExistObject;
+        }
+
+        public override void MainTutorialProgress()
+        {
+            TutorialManager tutorialManager = TutorialManager.Instance;
+            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(_mainTutorialType);
+            if (!isExecutedTutorial)
+            {
+                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                tutorialManager.LoadTutorial(_mainTutorialType);
+            }
         }
     }
 }

@@ -55,7 +55,7 @@ namespace FastFoodRush.Manager
             set => _data.unlockableObjectCount = value;
         }
 
-        public int Moneny
+        public int Money
         {
             get => _data.money;
             set
@@ -79,6 +79,7 @@ namespace FastFoodRush.Manager
         public List<ObjectStack> ObjectStacks { get; set; } = new();
         public List<Pile> Piles { get; set; } = new();
         public TrashBin TrashBin { get; set; }
+        public UnlockableBuyer UnlockableBuyer => _unlockableBuyer;
         
         [SerializeField] private UnlockableBuyer _unlockableBuyer;
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
@@ -154,8 +155,9 @@ namespace FastFoodRush.Manager
                 return;
             }
             
-            Moneny = Const.StartMoney;
-            UnlockObject(0);
+            Money = Const.StartMoney;
+            InitializeUnlockableBuyer(0);
+            // UnlockObject(0);
         }
 
         [SerializeField] private int _unlockIndex;
@@ -187,7 +189,7 @@ namespace FastFoodRush.Manager
 
         private void OnAbilityUpgrade(AbilityType abilityType)
         {
-            int currentMoney = Moneny;
+            int currentMoney = Money;
             int price = GetCurrentAbilityPrice(abilityType);
             if (currentMoney < price)
             {
@@ -211,7 +213,7 @@ namespace FastFoodRush.Manager
             abilityData.statusValue = _abilityData.GetStatusValue(abilityType, ++abilityData.level);
             dataDict[(int)abilityType] = abilityData;
             //UseMoney
-            Moneny -= price;
+            Money -= price;
 
             switch (abilityType)
             {
@@ -293,14 +295,24 @@ namespace FastFoodRush.Manager
             {
                 InitializeUnlockableBuyer(UnlockableObjectCount);
             }
+            else
+            {
+                EndStage();
+            }
             
             CheckProgress();
+        }
+
+        private void EndStage()
+        {
+            TutorialManager.Instance.CheckMainTutorialCompletion(MainTutorialType.None);
         }
 
         private void InitializeUnlockableBuyer(int index)
         {
             UnlockableObject target = _unlockableObjectList[index];
             _unlockableBuyer.Initialize(target, PaidAmount, target.GetBuyPointPosition, target.GetBuyPointRotation);
+            target.MainTutorialProgress();
         }
 
         private UnlockableObject UnlockObject(int index)
@@ -326,19 +338,11 @@ namespace FastFoodRush.Manager
 
         private void CheckProgress()
         {
-            bool isEnd = UnlockableObjectCount == _unlockableObjectList.Count;
             float ratio = (float) UnlockableObjectCount / _unlockableObjectList.Count;
-            if (isEnd)
-            {
-                
-                //Next stage
-                LoadOtherStage();
-            }
-            
             onUpdateProgressAction?.Invoke(ratio);
         }
 
-        private void LoadOtherStage()
+        public void LoadOtherStage()
         {
             Scene scene = SceneManager.GetActiveScene();
             int index = scene.buildIndex;
