@@ -103,8 +103,8 @@ namespace FastFoodRush.Manager
             SaveSystem.SaveLastPlayRestaurantId($"{id}");
             _data.isUnlock = true;
             LoadRestaurantData(id);
-            
             CheckProgress();
+            AudioManager.Instance.PlayBGM(AudioKey.BGM);
             
             onAbilityUpgradeAction += OnAbilityUpgrade;
         }
@@ -222,12 +222,13 @@ namespace FastFoodRush.Manager
                     break;
             }
             
+            AudioManager.Instance.PlaySfX(AudioKey.Kaching);
             onUpgradedAbilityAction?.Invoke(abilityType, abilityData.statusValue);
         }
 
         private void SpawnEmployee()
         {
-            GameObject employeeObj = PoolManager.Instance.Get(Key.Employee);
+            GameObject employeeObj = PoolManager.Instance.Get(PoolKey.Employee);
 
             if (employeeObj.TryGetComponent(out EmployeeController employeeController))
             {
@@ -289,6 +290,7 @@ namespace FastFoodRush.Manager
             
             UnlockableObjectCount++;
             PaidAmount = 0;
+            AudioManager.Instance.PlaySfX(AudioKey.Magical);
 
             ShowUnlockEffect(unlockableObject.transform.position);
             if (_unlockableObjectList.Count > UnlockableObjectCount)

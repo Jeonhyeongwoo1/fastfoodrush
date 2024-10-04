@@ -15,7 +15,7 @@ namespace FastFoodRush.Interactable
 
         public override void Drop(GameObject obj = null)
         {
-            obj = PoolManager.Instance.Get(Key.Food);
+            obj = PoolManager.Instance.Get(PoolKey.Food);
             
             _objectStack.Push(obj);
             int count = _objectStack.Count - 1;
@@ -29,6 +29,7 @@ namespace FastFoodRush.Interactable
 
             obj.transform.position = position;
             obj.gameObject.SetActive(true);
+            AudioManager.Instance.PlaySfX(AudioKey.Pop);
         }
     }
 }

@@ -72,7 +72,7 @@ namespace FastFoodRush.Interactable
 
         protected override void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition)
         {
-            GameObject obj = PoolManager.Instance.Get(Key.Customer);
+            GameObject obj = PoolManager.Instance.Get(PoolKey.Customer);
             if (!obj.TryGetComponent(out CustomerController customerAI))
             {
                 Debug.LogWarning($"failed get customer");

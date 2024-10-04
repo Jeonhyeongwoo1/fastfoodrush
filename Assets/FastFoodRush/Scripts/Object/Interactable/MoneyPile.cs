@@ -46,13 +46,13 @@ namespace FastFoodRush.Interactable
             _totalMoney = 0;
             for (int i = count - 1; i >= 0; i--)
             {
-                
                 GameObject obj = _moneyObjectList[i];
                 Vector3 endValue = _player.transform.position;
                 obj.transform.DOJump(endValue + Vector3.up, 3, 1, 0.15f)
                             .OnComplete(() => obj.SetActive(false));
                 _moneyObjectList.Remove(obj);
                 RestaurantManager.Instance.Money += Const.PriceDivisionFactor;
+                AudioManager.Instance.PlaySfX(AudioKey.Money);
                 yield return null;
             }
 
@@ -108,7 +108,7 @@ namespace FastFoodRush.Interactable
             bool isLeft = true;
             for (int i = 0; i < totalMoneyCount; i++)
             {
-                GameObject obj = PoolManager.Instance.Get(Key.Money);
+                GameObject obj = PoolManager.Instance.Get(PoolKey.Money);
                 if (zIndex >= half)
                 {
                     isLeft = !isLeft;
@@ -130,6 +130,8 @@ namespace FastFoodRush.Interactable
                 obj.SetActive(true);
                 _moneyObjectList.Add(obj);
             }
+            
+            AudioManager.Instance.PlaySfX(AudioKey.Money);
         }
     }
 }

@@ -21,8 +21,11 @@ namespace FastFoodRush.Manager
             Application.targetFrameRate = 60;
             
             _startButton.onClick.RemoveAllListeners();
+            _startButton.onClick.AddListener(()=> AudioManager.Instance.PlaySfX(AudioKey.Magical));
             _startButton.onClick.AddListener(OnClickStartButton);
 
+            AudioManager.Instance.PlayBGM(AudioKey.BGM);
+            
             Sequence sequence = DOTween.Sequence();
             sequence.SetDelay(.5f);
             sequence.Append(_punchAnimationTransform.DOScale(Vector3.one * 1.1f, 0.5f));

@@ -90,7 +90,7 @@ namespace FastFoodRush.Object
                 manager.Money -= amount;
                 manager.PaidAmount += amount;
 
-                GameObject moneyObj = PoolManager.Instance.Get(Key.Money);
+                GameObject moneyObj = PoolManager.Instance.Get(PoolKey.Money);
                 moneyObj.transform.position = playerTransform.position + new Vector3(0, 1f, 0);
                 moneyObj.SetActive(true);
                 moneyObj.transform.DOJump(transform.position, 2, 1, 0.15f)

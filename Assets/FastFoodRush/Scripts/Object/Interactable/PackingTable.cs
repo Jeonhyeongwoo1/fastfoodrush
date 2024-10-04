@@ -71,7 +71,7 @@ namespace FastFoodRush.Interactable
                 bool isAllActivated = _foodObjectList.TrueForAll((v) => v.activeSelf);
                 if (isAllActivated)
                 {
-                    GameObject packageObj = PoolManager.Instance.Get(Key.Package);
+                    GameObject packageObj = PoolManager.Instance.Get(PoolKey.Package);
                     packageObj.transform.position = _packageTransform.position;
                     packageObj.SetActive(true);
                     _packagePile.Drop(packageObj);
