@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 15980872173632417}
   - component: {fileID: 15980872173632419}
+  - component: {fileID: 8360732193729496945}
   m_Layer: 0
   m_Name: TrashPile
   m_TagString: Untagged
@@ -51,8 +52,22 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 1.8, z: 1.5}
+  m_Size: {x: 2, y: 1.8, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8360732193729496945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15980872173632422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdec3710b6e2414b8af48bdde547c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 3
+  _objectStackPoint: {fileID: 15980872173632417}
 --- !u!1 &15980873033079748
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +382,7 @@ GameObject:
   m_Component:
   - component: {fileID: 913405598748459371}
   - component: {fileID: 2548859876771349621}
+  - component: {fileID: 5091617740082950282}
   m_Layer: 0
   m_Name: TipMoneyPile
   m_TagString: Untagged
@@ -408,8 +424,27 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 2, z: 1.6}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5091617740082950282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8381122217991821769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 4
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
 --- !u!1 &8446703007387585300
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9111739778449002926}
+  - component: {fileID: 741751831280230733}
   m_Layer: 0
   m_Name: Seating_Double
   m_TagString: Untagged
@@ -445,3 +481,27 @@ Transform:
   - {fileID: 913405598748459371}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &741751831280230733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446703007387585300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buyPoint: {x: 2, y: 0, z: 0}
+  _buyPointRot: {x: 0, y: 0, z: 0}
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
+  _chairList:
+  - {fileID: 0}
+  - {fileID: 0}
+  _table: {fileID: 188060500903513099}
+  _tableTop: {fileID: 15980873033079751}
+  _trashPile: {fileID: 8360732193729496945}
+  _tipMoneyPile: {fileID: 5091617740082950282}
+  _mainTutorialType: 0

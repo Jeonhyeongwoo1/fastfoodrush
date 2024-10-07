@@ -14,7 +14,7 @@ namespace FastFoodRush.Object
 
         private void Start()
         {
-            _originPos = transform.position;
+            // _originPos = transform.position;
         }
 
         private void OnEnable()
@@ -30,7 +30,7 @@ namespace FastFoodRush.Object
                 _sequence = null;
             }
 
-            transform.position = _originPos;
+            // transform.position = _originPos;
         }
 
         private void DoFlip()
