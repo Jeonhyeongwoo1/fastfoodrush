@@ -75,7 +75,7 @@ namespace FastFoodRush.Manager
         
         public Action<float> onUpdateProgressAction;
         public Action<int> onUpdateMoneyAction;
-        public Action<AbilityType> onAbilityUpgradeAction;
+        public Action<AbilityType, bool> onAbilityUpgradeAction;
         public Action<AbilityType, float> onUpgradedAbilityAction;
 
         public List<ObjectStack> ObjectStacks { get; set; } = new();
@@ -203,14 +203,17 @@ namespace FastFoodRush.Manager
             onAbilityUpgradeAction -= OnAbilityUpgrade;
         }
 
-        private void OnAbilityUpgrade(AbilityType abilityType)
+        private void OnAbilityUpgrade(AbilityType abilityType, bool isFree)
         {
-            int currentMoney = Money;
             int price = GetCurrentAbilityPrice(abilityType);
-            if (currentMoney < price)
+            if (!isFree)
             {
-                Debug.LogWarning($"failed to upgrade ability current moneny {currentMoney} / price {price}");
-                return;
+                int currentMoney = Money;
+                if (currentMoney < price)
+                {
+                    Debug.LogWarning($"failed to upgrade ability current moneny {currentMoney} / price {price}");
+                    return;
+                }
             }
 
             Dictionary<int, AbilityData> dataDict = _data.abilityLevelDataDict;
@@ -225,12 +228,16 @@ namespace FastFoodRush.Manager
                 Debug.LogWarning($"ability is max level : {level}");
                 return;
             }
-
+            
             abilityData.statusValue = _abilityData.GetStatusValue(abilityType, ++abilityData.level);
             dataDict[(int)abilityType] = abilityData;
             //UseMoney
-            Money -= price;
-
+            
+            if (!isFree)
+            {
+                Money -= price;
+            }
+            
             switch (abilityType)
             {
                 case AbilityType.EmployeeAmount:

@@ -3,6 +3,7 @@ using System.Collections;
 using FastFoodRush.Controller;
 using FastFoodRush.Interactable;
 using FastFoodRush.Manager;
+using FastFoodRush.Scripts.Data;
 using UnityEngine;
 
 namespace FastFoodRush.Object
@@ -24,6 +25,7 @@ namespace FastFoodRush.Object
         public int OrderCount => _orderCount;
         public Transform Transform => transform;
 
+        [SerializeField] private CustomerAIConfigData _data;
         [SerializeField] private State _state;
 
         private int _height;
@@ -206,7 +208,7 @@ namespace FastFoodRush.Object
 
         public void Spawn(Vector3 spawnPosition, Vector3 queuePosition, int maxFoodCapacity, Vector3 despawnPosition)
         {
-            _agent.speed = RestaurantManager.Instance.GetStatusValue(AbilityType.EmployeeSpeed);
+            _agent.speed = _data.MoveSpeed;
             _orderCount = maxFoodCapacity;
             transform.position = spawnPosition;
             UpdateState(State.MoveToCounterTable);
