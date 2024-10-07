@@ -104,6 +104,7 @@ namespace FastFoodRush.Controller
 
                 while (pile.StackCount > 0)
                 {
+                    Debug.Log($"{_wobblingStack.Height} / {_employeeCapacity}");
                     if (_wobblingStack.Height >= _employeeCapacity)
                     {
                         break;

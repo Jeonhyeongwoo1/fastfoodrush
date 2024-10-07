@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxLevel: 5
   _firstUpgradePrice: 250
-  _upgradePrice: 100
+  _upgradePrice: 150
   _defaultPlayerMoveSpeed: 3
   _defaultPlayerCapacity: 2
   _defaultPlayerProfit: 0
   _defaultEmployeeMoveSpeed: 2
   _defaultEmployeeCapacity: 1
   _playerMoveSpeedUpgradeValue: 0.3
-  _playerCapacityUpgradeValue: 1
+  _playerCapacityUpgradeValue: 2
   _playerProfitUpgradeValue: 1
-  _employeeMoveSpeedUpgradeValue: 3
-  _employeeCapacityUpgradeValue: 5
+  _employeeMoveSpeedUpgradeValue: 0.3
+  _employeeCapacityUpgradeValue: 1

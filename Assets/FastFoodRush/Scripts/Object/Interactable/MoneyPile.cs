@@ -41,50 +41,48 @@ namespace FastFoodRush.Interactable
             }
             
             int count = _moneyObjectList.Count;
-
             int totalMoney = RestaurantManager.Instance.Money + _totalMoney;
+            
             _totalMoney = 0;
+
+            float elasped = 0;
+            float duration = 1.5f;
             for (int i = count - 1; i >= 0; i--)
             {
+                elasped += Time.deltaTime;
+
+                if (elasped > duration)
+                {
+                    break;
+                }
+
+                if (RestaurantManager.Instance.Money == totalMoney)
+                {
+                    break;
+                }
+
                 GameObject obj = _moneyObjectList[i];
                 Vector3 endValue = _player.transform.position;
                 obj.transform.DOJump(endValue + Vector3.up, 3, 1, 0.15f)
                             .OnComplete(() => obj.SetActive(false));
                 _moneyObjectList.Remove(obj);
-                RestaurantManager.Instance.Money += Const.PriceDivisionFactor;
+                RestaurantManager.Instance.Money++;
                 AudioManager.Instance.PlaySFX(AudioKey.Money);
                 yield return null;
             }
+            
+            //나머지는 모두 넣기
+            for (int i = 0; i < _moneyObjectList.Count; i++)
+            {
+                GameObject obj = _moneyObjectList[i];
+                Vector3 endValue = _player.transform.position;
+                obj.transform.DOJump(endValue + Vector3.up, 3, 1, 0.15f)
+                    .OnComplete(() => obj.SetActive(false));
+            }
 
+            _moneyObjectList.Clear();
             RestaurantManager.Instance.Money = totalMoney;
         }
-        
-        // [SerializeField] private AnimationCurve _animationCurve = new AnimationCurve(new Keyframe(0, 0, 0, 0),
-        //                                                                 new Keyframe(0.5f, 1, 1, 1),
-        //                                                                 new Keyframe(1, 0, 1, 0));
-        //
-        // [SerializeField] private float _duration = 0.2f;
-        // [SerializeField] private float _jumpHeight = 0.5f;
-        // private IEnumerator DOJump(Transform from, Transform to)
-        // {
-        //     float elasepd = 0;
-        //     float duration = 1;
-        //     Vector3 targetPosition = from.position;
-        //     
-        //     while (elasepd < _duration)
-        //     {
-        //         elasepd += Time.deltaTime;
-        //         targetPosition.x = Mathf.Lerp(targetPosition.x, to.position.x, elasepd / duration);
-        //         targetPosition.y = Mathf.Lerp(targetPosition.y, to.position.y, elasepd / duration) +
-        //                            _animationCurve.Evaluate(elasepd / duration) * _jumpHeight;
-        //         targetPosition.z = Mathf.Lerp(targetPosition.z, to.position.z, elasepd / duration);
-        //
-        //         from.transform.position = targetPosition;
-        //         yield return null;
-        //     }
-        //     
-        //     from.gameObject.SetActive(false);
-        // }
         
         public override void Drop(GameObject obj = null)
         {
@@ -96,7 +94,13 @@ namespace FastFoodRush.Interactable
         {
             _totalMoney += price;
 
-            int totalMoneyCount = _totalMoney / Const.PriceDivisionFactor;
+            if (_moneyObjectList.Count == _maxMoneyObjectStackCount)
+            {
+                AudioManager.Instance.PlaySFX(AudioKey.Money);
+                return;
+            }
+            
+            int totalMoneyCount = _totalMoney;
             totalMoneyCount = _maxMoneyObjectStackCount < totalMoneyCount ? _maxMoneyObjectStackCount : totalMoneyCount;
             totalMoneyCount = totalMoneyCount <= 3 && _totalMoney >= 1 ? 3 : totalMoneyCount;
             

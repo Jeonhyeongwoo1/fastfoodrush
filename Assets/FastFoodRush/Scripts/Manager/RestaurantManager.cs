@@ -139,7 +139,6 @@ namespace FastFoodRush.Manager
             AllDisableUnlockableObject();
             
             RestaurantData restaurantData = SaveSystem.LoadRestaurantData(id);
-            Debug.Log($"res " +restaurantData);
             if (restaurantData != null)
             {
                 _data = restaurantData;
@@ -369,6 +368,8 @@ namespace FastFoodRush.Manager
                 DOVirtual.DelayedCall(3, () =>
                 {
                     _mapUI.gameObject.SetActive(true);
+                    _stageClearText.gameObject.SetActive(false);
+                    _stageClearEffectObj.SetActive(false);
                 });
             }
             else
@@ -447,21 +448,18 @@ namespace FastFoodRush.Manager
             }
         }
 
-        public int GetTipAmount()
+        public int GetTipAmount(int foodCount, OrderInfoType orderInfoType)
         {
-            // int random = Random.Range(1, 3);
-            // float ratio = random * 0.1f;
-            // int tipAmount = (int)(_restaurantConfigData.PriceOfFood * ratio) + (int)GetStatusValue(AbilityType.PlayerProfit);
-
-            int tipAmount = (int)(Random.Range(1, _restaurantConfigData.PriceOfFood * 0.5f)) +
-                            (int)GetStatusValue(AbilityType.PlayerProfit);
+            int random = Random.Range(1, 3);
+            float ratio = random * 0.1f;
+            int tipAmount = (int)(foodCount * GetPriceOfFood(orderInfoType) * ratio) + (int)GetStatusValue(AbilityType.PlayerProfit);
             return tipAmount;
         }
 
         public int GetPriceOfFood(OrderInfoType orderInfoType)
         {
             int price = _restaurantConfigData.PriceOfFood * (orderInfoType == OrderInfoType.Package ? 4 : 1) +
-                        (int)GetStatusValue(AbilityType.PlayerProfit);
+                        (int)GetStatusValue(AbilityType.PlayerProfit) * _restaurantConfigData.PriceOfFood;
             return price;
         }
 

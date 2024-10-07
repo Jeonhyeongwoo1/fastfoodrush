@@ -41,9 +41,19 @@ namespace FastFoodRush.Interactable
 
             if (_unlockLevel >= Const.MaxLevel)
             {
+                if (_flippingObjectArray == null)
+                {
+                    _flippingObjectArray = GetComponentsInChildren<FlippingObject>(true);
+                }
+                
                 foreach (FlippingObject flippingObject in _flippingObjectArray)
                 {
                     flippingObject.gameObject.SetActive(false);
+                }
+
+                if (_movingObject == null)
+                {
+                    _movingObject = GetComponentInChildren<MovingObject>(true);
                 }
                 
                 _movingObject.Moving(_burgerMachineConfigData.DefaultCreateTime);

@@ -52,7 +52,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 2, z: 1.6}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5994120421134949692
 MonoBehaviour:
@@ -121,11 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 
   _buyPoint: {x: -2, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 150
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
   _chairList:
   - {fileID: 529651869933295928}
   - {fileID: 5497761363194014646}
@@ -133,6 +132,7 @@ MonoBehaviour:
   _tableTop: {fileID: 9087079457901133732}
   _trashPile: {fileID: 4038862960675972748}
   _tipMoneyPile: {fileID: 5994120421134949692}
+  _mainTutorialType: 0
 --- !u!1 &1882244584665759203
 GameObject:
   m_ObjectHideFlags: 0

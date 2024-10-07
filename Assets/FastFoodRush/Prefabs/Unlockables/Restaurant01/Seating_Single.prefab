@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 751175741553327530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: -2.5}
+  m_LocalPosition: {x: 1, y: 0, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -51,7 +51,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 2, z: 1.6}
+  m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &800439766849679223
 GameObject:
@@ -69,7 +69,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &22635742611879373
 Transform:
   m_ObjectHideFlags: 0
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buyPoint: {x: 0, y: 0, z: -2}
+  _buyPoint: {x: 0, y: 0, z: -2.5}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
@@ -241,7 +241,6 @@ MonoBehaviour:
   _mesheList:
   - {fileID: -4102455882285522874, guid: 90ff7779bbc32e94c9a5eba4345c87f2, type: 3}
   - {fileID: -4102455882285522874, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
-  _level: 0
 --- !u!1 &8708105802567026958
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +364,6 @@ MonoBehaviour:
   _mesheList:
   - {fileID: -1597465474890332046, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
   - {fileID: -1597465474890332046, guid: 8b162ce3843fb3a4a869d77f74c0ae0c, type: 3}
-  _level: 0
 --- !u!1 &9087079457901133735
 GameObject:
   m_ObjectHideFlags: 0

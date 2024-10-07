@@ -76,7 +76,7 @@ namespace FastFoodRush.Object
             }
             
             int maxFoodCapacity = Random.Range(1, 5);
-            driver.Spawn(spawnPosition, 1, despawnPosition, movePositionList);
+            driver.Spawn(spawnPosition, maxFoodCapacity, despawnPosition, movePositionList);
             _customerQueue.Enqueue(driver);
         }
 
@@ -92,10 +92,10 @@ namespace FastFoodRush.Object
                     tutorialManager.LoadTutorial(MainTutorialType.DriveThruCounterTable);
                 }
             }
-            else
-            {
-                RestaurantManager.Instance.UnlockableBuyer.gameObject.SetActive(false);
-            }
+            // else
+            // {
+            //     RestaurantManager.Instance.UnlockableBuyer.gameObject.SetActive(false);
+            // }
         }
     }
 }

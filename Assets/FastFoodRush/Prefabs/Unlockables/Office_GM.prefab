@@ -1197,10 +1197,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _buyPoint: {x: -6, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 10
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
-  _mainTutorialType: 500
+  _mainTutorialType: 600
 --- !u!1 &4887660844848031285
 GameObject:
   m_ObjectHideFlags: 0

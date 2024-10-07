@@ -153,7 +153,6 @@ MonoBehaviour:
   _mesheList:
   - {fileID: 4680675608976693439, guid: 7fb745ff70b33144683adfc9bd92d3fc, type: 3}
   - {fileID: 4680675608976693439, guid: ccff62a3de204024fa5d3dfe94247929, type: 3}
-  _level: 0
 --- !u!1 &2680578015931622865
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +274,6 @@ MonoBehaviour:
   _mesheList:
   - {fileID: -1394328347821736558, guid: 7fb745ff70b33144683adfc9bd92d3fc, type: 3}
   - {fileID: -1394328347821736558, guid: ccff62a3de204024fa5d3dfe94247929, type: 3}
-  _level: 0
 --- !u!1 &5821875567589431567
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,10 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0cb6eb089174d46b89e68deee3c32a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 
-  _buyPoint: {x: 0, y: 0, z: 1}
+  _buyPoint: {x: 2, y: 0, z: 2}
   _buyPointRot: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 10
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
   _objectStack: {fileID: 3573876018679560055}
@@ -864,7 +860,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 2, z: 2}
+  m_Size: {x: 3, y: 2, z: 3}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &2481398544978101810
 MonoBehaviour:
@@ -1252,7 +1248,6 @@ MonoBehaviour:
   _mesheList:
   - {fileID: -4488516306824289610, guid: 7fb745ff70b33144683adfc9bd92d3fc, type: 3}
   - {fileID: -4488516306824289610, guid: ccff62a3de204024fa5d3dfe94247929, type: 3}
-  _level: 0
 --- !u!1001 &6632145468780718548
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ea791f22474f64b5b610cf5fda7b2d, type: 3}
   m_Name: Restaurant01 Dat
   m_EditorClassIdentifier: 
-  _moneyNeedToUnlock: 25
+  _moneyNeedToUnlock: 20
   _priceOfFood: 5

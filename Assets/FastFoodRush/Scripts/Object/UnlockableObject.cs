@@ -53,6 +53,11 @@ namespace FastFoodRush.Object
 
         protected virtual void UpgradeableMesh()
         {
+            if (_updateableMeshList.Count == 0)
+            {
+                _updateableMeshList = GetComponentsInChildren<UpgradeableMesh>(true).ToList();
+            }
+            
             int count = _updateableMeshList.Count;
             for (int i = 0; i < count; i++)
             {

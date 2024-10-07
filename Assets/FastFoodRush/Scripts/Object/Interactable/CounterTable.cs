@@ -85,7 +85,20 @@ namespace FastFoodRush.Interactable
             }
 
             int min = 1;
-            int max = TutorialManager.Instance.MainTutorialStep > (int)MainTutorialType.FirstSeat ? 5 : 3;
+            int max = 1;
+            if (TutorialManager.Instance.MainTutorialStep > (int)MainTutorialType.FirstSeat && RestaurantManager.Instance.UnlockableObjectCount <= 7)
+            {
+                max = 5;
+            }
+            else if (RestaurantManager.Instance.UnlockableObjectCount > 7)
+            {
+                max = 8;
+            }
+            else
+            {
+                max = 3;
+            }
+            
             int maxFoodCapacity = Random.Range(min, max);
             customerAI.Spawn(spawnPosition, queuePoint.position, maxFoodCapacity, despawnPosition);
             _customerQueue.Enqueue(customerAI);

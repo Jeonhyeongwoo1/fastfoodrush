@@ -5,6 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using FastFoodRush.Object;
+using FastFoodRush.UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -27,6 +28,7 @@ namespace FastFoodRush.Interactable
         private int _tipChance;
         private float _eatingMinTime;
         private float _eatingMaxTime;
+        private int _foodCount = 0;
         
         private Action<int> onAllCustomerSeatedAction;
         private Action onLeaveCustomerAction;
@@ -64,8 +66,7 @@ namespace FastFoodRush.Interactable
             int random = Random.Range(0, 100);
             if (random < _tipChance)
             {
-                int tipMoney = RestaurantManager.Instance.GetTipAmount();
-                Debug.Log($"ReceivedTip {tipMoney}");
+                int tipMoney = RestaurantManager.Instance.GetTipAmount(_foodCount, OrderInfoType.Food);
                 _tipMoneyPile.AddMoney(tipMoney);    
             }
         }
@@ -124,6 +125,7 @@ namespace FastFoodRush.Interactable
             _objectStack ??= new Stack<GameObject>();
             Vector3 endValue = _tableTop.position + new Vector3(0, 0.25f, 0) * _objectStack.Count;
             _objectStack.Push(obj);
+            _foodCount++;
             obj.transform.DOJump(endValue, 2, 1, duration);
         }
 

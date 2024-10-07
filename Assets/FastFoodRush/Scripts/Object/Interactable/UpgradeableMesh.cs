@@ -11,12 +11,20 @@ namespace FastFoodRush.Object
         [SerializeField] private List<Mesh> _mesheList;
 
         private MeshFilter _meshFilter;
-        [SerializeField]   private int _level;
+        private int _level;
         
         private void Start()
         {
-            TryGetComponent(out MeshFilter meshFilter);
-            _meshFilter = meshFilter;
+            SetMeshFilter();
+        }
+
+        private void SetMeshFilter()
+        {
+            if (_meshFilter == null)
+            {
+                TryGetComponent(out MeshFilter meshFilter);
+                _meshFilter = meshFilter;
+            }
         }
 
         public void UpdateMesh()
@@ -27,6 +35,7 @@ namespace FastFoodRush.Object
                 return;
             }
 
+            SetMeshFilter();
             Mesh mesh = _mesheList[_level];
             if (_meshFilter == null)
             {
