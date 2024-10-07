@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using FastFoodRush.Object;
@@ -43,7 +44,6 @@ namespace FastFoodRush.Interactable
 
             _eatingMinTime = 1f * (1 - (_unlockLevel - 1) * 0.2f);
             _eatingMaxTime = 3f * (1 - (_unlockLevel - 1) * 0.3f);
-            Debug.LogWarning($"min {_eatingMinTime} / max {_eatingMaxTime}");
         }
 
         public void CompleteStackFood(Action<int> onAllCustomerSeatedAction, Action onLeaveCustomerAction)
@@ -65,6 +65,7 @@ namespace FastFoodRush.Interactable
             if (random < _tipChance)
             {
                 int tipMoney = RestaurantManager.Instance.GetTipAmount();
+                Debug.Log($"ReceivedTip {tipMoney}");
                 _tipMoneyPile.AddMoney(tipMoney);    
             }
         }
@@ -131,15 +132,38 @@ namespace FastFoodRush.Interactable
             return _chairList.Count > _remainSeatableChairCount && !_trashPile.IsExistObject;
         }
 
-        public override void MainTutorialProgress()
+        public override void LoadMainTutorial()
         {
             TutorialManager tutorialManager = TutorialManager.Instance;
-            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(_mainTutorialType);
+            bool isExecutedTutorial = tutorialManager.CheckExecutedMainTutorialProgress(_mainTutorialType);
             if (!isExecutedTutorial)
             {
-                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
-                tutorialManager.LoadTutorial(_mainTutorialType);
+                if (_mainTutorialType == MainTutorialType.FirstSeat)
+                {
+                    Transform foodPileTransform = RestaurantManager.Instance.FoodMachineList
+                        .Where(x => x.gameObject.activeSelf)
+                        .FirstOrDefault().FoodPileTransform;
+
+                    Transform objectStackTransform = RestaurantManager.Instance.ObjectStacks
+                        .Where(x => x.StackType == StackType.Food).FirstOrDefault().transform;
+
+                    Transform workingTransform = RestaurantManager.Instance.BaseCounterTableList
+                        .Where(x => x.gameObject.activeSelf).FirstOrDefault().WorkingSpot.transform;
+                    tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform,
+                        foodPileTransform, objectStackTransform, workingTransform);
+                    tutorialManager.LoadTutorial(_mainTutorialType);
+                }
+                else
+                {
+                    tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                    tutorialManager.LoadTutorial(_mainTutorialType);
+                }
             }
+        }
+        public override void CompleteMainTutorialProgress()
+        {
+            TutorialManager tutorialManager = TutorialManager.Instance;
+            tutorialManager.CompleteMainTutorialDepth(_mainTutorialType);
         }
     }
 }

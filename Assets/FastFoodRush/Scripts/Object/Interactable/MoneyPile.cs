@@ -98,7 +98,7 @@ namespace FastFoodRush.Interactable
 
             int totalMoneyCount = _totalMoney / Const.PriceDivisionFactor;
             totalMoneyCount = _maxMoneyObjectStackCount < totalMoneyCount ? _maxMoneyObjectStackCount : totalMoneyCount;
-            totalMoneyCount = totalMoneyCount <= 3 && _totalMoney > 1 ? 3 : totalMoneyCount;
+            totalMoneyCount = totalMoneyCount <= 3 && _totalMoney >= 1 ? 3 : totalMoneyCount;
             
             Vector3 center = new Vector3(_width * 0.5f, 0, _height * 0.5f);
             int xIndex = 0;

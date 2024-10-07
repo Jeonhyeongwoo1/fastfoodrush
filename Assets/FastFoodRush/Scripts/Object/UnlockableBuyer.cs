@@ -1,11 +1,8 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using TMPro;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace FastFoodRush.Object
@@ -24,10 +21,10 @@ namespace FastFoodRush.Object
         private int _paidAmount;
         private Coroutine _payCor;
 
-        public void Initialize(UnlockableObject unlockableObject, int paidAmount, Vector3 spawnPosition, Vector3 rotation = default)
+        public void Initialize(UnlockableObject unlockableObject, int moneyNeedToUnlock, int paidAmount, Vector3 spawnPosition, Vector3 rotation = default)
         {
             _unlockableObject = unlockableObject;
-            _moneyNeedToUnlock = _unlockableObject.MoneyNeedToUnlock;
+            _moneyNeedToUnlock = moneyNeedToUnlock;
             _paidAmount = paidAmount;
 
             _paidMoneyText.text = _moneyNeedToUnlock.ToString();

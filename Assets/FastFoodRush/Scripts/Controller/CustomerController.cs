@@ -25,7 +25,6 @@ namespace FastFoodRush.Object
         public Transform Transform => transform;
 
         [SerializeField] private State _state;
-        [SerializeField] private CustomerAIConfigData _data;
 
         private int _height;
         private int _orderCount;
@@ -67,7 +66,7 @@ namespace FastFoodRush.Object
             {
                 RaycastHit hit;
 
-                while (!Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, 2.5f, LayerMask.GetMask(_entranceLayer), QueryTriggerInteraction.Collide))
+                while (!Physics.Raycast(transform.position + Vector3.up, transform.forward, out hit, 2f, LayerMask.GetMask(_entranceLayer), QueryTriggerInteraction.Collide))
                 {
                     yield return null;
                 }
@@ -207,7 +206,7 @@ namespace FastFoodRush.Object
 
         public void Spawn(Vector3 spawnPosition, Vector3 queuePosition, int maxFoodCapacity, Vector3 despawnPosition)
         {
-            _agent.speed = _data.MoveSpeed;
+            _agent.speed = RestaurantManager.Instance.GetStatusValue(AbilityType.EmployeeSpeed);
             _orderCount = maxFoodCapacity;
             transform.position = spawnPosition;
             UpdateState(State.MoveToCounterTable);

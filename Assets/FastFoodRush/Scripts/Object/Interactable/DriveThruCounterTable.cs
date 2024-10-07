@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using FastFoodRush.Manager;
 using FastFoodRush.UI;
 using UnityEngine;
@@ -10,6 +9,16 @@ namespace FastFoodRush.Object
     public class DriveThruCounterTable : BaseCounterTable
     {
         private readonly int driverTypeCount = 4;
+
+        private void OnEnable()
+        {
+            TutorialManager.onCompletedMainTutorialAction += OnLoadTutorialProgress;
+        }
+
+        private void OnDisable()
+        {
+            TutorialManager.onCompletedMainTutorialAction -= OnLoadTutorialProgress;
+        }
 
         protected override void HandleOrderInfoUI()
         {            
@@ -71,15 +80,21 @@ namespace FastFoodRush.Object
             _customerQueue.Enqueue(driver);
         }
 
-        public override void MainTutorialProgress()
+        private void OnLoadTutorialProgress()
         {
-           
             TutorialManager tutorialManager = TutorialManager.Instance;
-            bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.DriveThruCounterTable);
-            if (!isExecutedTutorial)
+            if (tutorialManager.CheckMainTutorialCompletion(MainTutorialType.DriveThruCounterTable))
             {
-                tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
-                tutorialManager.LoadTutorial(MainTutorialType.DriveThruCounterTable);
+                bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.DriveThruCounterTable);
+                if (!isExecutedTutorial)
+                {
+                    tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
+                    tutorialManager.LoadTutorial(MainTutorialType.DriveThruCounterTable);
+                }
+            }
+            else
+            {
+                RestaurantManager.Instance.UnlockableBuyer.gameObject.SetActive(false);
             }
         }
     }

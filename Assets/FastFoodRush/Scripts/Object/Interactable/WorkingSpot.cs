@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FastFoodRush.Manager;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -16,6 +17,18 @@ namespace FastFoodRush.Interactable
         {
             base.OnPlayerEnter(tr);
             _indicatorImage.color = Color.green;
+
+            if (TutorialManager.Instance.CheckExecutedMainTutorialProgress(MainTutorialType.FoodMachine))
+            {
+                StartCoroutine(CheckFirstSeatTutorialCor());
+            }
+        }
+
+        private IEnumerator CheckFirstSeatTutorialCor()
+        {
+            yield return new WaitForSeconds(2f);
+            
+            TutorialManager.Instance.CompleteMainTutorialDepth(MainTutorialType.FirstSeat);
         }
 
         protected override void OnPlayerExit(Transform tr)

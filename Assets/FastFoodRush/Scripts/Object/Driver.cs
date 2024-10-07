@@ -11,8 +11,7 @@ namespace FastFoodRush.Object
     public interface IOrderable
     {
         public bool IsReadyOrder { get; }
-        public int 
-            RemainOrderCount { get; }
+        public int RemainOrderCount { get; }
         public int Height { get; }
         public int OrderCount { get; }
         public Transform Transform { get; }

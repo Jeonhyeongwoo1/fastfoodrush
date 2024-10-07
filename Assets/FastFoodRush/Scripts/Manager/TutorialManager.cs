@@ -14,10 +14,10 @@ namespace FastFoodRush.Manager
         FoodMachine = 200,
         FirstSeat = 300,
         HR = 400,
-        GM = 500,
-        DriveThruCounterTable = 600,
-        PackingTable = 700,
-        SecondSeat = 800
+        SecondSeat = 500,
+        GM = 600,
+        DriveThruCounterTable = 700,
+        PackingTable = 800,
     }
     
     public class TutorialManager : MonoBehaviour
@@ -34,6 +34,8 @@ namespace FastFoodRush.Manager
                 return _instance;
             }
         }
+        
+        private static TutorialManager _instance;
 
         public int MainTutorialStep
         {
@@ -45,15 +47,14 @@ namespace FastFoodRush.Manager
             }
         }
 
-        private static TutorialManager _instance;
-        
-        public static Action onExcuteTutorial;
-        public static Action onCompletedTutorial;
+        public static Action onCompletedMainTutorialAction;
         
         private int _mainTutorialStep = 0;
+        private int _trashTutorialStep = 0;
+        
         private PlayerController _player;
         private BaseTutorial _loadedMainTutorial;
-        private Transform _tutorialTarget;
+        private Transform[] _tutorialTarget;
         
         private void Start()
         {
@@ -72,24 +73,45 @@ namespace FastFoodRush.Manager
             return false;
         }
 
-        public void SetTutorialTarget(Transform tutorialTarget)
+        public void SetTutorialTarget(params Transform[] tutorialTarget)
         {
             _tutorialTarget = tutorialTarget;
         }
 
+        public bool IsRunningTutorial()
+        {
+            return _loadedMainTutorial != null && !_loadedMainTutorial.IsAllCompletedTutorial;
+        }
+
         public bool CheckMainTutorialCompletion(MainTutorialType mainTutorialType)
         {
-            if (_loadedMainTutorial == null)
+            if (_loadedMainTutorial == null || _loadedMainTutorial.MainTutorialType != mainTutorialType)
+            {
+                return false;
+            }
+
+            if (!_loadedMainTutorial.IsAllCompletedTutorial)
             {
                 return false;
             }
 
             MainTutorialStep = (int)_loadedMainTutorial.MainTutorialType;
             _loadedMainTutorial.CompletedTutorial();
-            onCompletedTutorial?.Invoke();
+            onCompletedMainTutorialAction?.Invoke();
+            _loadedMainTutorial = null;
             return true;
         }
-        
+
+        public void CompleteMainTutorialDepth(MainTutorialType mainTutorialType)
+        {
+            if (_loadedMainTutorial == null || _loadedMainTutorial.MainTutorialType != mainTutorialType)
+            {
+                return;
+            }
+
+            _loadedMainTutorial.CompletedTutorialDepth();
+        }
+
         public void LoadTutorial(MainTutorialType mainTutorialType)
         {
             if (mainTutorialType == MainTutorialType.None)
@@ -97,7 +119,13 @@ namespace FastFoodRush.Manager
                 Debug.Log($"tutorial type is none");
                 return;
             }
+
+            if (_loadedMainTutorial != null)
+            {
+                CheckMainTutorialCompletion(_loadedMainTutorial.MainTutorialType);
+            }
             
+            Debug.Log($"load tutorial {mainTutorialType}");
             switch (mainTutorialType)
             {
                 case MainTutorialType.RestaurantCountTable:
@@ -108,13 +136,11 @@ namespace FastFoodRush.Manager
                 case MainTutorialType.DriveThruCounterTable:
                 case MainTutorialType.PackingTable:
                 case MainTutorialType.SecondSeat:
-                    CheckMainTutorialCompletion(MainTutorialType.None);
                     var tutorial = Resources.Load<BaseTutorial>($"Tutorial/MainTutorial") as MainTutorial;
-                    var mainTutorial = Instantiate(tutorial);
-                    mainTutorial.Initialized(_player, _tutorialTarget, mainTutorialType);
-                    mainTutorial.ExecuteTutorial();
-                    onExcuteTutorial?.Invoke();
-                    _loadedMainTutorial = mainTutorial;
+                    var mainTutorialObj = Instantiate(tutorial);
+                    mainTutorialObj.Initialized(_player, mainTutorialType, _tutorialTarget);
+                    mainTutorialObj.ExecuteTutorial();
+                    _loadedMainTutorial = mainTutorialObj;
                     break;
                 default:
                     break;

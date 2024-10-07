@@ -7,6 +7,8 @@ namespace FastFoodRush.Interactable
 {
     public class BurgerMachine : UnlockableObject
     {
+        public Transform FoodPileTransform => _foodPile.transform;
+        
         [SerializeField] private BurgerMachineConfigData _burgerMachineConfigData;
         
         private FoodPile _foodPile;
@@ -30,6 +32,7 @@ namespace FastFoodRush.Interactable
             base.Unlock(animate);
             
             SetData();
+            RestaurantManager.Instance.FoodMachineList.Add(this);
         }
 
         protected override void UpgradeableMesh()
@@ -43,7 +46,7 @@ namespace FastFoodRush.Interactable
                     flippingObject.gameObject.SetActive(false);
                 }
                 
-                _movingObject.Moving(_burgerMachineConfigData.CreateTime);
+                _movingObject.Moving(_burgerMachineConfigData.DefaultCreateTime);
             }
         }
 
@@ -64,11 +67,11 @@ namespace FastFoodRush.Interactable
         
         private void SetData()
         {
-            _createTime = _burgerMachineConfigData.CreateTime * (1 - 0.2f * (_unlockLevel - 1));
-            _capacity = _burgerMachineConfigData.Capacity + (_unlockLevel - 1) * 2;
+            _createTime = _burgerMachineConfigData.DefaultCreateTime * (1 - 0.2f * (_unlockLevel - 1));
+            _capacity = _burgerMachineConfigData.DefaultCapacity + (_unlockLevel - 1) * 2;
         }
 
-        public override void MainTutorialProgress()
+        public override void LoadMainTutorial()
         {
             TutorialManager tutorialManager = TutorialManager.Instance;
             bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.FoodMachine);
@@ -77,6 +80,11 @@ namespace FastFoodRush.Interactable
                 tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
                 tutorialManager.LoadTutorial(MainTutorialType.FoodMachine);
             }
+        }
+
+        public override void CompleteMainTutorialProgress()
+        {
+            TutorialManager.Instance.CompleteMainTutorialDepth(MainTutorialType.FoodMachine);
         }
     }
 }

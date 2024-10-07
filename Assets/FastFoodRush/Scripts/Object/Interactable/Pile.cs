@@ -32,6 +32,11 @@ namespace FastFoodRush.Interactable
                 {
                     _player.Stack.Stack(_objectStack.Pop(), _stackType);
                     AudioManager.Instance.PlaySFX(AudioKey.Pop);
+                    
+                    if (_player.IsMaxCapacity)
+                    {
+                        TutorialManager.Instance.CompleteMainTutorialDepth(MainTutorialType.FirstSeat);
+                    }
                 }
             }
         }

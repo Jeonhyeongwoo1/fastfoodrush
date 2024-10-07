@@ -10,7 +10,7 @@ namespace FastFoodRush.Interactable
     {
         [SerializeField] private MainTutorialType _mainTutorialType;
         
-        public override void MainTutorialProgress()
+        public override void LoadMainTutorial()
         {
             TutorialManager tutorialManager = TutorialManager.Instance;
             bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(_mainTutorialType);
@@ -19,6 +19,11 @@ namespace FastFoodRush.Interactable
                 tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
                 tutorialManager.LoadTutorial(_mainTutorialType);
             }
+        }
+        
+        public override void CompleteMainTutorialProgress()
+        {
+            TutorialManager.Instance.CompleteMainTutorialDepth(_mainTutorialType);
         }
     }
 }

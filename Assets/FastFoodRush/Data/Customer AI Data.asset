@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceaf8eb6d809b4a1a991236661a0237b, type: 3}
   m_Name: Customer AI Data
   m_EditorClassIdentifier: 
-  _moveSpeed: 4
+  _moveSpeed: 2

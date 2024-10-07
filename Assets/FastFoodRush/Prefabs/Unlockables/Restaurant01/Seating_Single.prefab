@@ -100,10 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 
-  _buyPoint: {x: 0, y: 0, z: 0}
+  _buyPoint: {x: 0, y: 0, z: -2}
   _buyPointRot: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 100
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
   _chairList:
@@ -112,6 +110,7 @@ MonoBehaviour:
   _tableTop: {fileID: 9087079457901133732}
   _trashPile: {fileID: 4013900839171930677}
   _tipMoneyPile: {fileID: 0}
+  _mainTutorialType: 0
 --- !u!1 &1644711819708389705
 GameObject:
   m_ObjectHideFlags: 0

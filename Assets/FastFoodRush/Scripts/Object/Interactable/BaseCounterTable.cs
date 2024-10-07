@@ -8,6 +8,7 @@ namespace FastFoodRush.Object
 {
     public abstract class BaseCounterTable : UnlockableObject
     {
+        public WorkingSpot WorkingSpot => _workingSpot;
         [SerializeField] protected ObjectStack _objectStack;
         [SerializeField] protected List<Transform> _queuePointList = new();
         [SerializeField] protected Transform _customerSpawnPoint;
@@ -28,6 +29,7 @@ namespace FastFoodRush.Object
         {
             base.Start();
             _camera = Camera.main;
+            RestaurantManager.Instance.BaseCounterTableList.Add(this);
         }
 
         protected virtual void Update()

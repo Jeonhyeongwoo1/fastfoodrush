@@ -93,7 +93,6 @@ namespace FastFoodRush.Manager
                 yield return null;
             }
             
-            Debug.LogWarning(_brain.IsBlending);
             done?.Invoke();
         }
         

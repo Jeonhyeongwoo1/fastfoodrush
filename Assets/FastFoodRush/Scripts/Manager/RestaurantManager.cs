@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using FastFoodRush.Controller;
@@ -6,6 +7,7 @@ using FastFoodRush.Interactable;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using FastFoodRush.UI;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -79,51 +81,59 @@ namespace FastFoodRush.Manager
         public List<ObjectStack> ObjectStacks { get; set; } = new();
         public List<Pile> Piles { get; set; } = new();
         public TrashBin TrashBin { get; set; }
+        public List<BurgerMachine> FoodMachineList { get; set; } = new();
+        public List<BaseCounterTable> BaseCounterTableList { get; set; } = new();
         public UnlockableBuyer UnlockableBuyer => _unlockableBuyer;
         
         [SerializeField] private UnlockableBuyer _unlockableBuyer;
         [SerializeField] private List<UnlockableObject> _unlockableObjectList;
         [SerializeField] private AbilityConfigData _abilityData;
+        [SerializeField] private RestaurantConfigData _restaurantConfigData;
         [SerializeField] private Transform _employeeSpawnPoint;
-        [SerializeField] private GameObject _unlockEffectObj; 
-        
-        [SerializeField] private int _priceOfFood;
+        [SerializeField] private GameObject _unlockEffectObj;
+        [SerializeField] private GameObject _stageClearEffectObj;
+        [SerializeField] private GameObject _stageClearText;
+        [SerializeField] private MapUI _mapUI;
         
         private List<EmployeeController> _employeeControllerList = new();
         private RestaurantData _data;
 
         private void Awake()
         {
-            _data = new RestaurantData();
+            string id = SceneManager.GetActiveScene().name;
+            SaveSystem.SaveLastPlayRestaurantId($"{id}");;
+            LoadRestaurantData(id);
+            
+            _data.isUnlock = true;
+            SaveRestaurantData();
+            CheckProgress();
         }
 
         private void Start()
         {
-            string id = SceneManager.GetActiveScene().name;
-            SaveSystem.SaveLastPlayRestaurantId($"{id}");
-            _data.isUnlock = true;
-            LoadRestaurantData(id);
-            CheckProgress();
             AudioManager.Instance.PlayBGM(AudioKey.BGM, 0.5f);
-            
             onAbilityUpgradeAction += OnAbilityUpgrade;
         }
 
         private void OnApplicationQuit()
         {
-            string id = SceneManager.GetActiveScene().name;
-            SaveSystem.SaveRestaurantData(id, _data);
+            SaveRestaurantData();
         }
 
         private void OnApplicationPause(bool pauseStatus)
         {
             if (pauseStatus)
             {
-                string id = SceneManager.GetActiveScene().name;
-                SaveSystem.SaveRestaurantData(id, _data);
+                SaveRestaurantData();
             }
         }
 
+        private void SaveRestaurantData()
+        {
+            string id = SceneManager.GetActiveScene().name;
+            SaveSystem.SaveRestaurantData(id, _data);
+        }
+        
         private void LoadRestaurantData(string id)
         {
             AllDisableUnlockableObject();
@@ -140,7 +150,10 @@ namespace FastFoodRush.Manager
                     UnlockObject(i);
                 }
 
-                InitializeUnlockableBuyer(unlockCount);
+                if (unlockCount < _unlockableObjectList.Count)
+                {
+                    InitializeUnlockableBuyer(unlockCount);
+                }
 
                 try
                 {
@@ -155,6 +168,7 @@ namespace FastFoodRush.Manager
                 return;
             }
             
+            _data = new RestaurantData();
             Money = Const.StartMoney;
             InitializeUnlockableBuyer(0);
             // UnlockObject(0);
@@ -172,14 +186,16 @@ namespace FastFoodRush.Manager
             {
                 OnApplicationPause(true);
             }
+
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                Money += 1000;
+            }
         }
 
         private void Unlock_Debug()
         {
-            for (int i = 0; i < _unlockIndex; i++)
-            {
-                BuyUnlockableObject();
-            }
+            BuyUnlockableObject();
         }
 
         private void OnDestroy()
@@ -272,7 +288,25 @@ namespace FastFoodRush.Manager
                 abilityData = CreateAbilityData(abilityType);
             }
 
-            return abilityData.level * _abilityData.UpgradePrice + _abilityData.FirstUpgradePrice;
+            switch (abilityType)
+            {
+                case AbilityType.PlayerSpeed:
+                case AbilityType.PlayerProfit:
+                case AbilityType.EmployeeSpeed:
+                case AbilityType.EmployeeCapacity:
+                    return abilityData.level * _abilityData.UpgradePrice + _abilityData.FirstUpgradePrice;
+                case AbilityType.PlayerCapacity:
+                case AbilityType.EmployeeAmount:
+                    if (abilityData.level == 0)
+                    {
+                        return 0;
+                    }
+
+                    return abilityData.level * _abilityData.UpgradePrice + _abilityData.FirstUpgradePrice;
+                default:
+                    Debug.LogError($"failed ability type price {abilityType}");
+                    return 0;
+             }
         }
 
         private void AllDisableUnlockableObject()
@@ -288,10 +322,10 @@ namespace FastFoodRush.Manager
                 return;
             }
             
+            unlockableObject.CompleteMainTutorialProgress();
             UnlockableObjectCount++;
             PaidAmount = 0;
             AudioManager.Instance.PlaySFX(AudioKey.Magical);
-
             ShowUnlockEffect(unlockableObject.transform.position);
             if (_unlockableObjectList.Count > UnlockableObjectCount)
             {
@@ -307,25 +341,61 @@ namespace FastFoodRush.Manager
 
         private void EndStage()
         {
+            _stageClearText.gameObject.SetActive(true);
+            _stageClearEffectObj.SetActive(true);
             _unlockableBuyer.gameObject.SetActive(false);
-            TutorialManager.Instance.CheckMainTutorialCompletion(MainTutorialType.None);
+
+            int buildIndex = SceneManager.GetActiveScene().buildIndex;
+            int nextSceneIndex = buildIndex + 1;
+            if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+            {
+                RestaurantData restaurantData = new RestaurantData();
+                restaurantData.isUnlock = true;
+                string scenePath = SceneUtility.GetScenePathByBuildIndex(nextSceneIndex);
+                string sceneName = System.IO.Path.GetFileNameWithoutExtension(scenePath);
+                SaveSystem.SaveRestaurantData(sceneName, restaurantData);
+                DOVirtual.DelayedCall(3, () =>
+                {
+                    _mapUI.gameObject.SetActive(true);
+                });
+            }
+            else
+            {
+                Debug.Log("Last restaurant");
+            }
         }
 
         private void InitializeUnlockableBuyer(int index)
         {
-            UnlockableObject target = _unlockableObjectList[index];
-            _unlockableBuyer.Initialize(target, PaidAmount, target.GetBuyPointPosition, target.GetBuyPointRotation);
-            target.MainTutorialProgress();
+            _unlockableBuyer.gameObject.SetActive(false);
+            StartCoroutine(VerifyRunningTutorialCor(() =>
+            {
+                UnlockableObject target = _unlockableObjectList[index];
+                _unlockableBuyer.Initialize(target, GetMoneyNeedToUnlock(), PaidAmount, target.GetBuyPointPosition,
+                    target.GetBuyPointRotation);
+                _unlockableBuyer.gameObject.SetActive(true);
+                target.LoadMainTutorial();
+            }));
+        }
+
+        private IEnumerator VerifyRunningTutorialCor(Action done)
+        {
+            yield return new WaitForEndOfFrame();
+            while (TutorialManager.Instance.IsRunningTutorial())
+            {
+                yield return null;
+            }
+            
+            done?.Invoke();
+        }
+
+        private int GetMoneyNeedToUnlock()
+        {
+            return _restaurantConfigData.MoneyNeedToUnlock * (UnlockableObjectCount + 1);
         }
 
         private UnlockableObject UnlockObject(int index)
         {
-            if (_unlockableObjectList.Count <= UnlockableObjectCount)
-            {
-                Debug.LogWarning($"already opened all unlockable object");
-                return null;
-            }
-            
             UnlockableObject unlockableObject = _unlockableObjectList[index];
             unlockableObject.Unlock();
 
@@ -345,11 +415,9 @@ namespace FastFoodRush.Manager
             onUpdateProgressAction?.Invoke(ratio);
         }
 
-        public void LoadOtherStage()
+        public void LoadOtherStage(string resturantId)
         {
-            Scene scene = SceneManager.GetActiveScene();
-            int index = scene.buildIndex;
-            SceneManager.LoadScene(++index);
+            SceneManager.LoadScene(resturantId);
         }
 
         public Vector3 GetOffsetByStackType(StackType stackType)
@@ -369,16 +437,26 @@ namespace FastFoodRush.Manager
 
         public int GetTipAmount()
         {
-            int random = Random.Range(1, 3);
-            float ratio = random * 0.1f;
-            int tipAmount = (int)(_priceOfFood * ratio) + (int)GetStatusValue(AbilityType.PlayerProfit);
+            // int random = Random.Range(1, 3);
+            // float ratio = random * 0.1f;
+            // int tipAmount = (int)(_restaurantConfigData.PriceOfFood * ratio) + (int)GetStatusValue(AbilityType.PlayerProfit);
+
+            int tipAmount = (int)(Random.Range(1, _restaurantConfigData.PriceOfFood * 0.5f)) +
+                            (int)GetStatusValue(AbilityType.PlayerProfit);
             return tipAmount;
         }
 
         public int GetPriceOfFood(OrderInfoType orderInfoType)
         {
-            int price = _priceOfFood * (orderInfoType == OrderInfoType.Package ? 4 : 1) + (int)GetStatusValue(AbilityType.PlayerProfit);
+            int price = _restaurantConfigData.PriceOfFood * (orderInfoType == OrderInfoType.Package ? 4 : 1) +
+                        (int)GetStatusValue(AbilityType.PlayerProfit);
             return price;
+        }
+
+        [Button]
+        private void DeleteAllPlayerPrefabsData()
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 }

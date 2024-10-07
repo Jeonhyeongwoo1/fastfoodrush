@@ -10,7 +10,6 @@ namespace FastFoodRush.Object
 {
     public class UnlockableObject : MonoBehaviour
     {
-        public int MoneyNeedToUnlock => _moneyNeedToUnlock;
         public Vector3 GetBuyPointPosition => transform.TransformPoint(_buyPoint);
         public Vector3 GetBuyPointRotation => _buyPointRot;
         public bool IsUnlock => gameObject.activeSelf;
@@ -19,7 +18,6 @@ namespace FastFoodRush.Object
      
         [SerializeField] private Vector3 _buyPoint;
         [SerializeField] private Vector3 _buyPointRot;
-        [SerializeField] private int _moneyNeedToUnlock;
         [SerializeField] private Vector3 _punchScale = new Vector3(0.1f, 0.2f, 0.1f);
         
         [SerializeField] protected List<UpgradeableMesh> _updateableMeshList;
@@ -62,6 +60,8 @@ namespace FastFoodRush.Object
                 upgradeableMesh.UpdateMesh();
             }
         }
-        public virtual void MainTutorialProgress() {}
+        
+        public virtual void LoadMainTutorial() {}
+        public virtual void CompleteMainTutorialProgress() {}
     }
 }

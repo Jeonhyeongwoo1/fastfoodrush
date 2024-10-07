@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Ability Data
   m_EditorClassIdentifier: 
   _maxLevel: 5
-  _firstUpgradePrice: 300
-  _upgradePrice: 200
-  _defaultPlayerMoveSpeed: 5
-  _defaultPlayerCapacity: 15
+  _firstUpgradePrice: 250
+  _upgradePrice: 100
+  _defaultPlayerMoveSpeed: 3
+  _defaultPlayerCapacity: 2
   _defaultPlayerProfit: 0
   _defaultEmployeeMoveSpeed: 2
-  _defaultEmployeeCapacity: 5
+  _defaultEmployeeCapacity: 1
   _playerMoveSpeedUpgradeValue: 0.3
   _playerCapacityUpgradeValue: 1
   _playerProfitUpgradeValue: 1

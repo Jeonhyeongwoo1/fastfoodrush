@@ -33,7 +33,7 @@ namespace FastFoodRush.Interactable
             }
         }
 
-        public override void MainTutorialProgress()
+        public override void LoadMainTutorial()
         {
             
             TutorialManager tutorialManager = TutorialManager.Instance;
@@ -45,6 +45,11 @@ namespace FastFoodRush.Interactable
             }
         }
 
+        public override void CompleteMainTutorialProgress()
+        {
+            TutorialManager.Instance.CompleteMainTutorialDepth(MainTutorialType.PackingTable);
+        }
+        
         private void MakePackage()
         {
             if (_objectStack.StackCount == 0 || _sequence != null) 

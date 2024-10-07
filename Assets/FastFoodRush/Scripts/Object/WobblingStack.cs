@@ -4,7 +4,6 @@ using System.Linq;
 using DG.Tweening;
 using FastFoodRush.Manager;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FastFoodRush.Interactable
 {
@@ -28,7 +27,7 @@ namespace FastFoodRush.Interactable
             _stackOffset = RestaurantManager.Instance.GetOffsetByStackType(StackType.Food);
         }
 
-        void Update()
+        private void Update()
         {
             if (_stackList.Count == 0) return;
 
@@ -62,8 +61,15 @@ namespace FastFoodRush.Interactable
             }
 
             Vector3 endValue = transform.position + new Vector3(0, _stackOffset.y, 0) * _stackList.Count;
-            _height++;
             _currentStackType = stackType;
+
+            switch (_currentStackType)
+            {
+                case StackType.Food:
+                case StackType.Package:
+                    _height++;
+                    break;
+            }
 
             obj.transform.DOJump(endValue, 2, 1, 0.25f).OnComplete(() => _stackList.Add(obj.transform));
         }
@@ -74,7 +80,15 @@ namespace FastFoodRush.Interactable
         {
             Transform tr = Peek();
             _stackList.Remove(tr);
-            _height--;
+
+            switch (_currentStackType)
+            {
+                case StackType.Food:
+                case StackType.Package:
+                    _height--;
+                    break;
+            }
+            
             if (_stackList.Count == 0)
             {
                 _tray.SetActive(false);

@@ -1,15 +1,14 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace FastFoodRush.Scripts.Data
 {
     [CreateAssetMenu(fileName = "Burger Machine Data", menuName = "Scriptable Object/Fastfood Data")]
     public class BurgerMachineConfigData : ScriptableObject
     {
-        public int Capacity => _capacity;
-        public float CreateTime => _createTime;
+        public int DefaultCapacity => _defaultCapacity;
+        public float DefaultCreateTime => _defaultCreateTime;
         
-        [SerializeField] private int _capacity;
-        [SerializeField] private float _createTime;
+        [SerializeField] private int _defaultCapacity;
+        [SerializeField] private float _defaultCreateTime;
     }
 }

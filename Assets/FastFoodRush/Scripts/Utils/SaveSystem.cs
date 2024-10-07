@@ -1,3 +1,4 @@
+using FastFoodRush.Scripts.Data;
 using Newtonsoft.Json;
 using UnityEngine;
 

@@ -11,13 +11,15 @@ namespace FastFoodRush.Controller
     {
         public WobblingStack Stack => _wobblingStack;
         public int PlayerCapacity => _playerCapacity;
+        public bool IsMaxCapacity => Stack.Height == PlayerCapacity;
         
         [SerializeField] private Animator _animator;
         [SerializeField] private WobblingStack _wobblingStack;
         [SerializeField] private Transform _leftHandPoint;
         [SerializeField] private Transform _rightHandPoint;
-        [FormerlySerializedAs("_audioClipArray")] [SerializeField] private AudioClip[] _footStepAudioClipArray;
+        [SerializeField] private AudioClip[] _footStepAudioClipArray;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private GameObject _playerMaxCapacityObj;
         
         private float _moveSpeed;
         private int _playerCapacity;
@@ -91,6 +93,11 @@ namespace FastFoodRush.Controller
             }
 
             _animator.SetBool(_isMovingHash, isMoving);
+            _playerMaxCapacityObj.SetActive(IsMaxCapacity);
+            if (_playerMaxCapacityObj.activeSelf)
+            {
+                _playerMaxCapacityObj.transform.position = transform.position + new Vector3(0, 2, 0);
+            }
         }
         
         private void OnUpgradeAbility(AbilityType abilityType, float ability)

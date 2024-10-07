@@ -72,6 +72,11 @@ namespace FastFoodRush.Interactable
 
         protected override void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition)
         {
+            if (RestaurantManager.Instance.FoodMachineList.Count == 0)
+            {
+                return;
+            }
+
             GameObject obj = PoolManager.Instance.Get(PoolKey.Customer);
             if (!obj.TryGetComponent(out CustomerController customerAI))
             {
@@ -79,14 +84,15 @@ namespace FastFoodRush.Interactable
                 return;
             }
 
-            int maxFoodCapacity = Random.Range(1, 5);
+            int min = 1;
+            int max = TutorialManager.Instance.MainTutorialStep > (int)MainTutorialType.FirstSeat ? 5 : 3;
+            int maxFoodCapacity = Random.Range(min, max);
             customerAI.Spawn(spawnPosition, queuePoint.position, maxFoodCapacity, despawnPosition);
             _customerQueue.Enqueue(customerAI);
         }
 
-        public override void MainTutorialProgress()
+        public override void LoadMainTutorial()
         {
-          
             TutorialManager tutorialManager = TutorialManager.Instance;
             bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.RestaurantCountTable);
             if (!isExecutedTutorial)
@@ -94,6 +100,11 @@ namespace FastFoodRush.Interactable
                 tutorialManager.SetTutorialTarget(RestaurantManager.Instance.UnlockableBuyer.transform);
                 tutorialManager.LoadTutorial(MainTutorialType.RestaurantCountTable);
             }
+        }
+        
+        public override void CompleteMainTutorialProgress()
+        {
+            TutorialManager.Instance.CompleteMainTutorialDepth(MainTutorialType.RestaurantCountTable);
         }
     }
 }

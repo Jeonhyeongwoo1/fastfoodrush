@@ -209,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5527700679009679193
 Transform:
   m_ObjectHideFlags: 0
@@ -242,10 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2613ad12c712414cb50262752e9ecc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _id: 
   _buyPoint: {x: 0, y: 0, z: 3}
   _buyPointRot: {x: 0, y: 0, z: 0}
-  _moneyNeedToUnlock: 10
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
   _burgerMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a31569aabcc94c48bc782d97145470cf, type: 3}
   m_Name: Burger Machine Data
   m_EditorClassIdentifier: 
-  _capacity: 6
-  _createTime: 1
+  _defaultCapacity: 3
+  _defaultCreateTime: 1

@@ -55,6 +55,11 @@ namespace FastFoodRush.Interactable
                 GameObject obj = _player.Stack.Pop();
                 PlaySound();
                 DoStackAnimation(obj);
+
+                if (_player.Stack.StackCount == 0)
+                {
+                    TutorialManager.Instance.CompleteMainTutorialDepth(MainTutorialType.FirstSeat);
+                }
             }
         }
 

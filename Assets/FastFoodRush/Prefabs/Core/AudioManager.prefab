@@ -46,8 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98ca3ed57bd4344b2865b59c6676a900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sfxDataList: []
-  _bgmDataList: []
+  _sfxDataList:
+  - key: Trash
+    audioClip: {fileID: 8300000, guid: fbddefc8a7bdb784caa99e8e993ec1c8, type: 3}
+    audioSource: {fileID: 0}
+  - key: Bin
+    audioClip: {fileID: 8300000, guid: 260b94688093dfa4a83744305cf21796, type: 3}
+    audioSource: {fileID: 0}
+  - key: Pop
+    audioClip: {fileID: 8300000, guid: 62504d63499854148ac75e435204cf00, type: 3}
+    audioSource: {fileID: 0}
+  - key: Money
+    audioClip: {fileID: 8300000, guid: 6b183fda7d2ecf44cb90d096fe85c0cb, type: 3}
+    audioSource: {fileID: 0}
+  - key: Magical
+    audioClip: {fileID: 8300000, guid: 7333daddcc0583c4da7b1731088650a9, type: 3}
+    audioSource: {fileID: 0}
+  - key: Kaching
+    audioClip: {fileID: 8300000, guid: c6c46f49fca7c6a4f8835eb3ed9839d6, type: 3}
+    audioSource: {fileID: 0}
+  _bgmDataList:
+  - key: BGM
+    audioClip: {fileID: 8300000, guid: 372ab39d0a1052d4ab86edb357694013, type: 3}
+    audioSource: {fileID: 0}
 --- !u!82 &3541705550334212504
 AudioSource:
   m_ObjectHideFlags: 0
