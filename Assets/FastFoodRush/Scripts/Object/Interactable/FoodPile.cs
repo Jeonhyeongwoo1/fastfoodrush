@@ -8,6 +8,8 @@ namespace FastFoodRush.Interactable
     {
         protected override float _timeInterval => 0.2f;
 
+        [SerializeField] private bool _isCenterAxisX;
+        
         protected override void Start()
         {
             RestaurantManager.Instance.Piles.Add(this);
@@ -23,10 +25,21 @@ namespace FastFoodRush.Interactable
             int depth = count / 2;
 
             Vector3 offset = RestaurantManager.Instance.GetOffsetByStackType(StackType.Food);
-            Vector3 position = transform.position + (isLeft
-                ? new Vector3(-offset.x, depth * offset.y, 0)
-                : new Vector3(offset.x, depth * offset.y, 0));
-
+            Vector3 position = Vector3.zero;
+            if (_isCenterAxisX)
+            {
+                position = transform.position + (isLeft
+                    ? new Vector3(-offset.x, depth * offset.y, 0)
+                    : new Vector3(offset.x, depth * offset.y, 0));
+                
+            }
+            else
+            {
+                position = transform.position + (isLeft
+                    ? new Vector3(0, depth * offset.y, -offset.z)
+                    : new Vector3(0, depth * offset.y, offset.z));
+            }
+            
             obj.transform.position = position;
             obj.gameObject.SetActive(true);
         }

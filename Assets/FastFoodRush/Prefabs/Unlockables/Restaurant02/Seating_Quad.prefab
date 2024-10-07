@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4396495023600633910}
+  - component: {fileID: 3136450447902967414}
   m_Layer: 0
   m_Name: Seating_Quad
   m_TagString: Untagged
@@ -37,6 +38,32 @@ Transform:
   - {fileID: 5754767367469242611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3136450447902967414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3911565678805340812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buyPoint: {x: 2, y: 0, z: 0}
+  _buyPointRot: {x: 0, y: 0, z: 0}
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
+  _chairList:
+  - {fileID: 4182335976558322883}
+  - {fileID: 7156277908363916674}
+  - {fileID: 8149526499979777613}
+  - {fileID: 6533976503819431504}
+  _table: {fileID: 4750237558462485907}
+  _tableTop: {fileID: 4848368436303397471}
+  _trashPile: {fileID: 2129276404234350596}
+  _tipMoneyPile: {fileID: 8340265828953077906}
+  _mainTutorialType: 0
 --- !u!1 &3981078320439328849
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,6 +74,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5754767367469242611}
   - component: {fileID: 6930834694446587373}
+  - component: {fileID: 8340265828953077906}
   m_Layer: 0
   m_Name: TipMoneyPile
   m_TagString: Untagged
@@ -90,6 +118,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1.6}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8340265828953077906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981078320439328849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 4
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
 --- !u!1 &4848368435586851390
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4848368435586851385}
   - component: {fileID: 4848368435586851387}
+  - component: {fileID: 2129276404234350596}
   m_Layer: 0
   m_Name: TrashPile
   m_TagString: Untagged
@@ -141,8 +189,22 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.5, y: 1.8, z: 1.5}
+  m_Size: {x: 3, y: 1.8, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2129276404234350596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4848368435586851390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdec3710b6e2414b8af48bdde547c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 3
+  _objectStackPoint: {fileID: 4848368435586851385}
 --- !u!1 &4848368436303397468
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,6 +248,7 @@ GameObject:
   - component: {fileID: 5266066915586864225}
   - component: {fileID: 200466143983707285}
   - component: {fileID: 4848368436480119123}
+  - component: {fileID: 7286985191085125432}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -281,6 +344,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &7286985191085125432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5010958202752218357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6692290496178104961, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6692290496178104961, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &5716340901817588411
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +370,7 @@ GameObject:
   - component: {fileID: 4182335976558322883}
   - component: {fileID: 7088222808121499321}
   - component: {fileID: 8963294668491395854}
+  - component: {fileID: 7007247638705814027}
   m_Layer: 0
   m_Name: Chair (1)
   m_TagString: Untagged
@@ -364,6 +443,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7007247638705814027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5716340901817588411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6264831526926562434, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &6355768272928269517
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +469,7 @@ GameObject:
   - component: {fileID: 7156277908363916674}
   - component: {fileID: 6700347108622277723}
   - component: {fileID: 6077575775920529773}
+  - component: {fileID: 1162406344793591542}
   m_Layer: 0
   m_Name: Chair (2)
   m_TagString: Untagged
@@ -447,6 +542,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1162406344793591542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355768272928269517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6264831526926562434, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &7019579185034801443
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +568,7 @@ GameObject:
   - component: {fileID: 6533976503819431504}
   - component: {fileID: 158864694503489122}
   - component: {fileID: 1446390605438432284}
+  - component: {fileID: 327100641362232469}
   m_Layer: 0
   m_Name: Chair (4)
   m_TagString: Untagged
@@ -530,6 +641,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &327100641362232469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7019579185034801443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6264831526926562434, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &8149526499979777614
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +667,7 @@ GameObject:
   - component: {fileID: 8149526499979777613}
   - component: {fileID: 8149526499979777603}
   - component: {fileID: 8149526499979777612}
+  - component: {fileID: 7407221113746703339}
   m_Layer: 0
   m_Name: Chair (3)
   m_TagString: Untagged
@@ -613,3 +740,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7407221113746703339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149526499979777614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6264831526926562434, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}

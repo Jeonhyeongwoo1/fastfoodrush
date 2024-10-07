@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5527700679009679193}
+  - component: {fileID: 508514906981199176}
   m_Layer: 0
   m_Name: CoffeeMachine
   m_TagString: Untagged
@@ -33,6 +34,23 @@ Transform:
   - {fileID: 5421470861400449578}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &508514906981199176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5187450606456860131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2613ad12c712414cb50262752e9ecc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buyPoint: {x: 0, y: 0, z: 3}
+  _buyPointRot: {x: 0, y: 90, z: 0}
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
+  foodMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}
 --- !u!1 &5421470861400449577
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,6 +61,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5421470861400449578}
   - component: {fileID: 5421470861400449580}
+  - component: {fileID: 4884993754168325860}
   m_Layer: 0
   m_Name: FoodPile
   m_TagString: Untagged
@@ -87,6 +106,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4884993754168325860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421470861400449577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8679ff4bf80c940a399910efc5c52c55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 1
+  _isCenterAxisX: 0
 --- !u!1 &6407935811211735771
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,6 +133,7 @@ GameObject:
   - component: {fileID: 3931594042685777963}
   - component: {fileID: 4400615257687054246}
   - component: {fileID: 3837639465936587970}
+  - component: {fileID: 3588266034139398115}
   m_Layer: 0
   m_Name: Machine
   m_TagString: Untagged
@@ -203,12 +237,27 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.75, y: 1.5, z: 1.5}
+  m_Extents: {x: 0.75, y: 1.25, z: 1.5}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1.5, z: 0.5}
+  m_Center: {x: 0, y: 1.25, z: 0.5}
   m_TimeToStationary: 0.5
+--- !u!114 &3588266034139398115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407935811211735771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: 3527403131263069949, guid: 654678037c08a2b4b8643d8a54d41160, type: 3}
+  - {fileID: 6367554770108013036, guid: 8737643c38861364cb53bd394138a323, type: 3}
 --- !u!1 &8317266977804248035
 GameObject:
   m_ObjectHideFlags: 0

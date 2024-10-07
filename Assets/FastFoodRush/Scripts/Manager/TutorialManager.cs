@@ -48,6 +48,8 @@ namespace FastFoodRush.Manager
         }
 
         public static Action onCompletedMainTutorialAction;
+
+        [SerializeField] private bool _useTutorial;
         
         private int _mainTutorialStep = 0;
         private int _trashTutorialStep = 0;
@@ -114,6 +116,11 @@ namespace FastFoodRush.Manager
 
         public void LoadTutorial(MainTutorialType mainTutorialType)
         {
+            if (!_useTutorial)
+            {
+                return;
+            }
+            
             if (mainTutorialType == MainTutorialType.None)
             {
                 Debug.Log($"tutorial type is none");

@@ -900,7 +900,7 @@ Transform:
   m_GameObject: {fileID: 4887660844680673103}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 3.5, y: 0, z: 2.5}
+  m_LocalPosition: {x: 3.4999995, y: 0, z: -3.7500005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1195,7 +1195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed82149abe304ff5a6a7c979fb35293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buyPoint: {x: -6, y: 0, z: 0}
+  _buyPoint: {x: -1.5, y: 0, z: 0}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []

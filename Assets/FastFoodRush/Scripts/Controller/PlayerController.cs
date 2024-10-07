@@ -96,11 +96,9 @@ namespace FastFoodRush.Controller
             _playerMaxCapacityObj.SetActive(IsMaxCapacity);
             if (_playerMaxCapacityObj.activeSelf)
             {
-                _playerMaxCapacityObj.transform.position = transform.position + _offset;
+                _playerMaxCapacityObj.transform.position = transform.position + Vector3.up * 3;
             }
         }
-
-        [SerializeField] private Vector3 _offset;
         
         private void OnUpgradeAbility(AbilityType abilityType, float ability)
         {

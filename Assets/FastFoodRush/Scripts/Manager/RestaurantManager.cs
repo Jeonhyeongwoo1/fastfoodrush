@@ -81,7 +81,7 @@ namespace FastFoodRush.Manager
         public List<ObjectStack> ObjectStacks { get; set; } = new();
         public List<Pile> Piles { get; set; } = new();
         public TrashBin TrashBin { get; set; }
-        public List<BurgerMachine> FoodMachineList { get; set; } = new();
+        public List<FoodMachine> FoodMachineList { get; set; } = new();
         public List<BaseCounterTable> BaseCounterTableList { get; set; } = new();
         public UnlockableBuyer UnlockableBuyer => _unlockableBuyer;
         
@@ -153,6 +153,10 @@ namespace FastFoodRush.Manager
                 if (unlockCount < _unlockableObjectList.Count)
                 {
                     InitializeUnlockableBuyer(unlockCount);
+                }
+                else
+                {
+                    _unlockableBuyer.gameObject.SetActive(false);
                 }
 
                 try
@@ -376,6 +380,8 @@ namespace FastFoodRush.Manager
             {
                 Debug.Log("Last restaurant");
             }
+            
+            SaveRestaurantData();
         }
 
         private void InitializeUnlockableBuyer(int index)
@@ -430,6 +436,7 @@ namespace FastFoodRush.Manager
 
         public void LoadOtherStage(string resturantId)
         {
+            SaveRestaurantData();
             SceneManager.LoadScene(resturantId);
         }
 
@@ -438,11 +445,11 @@ namespace FastFoodRush.Manager
             switch (stackType)
             {
                 case StackType.Food:
-                    return new Vector3(0.25f, 0.25f, 0);
+                    return new Vector3(0.25f, 0.25f, 0.25f);
                 case StackType.Package:
-                    return new Vector3(0.25f, 0.25f, 0);
+                    return new Vector3(0.25f, 0.25f, .25f);
                 case StackType.Trash:
-                    return new Vector3(0.25f, 0.25f, 0);
+                    return new Vector3(0.25f, 0.25f, 0.25f);
                 default:
                     return new Vector3(0f, 0.25f, 0);
             }

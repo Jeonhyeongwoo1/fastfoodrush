@@ -30,7 +30,10 @@ namespace FastFoodRush.Interactable
 
         private void OnDisable()
         {
-            RestaurantManager.Instance.ObjectStacks.Remove(this);
+            if (RestaurantManager.Instance != null)
+            {
+                RestaurantManager.Instance.ObjectStacks.Remove(this);
+            }
         }
 
         private void Update()

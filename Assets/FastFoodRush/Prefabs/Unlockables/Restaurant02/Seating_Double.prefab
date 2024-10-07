@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8149570862236763722}
   - component: {fileID: 2976280098304441392}
   - component: {fileID: 3996864331155403143}
+  - component: {fileID: 7573134155248665694}
   m_Layer: 0
   m_Name: Chair (1)
   m_TagString: Untagged
@@ -83,6 +84,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7573134155248665694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 308274678189324338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6264831526926562434, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &602196520870338773
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 602196521587933360}
   - component: {fileID: 602196521587933362}
+  - component: {fileID: 3545274819362764710}
   m_Layer: 0
   m_Name: TrashPile
   m_TagString: Untagged
@@ -165,8 +182,22 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 1.8, z: 1.5}
+  m_Size: {x: 2, y: 1.8, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3545274819362764710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602196521587933367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdec3710b6e2414b8af48bdde547c0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 3
+  _objectStackPoint: {fileID: 602196521587933360}
 --- !u!1 &1052096303741752956
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,6 +210,7 @@ GameObject:
   - component: {fileID: 146191174604592872}
   - component: {fileID: 5321989262080689692}
   - component: {fileID: 602196520644277210}
+  - component: {fileID: 3832949124214417255}
   m_Layer: 0
   m_Name: Table
   m_TagString: Untagged
@@ -274,6 +306,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.9, z: 1}
   m_Center: {x: 0, y: 0.45, z: 0}
+--- !u!114 &3832949124214417255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052096303741752956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6692290496178104961, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6692290496178104961, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &4182538659914462407
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +332,7 @@ GameObject:
   - component: {fileID: 4182538659914462404}
   - component: {fileID: 4182538659914462410}
   - component: {fileID: 4182538659914462405}
+  - component: {fileID: 1515273958568696577}
   m_Layer: 0
   m_Name: Chair (2)
   m_TagString: Untagged
@@ -357,6 +405,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1515273958568696577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182538659914462407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -6264831526926562434, guid: 2fe345f914515a04a941b051fb37bc0c, type: 3}
+  - {fileID: -6264831526926562434, guid: 2f2d06d29cb66da438283b167d940bc0, type: 3}
 --- !u!1 &8947546694311797464
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 346418189391166074}
   - component: {fileID: 3115636083830194020}
+  - component: {fileID: 4311802504315872088}
   m_Layer: 0
   m_Name: TipMoneyPile
   m_TagString: Untagged
@@ -410,6 +474,25 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.6, y: 2, z: 1.6}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4311802504315872088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8947546694311797464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281720b1582f74e9cb3139f9b2c2c7f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stackType: 4
+  _width: 2
+  _height: 2
+  _spacing: {x: -0.4, y: 0.1, z: -0.4}
+  _xCount: 2
+  _zCount: 4
+  _oneDepthMaxCount: 8
 --- !u!1 &9032848312183173125
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,6 +502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8507527303987358399}
+  - component: {fileID: 8608225018217231701}
   m_Layer: 0
   m_Name: Seating_Double
   m_TagString: Untagged
@@ -445,3 +529,27 @@ Transform:
   - {fileID: 346418189391166074}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8608225018217231701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9032848312183173125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33363a399301549a1a5090af41298edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buyPoint: {x: 2, y: 0, z: 0}
+  _buyPointRot: {x: 0, y: 0, z: 0}
+  _punchScale: {x: 0.1, y: 0.2, z: 0.1}
+  _updateableMeshList: []
+  _chairList:
+  - {fileID: 8149570862236763722}
+  - {fileID: 4182538659914462404}
+  _table: {fileID: 792501627440822042}
+  _tableTop: {fileID: 602196520870338774}
+  _trashPile: {fileID: 3545274819362764710}
+  _tipMoneyPile: {fileID: 4311802504315872088}
+  _mainTutorialType: 0

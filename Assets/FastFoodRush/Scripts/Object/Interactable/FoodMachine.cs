@@ -2,14 +2,15 @@ using FastFoodRush.Manager;
 using FastFoodRush.Object;
 using FastFoodRush.Scripts.Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace FastFoodRush.Interactable
 {
-    public class BurgerMachine : UnlockableObject
+    public class FoodMachine : UnlockableObject
     {
         public Transform FoodPileTransform => _foodPile.transform;
         
-        [SerializeField] private BurgerMachineConfigData _burgerMachineConfigData;
+        [FormerlySerializedAs("_burgerMachineConfigData")] [SerializeField] private FoodMachineConfigData foodMachineConfigData;
         
         private FoodPile _foodPile;
         private float elapsed = 0;
@@ -56,7 +57,7 @@ namespace FastFoodRush.Interactable
                     _movingObject = GetComponentInChildren<MovingObject>(true);
                 }
                 
-                _movingObject.Moving(_burgerMachineConfigData.DefaultCreateTime);
+                _movingObject.Moving(foodMachineConfigData.DefaultCreateTime);
             }
         }
 
@@ -77,8 +78,8 @@ namespace FastFoodRush.Interactable
         
         private void SetData()
         {
-            _createTime = _burgerMachineConfigData.DefaultCreateTime * (1 - 0.2f * (_unlockLevel - 1));
-            _capacity = _burgerMachineConfigData.DefaultCapacity + (_unlockLevel - 1) * 2;
+            _createTime = foodMachineConfigData.DefaultCreateTime * (1 - 0.2f * (_unlockLevel - 1));
+            _capacity = foodMachineConfigData.DefaultCapacity + (_unlockLevel - 1) * 2;
         }
 
         public override void LoadMainTutorial()

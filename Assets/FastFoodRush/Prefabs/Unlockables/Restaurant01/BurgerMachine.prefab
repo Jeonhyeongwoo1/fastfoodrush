@@ -246,7 +246,7 @@ MonoBehaviour:
   _buyPointRot: {x: 0, y: 0, z: 0}
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
-  _burgerMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}
+  foodMachineConfigData: {fileID: 11400000, guid: dcdaaf5a4a4814b6d81bd73a5e520d56, type: 2}
 --- !u!1 &5421470861400449577
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stackType: 1
+  _isCenterAxisX: 1
 --- !u!1 &6096906714698419238
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +550,6 @@ MonoBehaviour:
   _mesheList:
   - {fileID: -1220596194976705504, guid: e1813e6bf6a17e84889971e7d009c271, type: 3}
   - {fileID: 2193752321316807310, guid: f02cb75ad2997e147ab04e0b569449c5, type: 3}
-  _level: 0
 --- !u!1 &8317266977804248035
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FastFoodRush.Manager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -42,7 +43,7 @@ namespace FastFoodRush.UI
 
         public void OnClickMapButton(string restaurantId)
         {
-            SceneManager.LoadScene(restaurantId);
+            RestaurantManager.Instance.LoadOtherStage(restaurantId);
         }
 
         private void Close()
