@@ -48,7 +48,7 @@ namespace FastFoodRush.Object
             UpdateCustomerQueuePosition();
         }
 
-        protected override void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition)
+        protected override void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition, int maxCapacity)
         {
             int random = Random.Range(1, driverTypeCount + 1);
             string key = $"Car0{random}";
@@ -75,8 +75,7 @@ namespace FastFoodRush.Object
                 }
             }
             
-            int maxFoodCapacity = Random.Range(1, 5);
-            driver.Spawn(spawnPosition, maxFoodCapacity, despawnPosition, movePositionList);
+            driver.Spawn(spawnPosition, maxCapacity, despawnPosition, movePositionList);
             _customerQueue.Enqueue(driver);
         }
 

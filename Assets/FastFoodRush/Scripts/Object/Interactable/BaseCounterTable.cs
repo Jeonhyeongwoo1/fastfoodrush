@@ -64,7 +64,28 @@ namespace FastFoodRush.Object
             if (_spawnCustomerElapsed > _spawnCustomerInterval)
             {
                 _spawnCustomerElapsed = 0;
-                SpawnCustomer(_customerSpawnPoint.position, GetQueuePoint(), _customerDesapwnPoint.position);
+                
+                int min = 1;
+                int max;
+                if (TutorialManager.Instance.MainTutorialStep > (int)MainTutorialType.FirstSeat && RestaurantManager.Instance.UnlockableObjectCount <= 7)
+                {
+                    max = 5;
+                }
+                else if (RestaurantManager.Instance.UnlockableObjectCount > 20)
+                {
+                    max = 10;
+                }
+                else if (RestaurantManager.Instance.UnlockableObjectCount > 7)
+                {
+                    max = 8;
+                }
+                else
+                {
+                    max = 3;
+                }
+            
+                int maxCapacity = Random.Range(min, max);
+                SpawnCustomer(_customerSpawnPoint.position, GetQueuePoint(), _customerDesapwnPoint.position, maxCapacity);
             }
         }
         
@@ -149,6 +170,6 @@ namespace FastFoodRush.Object
 
         protected abstract void HandleOrderInfoUI();
         protected abstract void CompleteOrder();
-        protected abstract void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition);
+        protected abstract void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition, int maxCapacity);
     }
 }

@@ -70,7 +70,7 @@ namespace FastFoodRush.Interactable
             return null;
         }
 
-        protected override void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition)
+        protected override void SpawnCustomer(Vector3 spawnPosition, Transform queuePoint, Vector3 despawnPosition, int maxCapacity)
         {
             if (RestaurantManager.Instance.FoodMachineList.Count == 0)
             {
@@ -84,23 +84,7 @@ namespace FastFoodRush.Interactable
                 return;
             }
 
-            int min = 1;
-            int max = 1;
-            if (TutorialManager.Instance.MainTutorialStep > (int)MainTutorialType.FirstSeat && RestaurantManager.Instance.UnlockableObjectCount <= 7)
-            {
-                max = 5;
-            }
-            else if (RestaurantManager.Instance.UnlockableObjectCount > 7)
-            {
-                max = 8;
-            }
-            else
-            {
-                max = 3;
-            }
-            
-            int maxFoodCapacity = Random.Range(min, max);
-            customerAI.Spawn(spawnPosition, queuePoint.position, maxFoodCapacity, despawnPosition);
+            customerAI.Spawn(spawnPosition, queuePoint.position, maxCapacity, despawnPosition);
             _customerQueue.Enqueue(customerAI);
         }
 
