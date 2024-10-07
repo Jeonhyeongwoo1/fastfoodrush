@@ -28,11 +28,12 @@ namespace FastFoodRush.Manager
         
         // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
-        private const string _interstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712";
+        private const string _sampleInterstitialAdUnitId = "ca-app-pub-3940256099942544/1033173712";
+        [SerializeField] private string _interstitialAdUnitId = "";
 #elif UNITY_IPHONE
-        private const string _interstitialAdUnitId = "ca-app-pub-3940256099942544/4411468910";
+        private const string _sampleInterstitialAdUnitId = "ca-app-pub-3940256099942544/4411468910";
 #else
-        private const string _interstitialAdUnitId = "unused";
+        private const string _sampleInterstitialAdUnitId = "unused";
 #endif
 
         private void Start()
@@ -80,8 +81,9 @@ namespace FastFoodRush.Manager
             // Create our request used to load the ad.
             var adRequest = new AdRequest();
 
+            string id = _useSampleUnitId ? _sampleInterstitialAdUnitId : _interstitialAdUnitId;
             // Send the request to load the ad.
-            InterstitialAd.Load(_interstitialAdUnitId, adRequest, (InterstitialAd ad, LoadAdError error) =>
+            InterstitialAd.Load(id, adRequest, (InterstitialAd ad, LoadAdError error) =>
             {
                 // If the operation failed with a reason.
                 if (error != null)
@@ -201,12 +203,17 @@ namespace FastFoodRush.Manager
 
         // These ad units are configured to always serve test ads.
 #if UNITY_ANDROID
-        private const string _rewardAdUnitId = "ca-app-pub-3940256099942544/5224354917";
+        private const string _sampleRewardAdUnitId = "ca-app-pub-3940256099942544/5224354917";
+        [SerializeField] private string _rewardAdUnitId = "";
 #elif UNITY_IPHONE
-        private const string _rewardAdUnitId = "ca-app-pub-3940256099942544/1712485313";
+        private const string _sampleRewardAdUnitId = "ca-app-pub-3940256099942544/1712485313";
+        [SerializeField] private string _rewardAdUnitId = "";
 #else
-        private const string _rewardAdUnitId = "unused";
+        private const string _sampleRewardAdUnitId = "unused";
+        [SerializeField] private string _rewardAdUnitId = "";
 #endif
+
+        [SerializeField] private bool _useSampleUnitId = true;
 
         private RewardedAd _rewardedAd;
 
@@ -239,8 +246,9 @@ namespace FastFoodRush.Manager
             // Create our request used to load the ad.
             var adRequest = new AdRequest();
 
+            string id = _useSampleUnitId ? _sampleRewardAdUnitId : _rewardAdUnitId;
             // Send the request to load the ad.
-            RewardedAd.Load(_rewardAdUnitId, adRequest, (RewardedAd ad, LoadAdError error) =>
+            RewardedAd.Load(id, adRequest, (RewardedAd ad, LoadAdError error) =>
             {
                 // If the operation failed with a reason.
                 if (error != null)
