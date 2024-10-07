@@ -139,6 +139,7 @@ namespace FastFoodRush.Manager
             AllDisableUnlockableObject();
             
             RestaurantData restaurantData = SaveSystem.LoadRestaurantData(id);
+            Debug.Log($"res " +restaurantData);
             if (restaurantData != null)
             {
                 _data = restaurantData;
@@ -163,7 +164,11 @@ namespace FastFoodRush.Manager
                         SpawnEmployee();
                     }
                 }
-                catch (Exception e){}
+                catch (Exception e)
+                {
+                    Debug.Log($"failed create employee " + e);
+                    CreateAbilityData(AbilityType.EmployeeAmount);
+                }
                 
                 return;
             }

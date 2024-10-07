@@ -33,7 +33,7 @@ namespace FastFoodRush.Manager
 
         private Dictionary<string, List<GameObject>> _pooledDict = new();
 
-        private void Start()
+        private void Awake()
         {
             Initialize();
         }

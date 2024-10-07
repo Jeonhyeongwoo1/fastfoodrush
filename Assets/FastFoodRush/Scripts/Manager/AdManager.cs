@@ -43,13 +43,14 @@ namespace FastFoodRush.Manager
             MobileAds.Initialize(initStatus => { });
             LoadInterstitialAd();
             StartCoroutine(LoadRewardAdCor());
+            StartCoroutine(ShowInterstitialAdCor());
         }
 
-        // [Button]
-        // public void Debug_ShowInterstitialAd()
-        // {
-        //     ShowInterstitialAd();
-        // }
+        [Button]
+        public void Debug_ShowInterstitialAd()
+        {
+            ShowInterstitialAd();
+        }
         //
         // [Button]
         // public void Debug_ShowRewardAd()
@@ -65,16 +66,31 @@ namespace FastFoodRush.Manager
 
         private InterstitialAd _interstitialAd;
 
+        private IEnumerator ShowInterstitialAdCor()
+        {
+            while (true)
+            {
+                if (_interstitialAd == null || !_interstitialAd.CanShowAd())
+                {
+                    LoadInterstitialAd();
+                }
+                
+                yield return new WaitForSeconds(60);
+                
+                ShowInterstitialAd();
+            }
+        }
+
         /// <summary>
         /// Loads the ad.
         /// </summary>
         public void LoadInterstitialAd()
         {
             // Clean up the old ad before loading a new one.
-            if (_interstitialAd != null)
-            {
-                DestroyInterstitialAd();
-            }
+            // if (_interstitialAd != null)
+            // {
+            //     DestroyInterstitialAd();
+            // }
 
             Debug.Log("Loading interstitial ad.");
 
