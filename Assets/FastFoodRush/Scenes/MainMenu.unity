@@ -1074,6 +1074,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4381131341971373324, guid: 1580107e8657c4eaf8c26f57135bc276, type: 3}
+      propertyPath: _rewardAdUnitId
+      value: ca-app-pub-1596485153633634/2495044312
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381131341971373324, guid: 1580107e8657c4eaf8c26f57135bc276, type: 3}
+      propertyPath: _useSampleUnitId
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4381131341971373324, guid: 1580107e8657c4eaf8c26f57135bc276, type: 3}
+      propertyPath: _interstitialAdUnitId
+      value: ca-app-pub-1596485153633634/8761069767
+      objectReference: {fileID: 0}
     - target: {fileID: 7510000033548885318, guid: 1580107e8657c4eaf8c26f57135bc276, type: 3}
       propertyPath: m_Name
       value: AdManager
