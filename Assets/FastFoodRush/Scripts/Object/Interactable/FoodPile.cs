@@ -9,6 +9,8 @@ namespace FastFoodRush.Interactable
         protected override float _timeInterval => 0.2f;
 
         [SerializeField] private bool _isCenterAxisX;
+        [SerializeField] private bool _useCustomOffset;
+        [SerializeField] private Vector3 _customOffset = new Vector3(0, 0.1f, 0);
         
         protected override void Start()
         {
@@ -24,7 +26,9 @@ namespace FastFoodRush.Interactable
             bool isLeft = count % 2 == 0;
             int depth = count / 2;
 
-            Vector3 offset = RestaurantManager.Instance.GetOffsetByStackType(StackType.Food);
+            Vector3 offset = _useCustomOffset
+                ? _customOffset
+                : RestaurantManager.Instance.GetOffsetByStackType(StackType.Food);
             Vector3 position = Vector3.zero;
             if (_isCenterAxisX)
             {

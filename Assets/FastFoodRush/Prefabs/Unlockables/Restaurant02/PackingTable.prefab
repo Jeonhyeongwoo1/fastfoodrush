@@ -673,6 +673,7 @@ MonoBehaviour:
   _packagePile: {fileID: 9078762100982259249}
   _packageTransform: {fileID: 4861900164497259563}
   _workerObj: {fileID: 6441852414546132279}
+  _workingSpot: {fileID: 1562789817012907345}
 --- !u!1 &9072634261445320647
 GameObject:
   m_ObjectHideFlags: 0
@@ -1123,6 +1124,8 @@ MonoBehaviour:
   _maxCapacity: 6
   _interval: 0.25
   _objectStackPoint: {fileID: 719961637408688950}
+  _useCustomOffset: 0
+  _customOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &9159237751484104666
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ namespace FastFoodRush.Interactable
         private void Start()
         {
             _stackOffset = RestaurantManager.Instance.GetOffsetByStackType(StackType.Food);
+            _stackOffset = new Vector3(0, 0.1f, 0);
         }
 
         private void Update()

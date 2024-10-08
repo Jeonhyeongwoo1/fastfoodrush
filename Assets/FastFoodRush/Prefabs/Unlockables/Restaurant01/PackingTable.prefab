@@ -231,6 +231,7 @@ MonoBehaviour:
   _packagePile: {fileID: 4751533465107270194}
   _packageTransform: {fileID: 226714318402174867}
   _workerObj: {fileID: 1818202644500266639}
+  _workingSpot: {fileID: 8403229973053399613}
 --- !u!1 &4379750458396015801
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,6 +507,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4558105980621579585}
   - component: {fileID: 4558105980621579587}
+  - component: {fileID: 8403229973053399613}
   m_Layer: 0
   m_Name: WorkingSpot
   m_TagString: Untagged
@@ -550,6 +552,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &8403229973053399613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4558105980621579590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9eea1e95a7a14e53aeb7aec8d37e987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _counterEmployeeObj: {fileID: 1818202644500266639}
+  _indicatorImage: {fileID: 4558105981118782348}
 --- !u!1 &4558105981105283620
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,6 +638,8 @@ MonoBehaviour:
   _maxCapacity: 6
   _interval: 0.2
   _objectStackPoint: {fileID: 3765755637189560394}
+  _useCustomOffset: 0
+  _customOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &4558105981118782338
 GameObject:
   m_ObjectHideFlags: 0

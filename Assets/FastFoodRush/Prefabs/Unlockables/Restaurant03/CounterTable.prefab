@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 573434306494377246}
   - component: {fileID: 7779068119903046995}
   - component: {fileID: 1351307325829625580}
+  - component: {fileID: 7085146668082672237}
   m_Layer: 0
   m_Name: Table_Small
   m_TagString: Untagged
@@ -106,6 +107,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 0.8, z: 1.2}
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &7085146668082672237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1351307325829625581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: 4680675608976693439, guid: 1ab4279246035f84d81e64302e2a0498, type: 3}
+  - {fileID: 4680675608976693439, guid: 0f0092ce4ca79004f9ec65e57bc8a98f, type: 3}
 --- !u!1 &1501074731246094243
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +134,7 @@ GameObject:
   - component: {fileID: 4843026215138720949}
   - component: {fileID: 8085461201805527779}
   - component: {fileID: 1501074731246094242}
+  - component: {fileID: 2874872881401876678}
   m_Layer: 0
   m_Name: Table_Large
   m_TagString: Untagged
@@ -211,6 +228,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &2874872881401876678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1501074731246094243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -1394328347821736558, guid: 1ab4279246035f84d81e64302e2a0498, type: 3}
+  - {fileID: -1394328347821736558, guid: 0f0092ce4ca79004f9ec65e57bc8a98f, type: 3}
 --- !u!1 &7002188092868131709
 GameObject:
   m_ObjectHideFlags: 0
@@ -288,7 +320,16 @@ MonoBehaviour:
   _moneyPile: {fileID: 7011213180340637259}
   _workingSpot: {fileID: 8486246435979695128}
   _workerObj: {fileID: 5446969300890372427}
-  _seatList: []
+  _seatList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &7057782255566511209
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,8 +339,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6386172551986378190}
-  - component: {fileID: 3477461707493344522}
-  - component: {fileID: 8837108655326915615}
   m_Layer: 0
   m_Name: StackPoint
   m_TagString: Untagged
@@ -322,44 +361,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7921177712612090201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &3477461707493344522
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7057782255566511209}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.8, y: 1.6, z: 1.8}
-  m_Center: {x: -0.3, y: 0, z: -0.3}
---- !u!114 &8837108655326915615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7057782255566511209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25175b17084ff4d5aa6a771b8560a87d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stackType: 1
-  _useMaxCapacity: 0
-  _maxCapacity: 6
-  _interval: 0.25
-  _objectStackPoint: {fileID: 6386172551986378190}
 --- !u!1 &7921177711224323155
 GameObject:
   m_ObjectHideFlags: 0
@@ -876,7 +877,9 @@ MonoBehaviour:
   _useMaxCapacity: 0
   _maxCapacity: 6
   _interval: 0.25
-  _objectStackPoint: {fileID: 0}
+  _objectStackPoint: {fileID: 6386172551986378190}
+  _useCustomOffset: 1
+  _customOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &7921177712729629033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,6 +1160,7 @@ GameObject:
   - component: {fileID: 2063818685361166875}
   - component: {fileID: 6304172829833057386}
   - component: {fileID: 6253153784021679886}
+  - component: {fileID: 4776305442419736604}
   m_Layer: 0
   m_Name: CashRegister
   m_TagString: Untagged
@@ -1229,6 +1233,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4776305442419736604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8005697916044519708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -4488516306824289610, guid: 1ab4279246035f84d81e64302e2a0498, type: 3}
+  - {fileID: -4488516306824289610, guid: 0f0092ce4ca79004f9ec65e57bc8a98f, type: 3}
 --- !u!1001 &7921177712361360294
 PrefabInstance:
   m_ObjectHideFlags: 0

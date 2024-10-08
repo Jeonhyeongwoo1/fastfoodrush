@@ -746,6 +746,7 @@ GameObject:
   - component: {fileID: 4009546551255831672}
   - component: {fileID: 6111535970738420931}
   - component: {fileID: 6232189559041473793}
+  - component: {fileID: 396631800201359096}
   m_Layer: 0
   m_Name: MovingDonut
   m_TagString: Untagged
@@ -762,7 +763,7 @@ Transform:
   m_GameObject: {fileID: 3568406665174130370}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.9, z: -0.3}
+  m_LocalPosition: {x: 0, y: 0.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -818,6 +819,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &396631800201359096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3568406665174130370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8399284412e643baac5c8b59a3bcddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _endPos: {x: 0.0000001192093, y: 0.9, z: 0.45}
 --- !u!1 &3606364605498323480
 GameObject:
   m_ObjectHideFlags: 0
@@ -1496,7 +1510,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stackType: 1
-  _isCenterAxisX: 0
+  _isCenterAxisX: 1
+  _useCustomOffset: 1
+  _customOffset: {x: 0, y: 0.1, z: 0}
 --- !u!1 &8133737459775958119
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1690,7 @@ GameObject:
   - component: {fileID: 1532332976702719393}
   - component: {fileID: 2224218599419132460}
   - component: {fileID: 1625284379674927432}
+  - component: {fileID: 8280382650942523226}
   m_Layer: 0
   m_Name: Fryer
   m_TagString: Untagged
@@ -1783,3 +1800,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 1.5, z: 0.5}
   m_TimeToStationary: 0.5
+--- !u!114 &8280382650942523226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8872562825955893073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -2638205605322376718, guid: 8e664f6d529a28743b60eb31caaa70be, type: 3}
+  - {fileID: 1050567930212880897, guid: 214e807ef1c117b47a81add24dd4564e, type: 3}

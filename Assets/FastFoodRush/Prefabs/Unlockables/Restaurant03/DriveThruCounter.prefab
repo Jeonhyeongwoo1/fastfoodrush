@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 440a5ffa1cb794427a30db897d18f3d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buyPoint: {x: 0, y: 0, z: 0}
+  _buyPoint: {x: 1, y: 0, z: 3}
   _buyPointRot: {x: 0, y: 0, z: 0}
   _punchScale: {x: 0.1, y: 0.2, z: 0.1}
   _updateableMeshList: []
@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 3389952025353290351}
   - component: {fileID: 3389952025353290344}
   - component: {fileID: 3389952025353290345}
+  - component: {fileID: 8645865328546985030}
   m_Layer: 0
   m_Name: Table_Large
   m_TagString: Untagged
@@ -213,6 +214,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.8, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &8645865328546985030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389952025353290347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -1394328347821736558, guid: 1ab4279246035f84d81e64302e2a0498, type: 3}
+  - {fileID: -1394328347821736558, guid: 0f0092ce4ca79004f9ec65e57bc8a98f, type: 3}
 --- !u!1 &3389952025461112262
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +271,7 @@ GameObject:
   - component: {fileID: 3389952025671691682}
   - component: {fileID: 3389952025671691680}
   - component: {fileID: 3389952025671691681}
+  - component: {fileID: 433229009185912593}
   m_Layer: 0
   m_Name: CashRegister
   m_TagString: Untagged
@@ -327,6 +344,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &433229009185912593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389952025671691683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: -4488516306824289610, guid: 1ab4279246035f84d81e64302e2a0498, type: 3}
+  - {fileID: -4488516306824289610, guid: 0f0092ce4ca79004f9ec65e57bc8a98f, type: 3}
 --- !u!1 &3389952025761569910
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +531,8 @@ MonoBehaviour:
   _maxCapacity: 6
   _interval: 0.25
   _objectStackPoint: {fileID: 249631240726940565}
+  _useCustomOffset: 0
+  _customOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &3389952025948218798
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +586,7 @@ GameObject:
   - component: {fileID: 3389952026034362329}
   - component: {fileID: 3389952026034362330}
   - component: {fileID: 3389952026034362331}
+  - component: {fileID: 8966503639395801134}
   m_Layer: 0
   m_Name: Table_Small
   m_TagString: Untagged
@@ -646,6 +681,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2, y: 0.8, z: 1.2}
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &8966503639395801134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3389952026034362309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1bdd23dc6d94f8bbd22c98e7872440, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mesheList:
+  - {fileID: 4680675608976693439, guid: 1ab4279246035f84d81e64302e2a0498, type: 3}
+  - {fileID: 4680675608976693439, guid: 0f0092ce4ca79004f9ec65e57bc8a98f, type: 3}
 --- !u!1 &3389952026182999154
 GameObject:
   m_ObjectHideFlags: 0

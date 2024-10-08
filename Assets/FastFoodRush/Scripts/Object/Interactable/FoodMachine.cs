@@ -46,18 +46,24 @@ namespace FastFoodRush.Interactable
                 {
                     _flippingObjectArray = GetComponentsInChildren<FlippingObject>(true);
                 }
-                
-                foreach (FlippingObject flippingObject in _flippingObjectArray)
+
+                if (_flippingObjectArray != null)
                 {
-                    flippingObject.gameObject.SetActive(false);
+                    foreach (FlippingObject flippingObject in _flippingObjectArray)
+                    {
+                        flippingObject.gameObject.SetActive(false);
+                    }
                 }
 
                 if (_movingObject == null)
                 {
                     _movingObject = GetComponentInChildren<MovingObject>(true);
                 }
-                
-                _movingObject.Moving(foodMachineConfigData.DefaultCreateTime);
+
+                if (_movingObject != null)
+                {
+                    _movingObject.Moving(foodMachineConfigData.DefaultCreateTime);
+                }
             }
         }
 

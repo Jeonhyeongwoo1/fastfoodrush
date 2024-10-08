@@ -41,7 +41,10 @@ namespace FastFoodRush.Controller
 
         private void OnDisable()
         {
-            RestaurantManager.Instance.onUpgradedAbilityAction -= OnUpgradeAbility;
+            if (RestaurantManager.Instance)
+            {
+                RestaurantManager.Instance.onUpgradedAbilityAction -= OnUpgradeAbility;
+            }
         }
 
         public void Sleep()
@@ -104,7 +107,6 @@ namespace FastFoodRush.Controller
 
                 while (pile.StackCount > 0)
                 {
-                    Debug.Log($"{_wobblingStack.Height} / {_employeeCapacity}");
                     if (_wobblingStack.Height >= _employeeCapacity)
                     {
                         break;

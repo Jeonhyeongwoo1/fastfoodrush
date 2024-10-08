@@ -15,12 +15,14 @@ namespace FastFoodRush.Interactable
         [SerializeField] private PackagePile _packagePile;
         [SerializeField] private Transform _packageTransform;
         [SerializeField] private GameObject _workerObj;
+        [SerializeField] private WorkingSpot _workingSpot;
         
         private Sequence _sequence;
 
         private void Update()
         {
             MakePackage();
+            TryDropPackagePile();
         }
 
         protected override void UpgradeableMesh()
@@ -35,7 +37,6 @@ namespace FastFoodRush.Interactable
 
         public override void LoadMainTutorial()
         {
-            
             TutorialManager tutorialManager = TutorialManager.Instance;
             bool isExecutedTutorial =  tutorialManager.CheckExecutedMainTutorialProgress(MainTutorialType.PackingTable);
             if (!isExecutedTutorial)
@@ -72,17 +73,21 @@ namespace FastFoodRush.Interactable
                 targetObj.SetActive(true);
                 obj.SetActive(false);
                 _sequence = null;
-
-                bool isAllActivated = _foodObjectList.TrueForAll((v) => v.activeSelf);
-                if (isAllActivated)
-                {
-                    GameObject packageObj = PoolManager.Instance.Get(PoolKey.Package);
-                    packageObj.transform.position = _packageTransform.position;
-                    packageObj.SetActive(true);
-                    _packagePile.Drop(packageObj);
-                    _foodObjectList.ForEach(v=> v.SetActive(false));
-                }
+                // TryDropPackagePile();
             });
+        }
+
+        private void TryDropPackagePile()
+        {
+            bool isAllActivated = _foodObjectList.TrueForAll((v) => v.activeSelf);
+            if (isAllActivated && _workingSpot.IsAvailableHandleOrder)
+            {
+                GameObject packageObj = PoolManager.Instance.Get(PoolKey.Package);
+                packageObj.transform.position = _packageTransform.position;
+                packageObj.SetActive(true);
+                _packagePile.Drop(packageObj);
+                _foodObjectList.ForEach(v=> v.SetActive(false));
+            }
         }
     }
 }

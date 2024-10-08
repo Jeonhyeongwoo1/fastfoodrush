@@ -12,20 +12,24 @@ namespace FastFoodRush.Interactable
     {
         public int StackCount => _objectStack.Count;
         public StackType StackType => _stackType;
-        public Vector3 ObjectStackPointPosition => _objectStackPoint.position;
+        public Vector3 ObjectStackPointPosition => _objectStackPoint != null ? _objectStackPoint.position : Vector3.zero;
 
         [SerializeField] private StackType _stackType;
         [SerializeField] private bool _useMaxCapacity;
         [SerializeField] private int _maxCapacity = 6;
         [SerializeField] private float _interval;
         [SerializeField] private Transform _objectStackPoint;
+        [SerializeField] private bool _useCustomOffset;
+        [SerializeField] private Vector3 _customOffset;
 
         private Stack<GameObject> _objectStack = new();
         private float _elapsed = 0;
+        private Vector3 _offset;
 
         private void OnEnable()
         {
             RestaurantManager.Instance.ObjectStacks.Add(this);
+            _offset = _useCustomOffset ? _customOffset : RestaurantManager.Instance.GetOffsetByStackType(_stackType);
         }
 
         private void OnDisable()
@@ -83,7 +87,7 @@ namespace FastFoodRush.Interactable
         private void DoStackAnimation(GameObject obj)
         {
             Vector3 endValue = transform.position +
-                               new Vector3(0, RestaurantManager.Instance.GetOffsetByStackType(_stackType).y, 0) *
+                               new Vector3(0, _offset.y, 0) *
                                _objectStack.Count;
             _objectStack.Push(obj);
             obj.transform.DOJump(endValue, 2, 1, _interval);

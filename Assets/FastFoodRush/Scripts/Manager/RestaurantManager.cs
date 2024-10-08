@@ -379,6 +379,11 @@ namespace FastFoodRush.Manager
             else
             {
                 Debug.Log("Last restaurant");
+                DOVirtual.DelayedCall(3, () =>
+                {
+                    _stageClearText.gameObject.SetActive(false);
+                    _stageClearEffectObj.SetActive(false);
+                });
             }
             
             SaveRestaurantData();

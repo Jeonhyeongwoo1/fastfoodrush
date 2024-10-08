@@ -44,7 +44,7 @@ namespace FastFoodRush.Object
             
             if (_workerObj)
             {
-                _workerObj.SetActive(_unlockLevel >= 2);
+                _workerObj.SetActive(_unlockLevel >= Const.MaxLevel - 1);
             }
         }
 
