@@ -109,11 +109,11 @@ namespace FastFoodRush.Tutorial
         {
             for (int i = 0; i < _arrowTargetArray.Length; i++)
             {
-                _arrowIndicator.gameObject.SetActive(true);
                 _isCompletedTutorialDepth = false;
                 SimpleInput.IsStop = true;
                 yield return new WaitForSeconds(0.5f);
                 Transform target = _arrowTargetArray[i];
+                _arrowIndicator.gameObject.SetActive(true);
                 _arrowIndicator.DoIndicate(target);
                 yield return ChangeCameraCor(target, CameraType.Tutorial);
                 yield return new WaitForSeconds(1);
